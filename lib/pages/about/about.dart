@@ -13,64 +13,77 @@ class _AboutState extends State<About> {
     return Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
-          children: const [
+          children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'About this new parcel tracking system',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'This parcel tracking system is designed to provide real-time updates and tracking information for your shipments.',
+                const SizedBox(height: 10.0),
+                const Text(
+                  '• This parcel tracking system is designed to provide real-time updates and tracking information for your shipments.',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 40.0),
-                Text(
-                  'Developers',
+                const SizedBox(height: 40.0),
+                const Text(
+                  'Our System Developers',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'This system or application was created through collaboration with Haqim Haslee, who is associated with Google Developers Group (GDG) Kuala Lumpur and is also part of the Google Cloud Innovators program. His expertise and involvement from these platforms likely contributed valuable insights and technical contributions to the development process. His affiliation with GDG Kuala Lumpur suggests a connection to a community of developers focused on Google technologies, while being a Google Cloud Innovator underscores his innovative approach within the Google Cloud ecosystem. Together, this partnership highlights a commitment to leveraging cutting-edge technologies and fostering innovation in the development of the system or application.',
-                  style: TextStyle(fontSize: 16.0),
+                const SizedBox(height: 10.0),
+                Card(
+                  elevation: 5,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      width: 400,
+                      'assets/images/dev_pic.png',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 40.0),
-                Text(
+                const SizedBox(height: 40.0),
+                const Text(
                   'Technology used to develop this system',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'The system utilizes Google Cloud services and the Gemini API for efficient data management and integration.',
+                const SizedBox(height: 10.0),
+                const Text(
+                  '• The system utilizes Google Cloud services and the Gemini API for efficient data management and integration.',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 40.0),
-                Text(
+                const SizedBox(height: 40.0),
+                const Text(
                   'We are excited to bring the latest/exciting technology to you',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'Our team is dedicated to bringing you cutting-edge technology to enhance your shipping and tracking experience.',
+                const SizedBox(height: 10.0),
+                const Text(
+                  '• Our team is dedicated to bringing you cutting-edge technology to enhance your shipping and tracking experience.',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 40.0),
-                Text(
+                const SizedBox(height: 40.0),
+                const Text(
                   'This is just the beginning of a multiyear project',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'We are committed to expanding and improving this system over the coming years to provide even more features and reliability.',
+                const SizedBox(height: 10.0),
+                const Text(
+                  '• We are committed to expanding and improving this system over the coming years to provide even more features and reliability.',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  '~More exciting features coming soon 😁🙃~',
+                const SizedBox(height: 50.0),
+                const Text(
+                  'More exciting features coming soon... 🙃',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
+                const SizedBox(height: 50.0),
+                FilledButton(
+                    onPressed: () => showLicensePage(
+                          context: context,
+                        ),
+                    child: const Text("Licenses"))
               ],
             ),
           ],

@@ -33,5 +33,6 @@ flutter:
   uses-material-design: true
   assets:
   - assets/images/postalhub_logo.jpg
+  - assets/images/dev_pic.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
