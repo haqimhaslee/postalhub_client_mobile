@@ -1,6 +1,6 @@
 {
-    "name": "postalhub_tracker",
-    "short_name": "postalhub_tracker",
+    "name": "Postal Hub Tracker",
+    "short_name": "Tracker",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

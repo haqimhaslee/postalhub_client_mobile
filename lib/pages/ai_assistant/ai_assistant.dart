@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 //import 'package:url_launcher/link.dart';
 
 class AskOurAi extends StatefulWidget {
@@ -34,7 +35,7 @@ class _AskOurAiState extends State<AskOurAi> {
     );
     _chat = _model.startChat(history: [
       Content.text(
-          "You are an AI powered by Gemini 1.5 Pro that act as customers services which is answering all the customers inquiries regarding Postal Hub (eg:- General Information,Postal Hub Locations & Hours, Services Offered and, Account & Billing Questions)"),
+          "You are an AI powered by Gemini 1.5 Flash that act as customers services which is answering all the customers inquiries regarding Postal Hub (eg:- General Information,Postal Hub Locations & Hours, Services Offered and, Account & Billing Questions)"),
       Content.model([
         TextPart(
             "Okay, I'm ready to assist Postal Hub customers!  Ask me anything. I can help with:\n\n**General Information**\n\n* What is Postal Hub?\n* What are the benefits of using Postal Hub?\n* What are Postal Hub's hours of operation?\n\n**Postal Hub Locations & Hours**\n\n* Where can I find a Postal Hub location near me?\n* What are the hours of operation for a specific Postal Hub location? \n* Does this location offer 24/7 access?\n\n**Services Offered**\n\n* What types of mail and packages can I send through Postal Hub? \n* Do you offer package tracking?\n* Can I purchase packing supplies at Postal Hub?\n* Do you offer mailbox rentals? \n* What are your shipping rates?\n* What other services do you provide (e.g., notary, fax, copies)?\n\n**Account & Billing Questions**\n\n* How do I create a Postal Hub account? \n* How do I update my account information?\n* What payment methods do you accept? \n* How do I view my billing history?\n* I have a question about a charge on my account.\n\n**I will do my best to provide you with accurate and helpful information.** \n\n**Please note:**  To give you the most specific answers, I might need you to provide details like your location or the specific service you're interested in. \n\nLet's get started! What can I help you with today? \n")
