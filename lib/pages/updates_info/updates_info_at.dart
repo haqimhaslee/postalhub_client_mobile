@@ -41,7 +41,7 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
               // Convert Timestamp to DateTime and format as a string
               Timestamp timestamp = data['ver_date'];
               DateTime dateTime = timestamp.toDate();
-              String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+              String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
 
               return Padding(
                 padding: const EdgeInsets.only(

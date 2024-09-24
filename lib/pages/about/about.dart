@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatefulWidget {
   const About({super.key});
@@ -8,16 +8,12 @@ class About extends StatefulWidget {
   State<About> createState() => _AboutState();
 }
 
-Future<void> _easteregg(BuildContext context) async {
-  try {
-    await launchUrl(
-      Uri.parse('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
-      prefersDeepLink: false,
-    );
-  } catch (e) {
-    debugPrint(e.toString());
+Future<void> _launchUrl(String url) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
   }
 }
+
 
 class _AboutState extends State<About> {
   @override
@@ -98,7 +94,8 @@ class _AboutState extends State<About> {
                     child: const Text("Licenses")),
                 const SizedBox(height: 10.0),
                 FilledButton(
-                    onPressed: () => _easteregg(context),
+                    onPressed: () => _launchUrl('https://www.example.com'),
+
                     child: const Text("Easter Egg 🥚")),
               ],
             ),

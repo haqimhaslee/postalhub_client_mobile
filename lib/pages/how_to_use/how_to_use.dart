@@ -116,7 +116,7 @@ class _HowToUseState extends State<HowToUse> {
                       style: TextStyle(fontSize: 10.0),
                     ),
                     Text(
-                      "³ Coming soon in Google Play Store and Apple App Store.",
+                      "³ Only available in Android via sideload. Coming soon in Google Play Store and Apple App Store.",
                       style: TextStyle(fontSize: 10.0),
                     ),
                   ],
