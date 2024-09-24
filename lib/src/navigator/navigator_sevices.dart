@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'package:postalhub_tracker/pages/about/about.dart';
+import 'package:postalhub_tracker/pages/how_to_use/how_to_use.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
+//import 'package:postalhub_tracker/pages/updates_info/updates_info.dart';
+import 'package:postalhub_tracker/pages/updates_info/updates_info_at.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NavigatorServices extends StatefulWidget {
   const NavigatorServices({super.key});
@@ -16,6 +20,8 @@ class _NavigatorServicesState extends State<NavigatorServices> {
   final List<Widget> _windgetOption = <Widget>[
     const SearchInventory(),
     const AskOurAi(),
+    const HowToUse(),
+    const UpdatesInfoAt(),
     const About(),
   ];
   void openDrawer() {
@@ -70,10 +76,65 @@ class _NavigatorServicesState extends State<NavigatorServices> {
               icon: Icon(Icons.search),
               selectedIcon: Icon(Icons.search),
             ),
+            NavigationDrawerDestination(
+              label: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      right: 0,
+                      left: 0,
+                      //top: 5,
+                      //bottom: 2,
+                    ),
+                    child: Text("[Ask AI]  by "),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                    ),
+                    child: Shimmer.fromColors(
+                      direction: ShimmerDirection.ltr,
+                      period: const Duration(milliseconds: 3800),
+                      baseColor: const Color.fromARGB(255, 106, 147, 252),
+                      highlightColor: const Color.fromARGB(255, 242, 106, 88),
+                      child: const Text(
+                        '✨Gemini',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  //const Flexible(fit: FlexFit.tight, child: SizedBox()),
+                ],
+              ),
+              icon: const Icon(Icons.hub_outlined),
+              selectedIcon: const Icon(Icons.hub_rounded),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+              child: Divider(),
+            ),
             const NavigationDrawerDestination(
-              label: Text("Ask AI"),
-              icon: Icon(Icons.hub_outlined),
-              selectedIcon: Icon(Icons.hub_rounded),
+              label: Text("How to use"),
+              icon: Icon(Icons.question_mark_outlined),
+              selectedIcon: Icon(Icons.question_mark_rounded),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+              child: Divider(),
+            ),
+            const NavigationDrawerDestination(
+              label: Text("Updates"),
+              icon: Icon(Icons.update_rounded),
+              selectedIcon: Icon(Icons.update_rounded),
             ),
             const NavigationDrawerDestination(
               label: Text("About"),
@@ -88,7 +149,7 @@ class _NavigatorServicesState extends State<NavigatorServices> {
           children: [
             width > 680
                 ? SizedBox(
-                    width: 200,
+                    width: 250,
                     child: NavigationDrawer(
                       surfaceTintColor: Theme.of(context).colorScheme.surface,
                       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -109,10 +170,67 @@ class _NavigatorServicesState extends State<NavigatorServices> {
                           icon: Icon(Icons.search),
                           selectedIcon: Icon(Icons.search),
                         ),
+                        NavigationDrawerDestination(
+                          label: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                  right: 0,
+                                  left: 0,
+                                  //top: 5,
+                                  //bottom: 2,
+                                ),
+                                child: Text("[Ask AI]  by "),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 0,
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                ),
+                                child: Shimmer.fromColors(
+                                  direction: ShimmerDirection.ltr,
+                                  period: const Duration(milliseconds: 3800),
+                                  baseColor:
+                                      const Color.fromARGB(255, 106, 147, 252),
+                                  highlightColor:
+                                      const Color.fromARGB(255, 242, 106, 88),
+                                  child: const Text(
+                                    '✨Gemini',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              //const Flexible(fit: FlexFit.tight, child: SizedBox()),
+                            ],
+                          ),
+                          icon: const Icon(Icons.hub_outlined),
+                          selectedIcon: const Icon(Icons.hub_rounded),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                          child: Divider(),
+                        ),
                         const NavigationDrawerDestination(
-                          label: Text("Ask AI"),
-                          icon: Icon(Icons.hub_outlined),
-                          selectedIcon: Icon(Icons.hub_rounded),
+                          label: Text("How to use"),
+                          icon: Icon(Icons.question_mark_outlined),
+                          selectedIcon: Icon(Icons.question_mark_rounded),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                          child: Divider(),
+                        ),
+                        const NavigationDrawerDestination(
+                          label: Text("Updates"),
+                          icon: Icon(Icons.update_rounded),
+                          selectedIcon: Icon(Icons.update_rounded),
                         ),
                         const NavigationDrawerDestination(
                           label: Text("About"),
@@ -137,7 +255,7 @@ class _NavigatorServicesState extends State<NavigatorServices> {
                           const BorderRadius.all(Radius.circular(30))),
                   child: SizedBox(
                     height: width > 680 ? height - 100 : height - 20,
-                    width: width > 680 ? width - 225 : width - 10,
+                    width: width > 680 ? width - 270 : width - 10,
                     child: PageTransitionSwitcher(
                       transitionBuilder:
                           (child, animation, secondaryAnimation) =>

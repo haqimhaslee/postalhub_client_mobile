@@ -23,6 +23,9 @@ dependencies:
   google_generative_ai: ^0.4.1
   loading_animation_widget: ^1.2.1
   intl: ^0.17.0
+  another_stepper: ^1.2.2
+  shimmer: ^3.0.0
+  flutter_custom_tabs: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -34,5 +37,17 @@ flutter:
   assets:
   - assets/images/postalhub_logo.jpg
   - assets/images/dev_pic.png
+  - assets/images/How_to_use_1.png
+  - assets/images/How_to_use_2.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
+
+  fonts:
+      - family: GoogleSans
+        fonts:
+          - asset: assets/fonts/google_sans_regular.ttf
+          - asset: assets/fonts/google_sans_italic.ttf
+            style: italic
+      - family: Kaleko
+        fonts:
+          - asset: assets/fonts/kaleko_regular.ttf

@@ -12,7 +12,7 @@
     }
   },
   "hosting": {
-    "site": "postalhub-tracker",
+    "site":"postalhub-tracker",
     "public": "build/web",
     "ignore": [
       "firebase.json",

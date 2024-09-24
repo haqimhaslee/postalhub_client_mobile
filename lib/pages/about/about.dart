@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 class About extends StatefulWidget {
   const About({super.key});
 
   @override
   State<About> createState() => _AboutState();
+}
+
+Future<void> _easteregg(BuildContext context) async {
+  try {
+    await launchUrl(
+      Uri.parse('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+      prefersDeepLink: false,
+    );
+  } catch (e) {
+    debugPrint(e.toString());
+  }
 }
 
 class _AboutState extends State<About> {
@@ -83,7 +95,11 @@ class _AboutState extends State<About> {
                     onPressed: () => showLicensePage(
                           context: context,
                         ),
-                    child: const Text("Licenses"))
+                    child: const Text("Licenses")),
+                const SizedBox(height: 10.0),
+                FilledButton(
+                    onPressed: () => _easteregg(context),
+                    child: const Text("Easter Egg 🥚")),
               ],
             ),
           ],

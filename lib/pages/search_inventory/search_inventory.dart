@@ -1,8 +1,8 @@
-// ignore_for_file: deprecated_member_use, prefer_const_constructors
-
+// ignore_for_file: deprecated_member_use
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Add this import for date formatting
+import 'package:intl/intl.dart';
+import 'package:another_stepper/another_stepper.dart';
 
 class SearchInventory extends StatefulWidget {
   const SearchInventory({super.key});
@@ -20,7 +20,7 @@ class _SearchInventoryState extends State<SearchInventory> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
       child: Column(
         children: [
           Padding(
@@ -43,17 +43,74 @@ class _SearchInventoryState extends State<SearchInventory> {
               ),
             ),
           ),
-          const Divider(),
+          //const Divider(),
           Expanded(
             child: _buildSearchResults(_searchTerm),
           ),
-          FilledButton(
-            onPressed: () => setState(() => _searchTerm = searchInput.text),
-            child: const Center(
-              child: Text(
-                "Search",
-              ),
+          Card(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            elevation: 0,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
+            child: SizedBox(
+                width: 200,
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      ),
+                      child: Material(
+                        color: const Color.fromARGB(0, 255, 193, 7),
+                        child: InkWell(
+                          onTap: () =>
+                              setState(() => _searchTerm = searchInput.text),
+                          child: const Padding(
+                            padding: EdgeInsets.only(
+                              top: 15,
+                              bottom: 15,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  //width: MediaQuery.of(context).size.width - 180,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                              child: Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 0),
+                                                  child: Text("Search",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ))))
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
           ),
         ],
       ),
@@ -124,10 +181,197 @@ class _SearchInventoryState extends State<SearchInventory> {
                 ? (data['timestamp_delivered'] as Timestamp).toDate()
                 : null;
 
+            List<StepperData> stepperDataDelivered = [
+              StepperData(
+                  title: StepperText(
+                    "Ready to take",
+                    textStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  subtitle: StepperText("Arriving/Sorting"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: const Icon(Icons.inventory, color: Colors.white),
+                  )),
+              StepperData(
+                  title: StepperText(
+                    "On delivery",
+                    textStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  subtitle: StepperText("On delivery"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child:
+                        const Icon(Icons.delivery_dining, color: Colors.white),
+                  )),
+              StepperData(
+                  title: StepperText("Delivered",
+                      textStyle: const TextStyle(
+                        color: Colors.grey,
+                      )),
+                  subtitle: StepperText("Delivery"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: const Icon(Icons.check_rounded, color: Colors.white),
+                  ))
+            ];
+
+            List<StepperData> stepperDataSorted = [
+              StepperData(
+                  title: StepperText(
+                    "Ready to take",
+                    textStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  subtitle: StepperText("Arriving/Sorting"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: const Icon(Icons.inventory, color: Colors.white),
+                  )),
+              StepperData(
+                  title: StepperText(
+                    "On delivery",
+                    textStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  subtitle: StepperText("On delivery"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child:
+                        const Icon(Icons.delivery_dining, color: Colors.white),
+                  )),
+              StepperData(
+                  title: StepperText("Delivered",
+                      textStyle: const TextStyle(
+                        color: Colors.grey,
+                      )),
+                  subtitle: StepperText("Delivery"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: const Icon(Icons.check_rounded, color: Colors.white),
+                  ))
+            ];
+
+            List<StepperData> stepperDataOnDelivery = [
+              StepperData(
+                  title: StepperText(
+                    "Ready to take",
+                    textStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  subtitle: StepperText("Arriving/Sorting"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: const Icon(Icons.inventory, color: Colors.white),
+                  )),
+              StepperData(
+                  title: StepperText(
+                    "On delivery",
+                    textStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  subtitle: StepperText("On delivery"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child:
+                        const Icon(Icons.delivery_dining, color: Colors.white),
+                  )),
+              StepperData(
+                  title: StepperText("Not delivered",
+                      textStyle: const TextStyle(
+                        color: Colors.grey,
+                      )),
+                  subtitle: StepperText("Delivery"),
+                  iconWidget: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: const Icon(Icons.check_rounded, color: Colors.white),
+                  ))
+            ];
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Column(
+                  children: [
+                    switch (status) {
+                      1 => AnotherStepper(
+                          stepperList: stepperDataSorted,
+                          stepperDirection: Axis.horizontal,
+                          iconWidth: 40,
+                          iconHeight: 40,
+                          activeBarColor: Colors.green,
+                          inActiveBarColor: Colors.grey,
+                          inverted: true,
+                          verticalGap: 20,
+                          activeIndex: 0,
+                          barThickness: 8,
+                        ),
+                      2 => AnotherStepper(
+                          stepperList: stepperDataOnDelivery,
+                          stepperDirection: Axis.horizontal,
+                          iconWidth: 40,
+                          iconHeight: 40,
+                          activeBarColor: Colors.green,
+                          inActiveBarColor: Colors.grey,
+                          inverted: true,
+                          verticalGap: 20,
+                          activeIndex: 1,
+                          barThickness: 8,
+                        ),
+                      3 => AnotherStepper(
+                          stepperList: stepperDataDelivered,
+                          stepperDirection: Axis.horizontal,
+                          iconWidth: 40,
+                          iconHeight: 40,
+                          activeBarColor: Colors.green,
+                          inActiveBarColor: Colors.grey,
+                          inverted: true,
+                          verticalGap: 20,
+                          activeIndex: 2,
+                          barThickness: 8,
+                        ),
+                      _ => Container(), // Handle default case if needed
+                    },
+                  ],
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -137,7 +381,7 @@ class _SearchInventoryState extends State<SearchInventory> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Padding(
@@ -200,10 +444,14 @@ class _SearchInventoryState extends State<SearchInventory> {
                               Text(
                                 'Remarks/Notes : $remarks',
                               ),
+                            if (timestampDelivered != null)
+                              Text(
+                                'Delivered at: ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
+                              ),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       )
                     ],
@@ -230,50 +478,15 @@ class _SearchInventoryState extends State<SearchInventory> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (status == 'DELIVERED')
+                            if (status == 3)
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(5, 5, 5, 1),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const Text('Status : '),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                  255, 13, 196, 0),
-                                              border: Border.all(),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(10))),
-                                          child: Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      5, 1, 5, 1),
-                                              child: Text(
-                                                data['status'],
-                                                style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
                                     if (timestampSorted != null)
                                       Text(
                                         'Arrived & sorted at: ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
-                                      ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    if (timestampDelivered != null)
-                                      Text(
-                                        'Delivered at: ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
                                       ),
                                     Text(
                                       'Receiver: ${data['receiverId']}',
@@ -331,31 +544,6 @@ class _SearchInventoryState extends State<SearchInventory> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const Text('Status : '),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                  255, 167, 196, 0),
-                                              border: Border.all(),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(10))),
-                                          child: Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      5, 1, 5, 1),
-                                              child: Text(
-                                                data['status'],
-                                                style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
                                     if (timestampSorted != null)
                                       Text(
                                         'Arrived & sorted at: ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
@@ -366,8 +554,8 @@ class _SearchInventoryState extends State<SearchInventory> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
+                      const SizedBox(
+                        height: 6,
                       )
                     ],
                   ),

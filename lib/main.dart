@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
           theme: ThemeData(
             colorScheme: lightDynamic ?? lightColorScheme,
-            //  fontFamily: 'GoogleSans',
+            fontFamily: 'GoogleSans',
           ),
           darkTheme: ThemeData(
             colorScheme: darkDynamic ?? darkColorScheme,
-            // fontFamily: 'GoogleSans',
+            fontFamily: 'GoogleSans',
           ),
           themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
