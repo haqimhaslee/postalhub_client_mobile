@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HowToUse extends StatefulWidget {
   const HowToUse({super.key});
 
   @override
   State<HowToUse> createState() => _HowToUseState();
+}
+
+// ignore: unused_element
+Future<void> _launchUrl(String url) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
+  }
 }
 
 class _HowToUseState extends State<HowToUse> {
@@ -101,18 +109,22 @@ class _HowToUseState extends State<HowToUse> {
                 ),
                 const SizedBox(height: 10.0),
                 FilledButton(
-                    onPressed: () {},
+                    onPressed: ()
+                        //=> _launchUrl(
+                        //    'https://drive.google.com/drive/folders/1rL-EHsUW3CxwnvZuVDzSaLKbmmZcVkQo?usp=sharing'
+                        //    ),
+                        {},
                     child: const Text("Download Mobile App³")),
                 const SizedBox(height: 50.0),
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "¹ Powered by Gemini 1.5 Flash.There is no chat or interaction history saved by this AI model. The AI model, which was trained on a dataset that contains general data knowledge up to mid 2024 and is continuously updated, to learn and process information using Google's core algorithms.",
+                      "¹ Powered by Gemini 1.5 Flash.There is no chat or interaction history saved by this AI model. The AI model, which was trained on a dataset that contains general data knowledge up to mid 2023 and is continuously updated, to learn and process information using Google's core algorithms.",
                       style: TextStyle(fontSize: 10.0),
                     ),
                     Text(
-                      "² Account registration required.",
+                      "² Account registration required. Few features planned and still on development",
                       style: TextStyle(fontSize: 10.0),
                     ),
                     Text(

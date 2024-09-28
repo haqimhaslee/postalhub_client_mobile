@@ -14,7 +14,6 @@ Future<void> _launchUrl(String url) async {
   }
 }
 
-
 class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class _AboutState extends State<About> {
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       width: 400,
-                      'assets/images/dev_pic.png',
+                      'assets/images/dev_pic1.png',
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -83,7 +82,7 @@ class _AboutState extends State<About> {
                 ),
                 const SizedBox(height: 50.0),
                 const Text(
-                  'More exciting features coming soon... 🙃',
+                  'More exciting features coming soon... ✌️',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
                 const SizedBox(height: 50.0),
@@ -94,8 +93,8 @@ class _AboutState extends State<About> {
                     child: const Text("Licenses")),
                 const SizedBox(height: 10.0),
                 FilledButton(
-                    onPressed: () => _launchUrl('https://www.example.com'),
-
+                    onPressed: () => _launchUrl(
+                        'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
                     child: const Text("Easter Egg 🥚")),
               ],
             ),

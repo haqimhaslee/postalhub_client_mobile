@@ -17,7 +17,6 @@ dependencies:
   animations: ^2.0.8
   cloud_firestore: ^4.14.0
   path: ^1.9.0
-  firebase_storage: ^11.6.0
   firebase_database: ^10.5.5
   flutter_markdown: ^0.7.1
   google_generative_ai: ^0.4.1
@@ -28,6 +27,7 @@ dependencies:
   flutter_custom_tabs: ^2.1.0
   url_launcher: ^6.3.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -37,6 +37,7 @@ flutter:
   uses-material-design: true
   assets:
   - assets/images/postalhub_logo.jpg
+  - assets/images/dev_pic1.png
   - assets/images/dev_pic.png
   - assets/images/How_to_use_1.png
   - assets/images/How_to_use_2.png

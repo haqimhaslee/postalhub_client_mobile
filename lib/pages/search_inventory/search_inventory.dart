@@ -442,11 +442,11 @@ class _SearchInventoryState extends State<SearchInventory> {
                               ),
                             if (remarks.isNotEmpty)
                               Text(
-                                'Remarks/Notes : $remarks',
+                                'Remarks : $remarks',
                               ),
-                            if (timestampDelivered != null)
+                            if (timestampSorted != null)
                               Text(
-                                'Delivered at: ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
+                                'Arrived & sorted at: ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
                               ),
                           ],
                         ),
@@ -469,11 +469,8 @@ class _SearchInventoryState extends State<SearchInventory> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,9 +481,9 @@ class _SearchInventoryState extends State<SearchInventory> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (timestampSorted != null)
+                                    if (timestampDelivered != null)
                                       Text(
-                                        'Arrived & sorted at: ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
+                                        'Delivered at: ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
                                       ),
                                     Text(
                                       'Receiver: ${data['receiverId']}',
@@ -539,18 +536,7 @@ class _SearchInventoryState extends State<SearchInventory> {
                                 ),
                               )
                             else
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(5, 5, 5, 1),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (timestampSorted != null)
-                                      Text(
-                                        'Arrived & sorted at: ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
-                                      ),
-                                  ],
-                                ),
-                              ),
+                              const Column(),
                           ],
                         ),
                       ),

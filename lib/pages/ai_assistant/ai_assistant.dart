@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 //import 'package:url_launcher/link.dart';
 
@@ -79,25 +80,28 @@ class _AskOurAiState extends State<AskOurAi> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _chat.history.length <= preSetChatHistory
-              ? const Expanded(
+              ? Expanded(
                   child: Center(
                       child: Padding(
-                          padding: EdgeInsets.only(
-                              top: 30, left: 30, right: 30, bottom: 30),
+                          padding: const EdgeInsets.only(
+                              top: 0, left: 0, right: 0, bottom: 0),
                           child: SizedBox(
-                            height: 100,
-                            width: 200,
-                            child: Card(
-                                elevation: 0,
-                                child: Center(
-                                  child: Text(
-                                    'No conversation yet',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      //color: Colors.black,
-                                    ),
-                                  ),
-                                )),
+                            child: Shimmer.fromColors(
+                              direction: ShimmerDirection.ltr,
+                              period: const Duration(milliseconds: 5000),
+                              baseColor:
+                                  const Color.fromARGB(255, 106, 147, 252),
+                              highlightColor:
+                                  const Color.fromARGB(255, 242, 106, 88),
+                              child: const Text(
+                                'Hi! How can I help?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ))))
               : Expanded(
                   child: ListView.builder(
@@ -137,6 +141,8 @@ class _AskOurAiState extends State<AskOurAi> {
                         onSubmitted: (String value) {
                           _sendChatMessage(value);
                         },
+                        maxLines:
+                            null, // This allows the TextField to expand vertically for multiline input
                       ),
                     ),
                     const SizedBox.square(
