@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UpdatesInfoAt extends StatefulWidget {
   const UpdatesInfoAt({super.key});
@@ -83,6 +84,11 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
                             right: 5,
                           ),
                           child: MarkdownBody(
+                            onTapLink: (text, href, title) {
+                              if (href != null) {
+                                launchUrl(Uri.parse(href));
+                              }
+                            },
                             data: data['ver_info']?.replaceAll(r'\n', '\n') ??
                                 'No Content',
                             styleSheet: MarkdownStyleSheet.fromTheme(
