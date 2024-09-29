@@ -1,10 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
-
-//import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AskOurAi extends StatefulWidget {
   const AskOurAi({super.key});
@@ -31,27 +32,41 @@ class _AskOurAiState extends State<AskOurAi> {
     super.initState();
     _model = GenerativeModel(
       safetySettings: safetySettings,
-      model: 'gemini-1.5-flash',
+      model: 'gemini-1.5-pro-002',
       apiKey: 'AIzaSyAWoWzJ-Qh-Gfos2r3cP3_QgzCcf2ewyNs',
     );
     _chat = _model.startChat(history: [
-      Content.text(
-          "You are an AI powered by Gemini 1.5 Flash that act as customers services which is answering all the customers inquiries regarding Postal Hub (eg:- General Information,Postal Hub Locations & Hours, Services Offered and, Account & Billing Questions)"),
-      Content.model([
+      Content.multi([
         TextPart(
-            "Okay, I'm ready to assist Postal Hub customers!  Ask me anything. I can help with:\n\n**General Information**\n\n* What is Postal Hub?\n* What are the benefits of using Postal Hub?\n* What are Postal Hub's hours of operation?\n\n**Postal Hub Locations & Hours**\n\n* Where can I find a Postal Hub location near me?\n* What are the hours of operation for a specific Postal Hub location? \n* Does this location offer 24/7 access?\n\n**Services Offered**\n\n* What types of mail and packages can I send through Postal Hub? \n* Do you offer package tracking?\n* Can I purchase packing supplies at Postal Hub?\n* Do you offer mailbox rentals? \n* What are your shipping rates?\n* What other services do you provide (e.g., notary, fax, copies)?\n\n**Account & Billing Questions**\n\n* How do I create a Postal Hub account? \n* How do I update my account information?\n* What payment methods do you accept? \n* How do I view my billing history?\n* I have a question about a charge on my account.\n\n**I will do my best to provide you with accurate and helpful information.** \n\n**Please note:**  To give you the most specific answers, I might need you to provide details like your location or the specific service you're interested in. \n\nLet's get started! What can I help you with today? \n")
+            'You are an AI powered by Gemini 1.5 Pro that act as customers services which is answering all the customers inquiries regarding Postal Hub (eg:- General Information,Postal Hub Locations & Hours, Services Offered)'),
       ]),
-      Content.text(
-          "Postal Hub - Prohibited and dangerous item classification at Postal Hub\n\n-The Dangerous Good Act 1952 regulates the handling, transportation, and storage of dangerous goods within Malaysia. It defines dangerous goods as substances or articles that are capable of posing a risk to health, safety, property, or the environment.\nExample of the item is:-\n-Liquid form\n-Drug & Narcotics\n-Weapon & Parts\n-Hazard, Toxic & Radioactive\n-Jewellery, Gold & Precious Stone\n-Card, Coins, & Currency Notes\n-Animal\n-Pornographic substance"),
       Content.model([
         TextPart(
-            "You're right, safety is a top priority for Postal Hub, and we strictly adhere to the Dangerous Goods Act 1952 in Malaysia.  We prohibit the shipping of items that could pose a risk during transport.  \n\nThanks for providing the list of prohibited items. To be even clearer for our customers, let's break them down and explain why each is a concern: \n\n**Prohibited Items at Postal Hub**\n\n* **Liquids:** Many liquids are restricted or prohibited due to flammability, corrosiveness, or potential for leakage (e.g., gasoline, paint thinner, strong acids). Restrictions may vary, so it's always best to check with us if you're unsure.\n* **Drugs & Narcotics:**  Illegal drugs and narcotics are strictly prohibited. Shipping these substances is against the law and puts individuals and communities at risk.\n* **Weapons & Parts:** Firearms, ammunition, explosives, and other weapons are strictly prohibited. This includes parts that could be used to assemble a weapon.\n* **Hazardous, Toxic & Radioactive Materials:** This category includes substances like:\n    * Chemicals (e.g., pesticides, mercury)\n    * Biological agents (e.g., infectious substances)\n    * Radioactive materials \n    These items pose serious health and environmental risks.\n* **Jewelry, Gold & Precious Stones:** While not inherently dangerous, these items are often restricted due to their high value and potential for theft or loss. Check with Postal Hub about insurance options and declared value limits.\n* **Cash, Coins, & Currency Notes:**  Shipping large amounts of cash is generally discouraged due to security risks. \n* **Animals:**  Live animals require specialized transport and often have strict regulations. Contact a pet relocation service for assistance.\n* **Pornographic Material:**  Shipping pornographic material is often subject to legal restrictions and is generally prohibited by Postal Hub.\n\n**Important Notes:**\n\n* **Packaging:** Even permitted items must be packaged according to safety standards. For example, fragile items need proper cushioning.\n* **Declaration:** You must accurately declare the contents of your package. Failure to do so can result in delays, penalties, or legal action.\n* **International Shipping:**  Prohibitions and restrictions vary by country. Check with both the sending and receiving country's regulations. \n\n**When in doubt, ask!**  It's always best to contact Postal Hub directly if you have any questions about whether an item is permitted for shipping. We're here to help! \n")
+            'Hello! Thank you for contacting Postal Hub Customer Service. I\'m an AI assistant ready to help with your inquiries.  Please let me know what you\'d like to know about Postal Hub.  For example, you can ask about:\n\n* **General Information:**  What is Postal Hub? What are its main services?  What are the benefits of using Postal Hub?\n* **Postal Hub Locations & Hours:** Where is the nearest Postal Hub? What are the operating hours of a specific location? Are there any locations open on weekends or holidays?\n* **Services Offered:**  Does Postal Hub offer mail forwarding? Can I ship internationally through Postal Hub? Do you offer mailbox rentals?  What about packing supplies?  Can I buy stamps?  Do you offer printing and copying services?\n* **Specific Questions about a Shipment:** I have a tracking number, can you tell me its status? My package is late, what should I do? I need to file a claim, how do I do that?\n\n\nI\'m here to assist you in any way I can, so please don\'t hesitate to ask your questions.\n'),
       ]),
-      Content.text(
-          "Postal Hub - General Policy\n-These general policies are entered into between campus postal hub and yourself or authorized persons on your behalf ('You') when you use our products and/or services in our hub by using and/or continuing to use our services you agree and acknowledge to comply with and be bound by these general policies\n--Customers are not allowed to send or store any prohibited items or dangerous goods in our hub. Any such items will be refused. And appropriate action will be taken. including notification of the relevant authorities if necessary.\n--All parcels arriving on the same day must be collected by the next working day this procedure ensures smooth arrangement or parcel handover to customers.\n--Packages that remain unclaimed for more than 30 days will be disposed of automatically.\n--Request for compensation/information regarding package that have been held for more than 30 days will be directly refused.\n--All services charges are subject to the prices we have set our pricing structure is carefully determined based on various factors including the cost of providing our services and operational expenses.\n--Information and privacy policy all customers data will be saved only for evidence and reference purposes and we will not share any information with other parties except the authorities.\n--customers must adhere to all rules and policies and we reserve that right to refuse any package or request that does not meet the above requirement"),
+      Content.multi([
+        TextPart(
+            'Postal Hub - Prohibited and dangerous item classification at Postal Hub\n\n-The Dangerous Good Act 1952 regulates the handling, transportation, and storage of dangerous goods within Malaysia. It defines dangerous goods as substances or articles that are capable of posing a risk to health, safety, property, or the environment.\nExample of the item is:-\n-Liquid form\n-Drug & Narcotics\n-Weapon & Parts\n-Hazard, Toxic & Radioactive\n-Jewellery, Gold & Precious Stone\n-Card, Coins, & Currency Notes\n-Animal\n-Pornographic substance'),
+      ]),
       Content.model([
         TextPart(
-            "You've provided a comprehensive overview of Postal Hub's General Policies. This is very helpful information for customers! To make it even clearer, I've reformatted and slightly expanded on the key points:\n\n## Postal Hub: General Policies\n\n**Agreement:** By using Postal Hub's services, you agree to comply with these policies. \n\n**1. Prohibited Items & Dangerous Goods:**\n   - You are prohibited from sending or storing any items classified as dangerous goods or that violate Postal Hub policies (See above for examples).\n   - Attempts to ship prohibited items may result in package refusal, disposal, and/or notification of authorities.\n\n**2. Package Collection:**\n   - All parcels received on a given day **must be collected by the next working day**. This ensures efficient package handling and handover.\n\n**3. Unclaimed Packages:**\n   - Packages unclaimed for **more than 30 days** will be automatically disposed of. \n   - **No compensation or information will be provided for packages unclaimed after this period.**\n\n**4. Service Charges:**\n   - All service charges are subject to Postal Hub's current pricing structure.\n   - Pricing is determined by factors like service costs and operational expenses.\n\n**5. Information & Privacy:**\n   - Customer data is collected solely for evidence and reference purposes.\n   - Postal Hub will not share customer information with third parties, except when required by law or to comply with legal authorities.\n\n**6. Policy Adherence & Right to Refuse Service:**\n   - Customers must adhere to all Postal Hub policies.\n   - Postal Hub reserves the right to refuse any package or service request that does not meet its requirements.\n\n**For any questions or clarifications, please do not hesitate to contact Postal Hub directly.** \n")
+            'Thank you for providing that information.  It\'s important for customers to understand what items are prohibited or restricted for shipment through Postal Hub.  \n\nJust to clarify and expand on the information you\'ve given, Postal Hub, in accordance with the Dangerous Goods Act 1952 (and likely other relevant regulations), prohibits or restricts the shipment of the following categories of items:\n\n* **Liquids:**  While not all liquids are prohibited, many are restricted based on their flammability, corrosiveness, or toxicity.  Regulations regarding the packaging and labeling of shippable liquids are strictly enforced.  Customers should inquire about specific restrictions before attempting to ship any liquid.\n* **Drugs & Narcotics:**  Shipping illegal drugs and narcotics is strictly prohibited and constitutes a serious crime.\n* **Weapons & Parts:**  Firearms, ammunition, and other weapons are generally prohibited.  Restrictions also typically apply to parts that could be used to assemble a weapon.\n* **Hazardous, Toxic & Radioactive Materials:**  These materials pose significant risks and are generally prohibited from being shipped through standard postal channels.  Specialized handling and permits are required for shipping these materials.\n* **Jewelry, Gold & Precious Stones:** While not always strictly prohibited, these items often have restrictions due to their value and potential for theft.  Declaring their value and insuring them is usually required.  Shipping extremely valuable items may require specialized services.\n* **Cash, Coins, & Currency Notes:**  Shipping large amounts of cash or currency is often restricted and requires specific declarations and procedures.\n* **Animals:**  Live animals are generally prohibited or require specific permits and arrangements with specialized carriers.  Restrictions may vary depending on the type of animal.\n* **Pornographic Material:**  Shipping materials deemed obscene or pornographic is prohibited.\n\n**In addition to these categories, it\'s important to remember that other items may be prohibited or restricted based on specific regulations, destination country rules, or Postal Hub\'s internal policies.**  \n\nCustomers should always check with Postal Hub customer service *before* attempting to ship any item they are unsure about to avoid delays, confiscation, or potential legal issues.  Providing clear and accurate information about the contents of a package is crucial for smooth and compliant shipping.\n'),
+      ]),
+      Content.multi([
+        TextPart(
+            'Postal Hub - General Policy\n-These general policies are entered into between campus postal hub and yourself or authorized persons on your behalf (\'You\') when you use our products and/or services in our hub by using and/or continuing to use our services you agree and acknowledge to comply with and be bound by these general policies\n--Customers are not allowed to send or store any prohibited items or dangerous goods in our hub. Any such items will be refused. And appropriate action will be taken. including notification of the relevant authorities if necessary.\n--All parcels arriving on the same day must be collected by the next working day this procedure ensures smooth arrangement or parcel handover to customers.\n--Packages that remain unclaimed for more than 30 days will be disposed of automatically.\n--Request for compensation/information regarding package that have been held for more than 30 days will be directly refused.\n--All services charges are subject to the prices we have set our pricing structure is carefully determined based on various factors including the cost of providing our services and operational expenses.\n--Information and privacy policy all customers data will be saved only for evidence and reference purposes and we will not share any information with other parties except the authorities.\n--customers must adhere to all rules and policies and we reserve that right to refuse any package or request that does not meet the above requirement'),
+      ]),
+      Content.model([
+        TextPart(
+            '**Postal Hub General Policies**\n\nBy using Postal Hub services, you agree to the following terms and conditions:\n\n* **Prohibited & Dangerous Items:** For safety and legal compliance, certain items are prohibited from being shipped or stored at Postal Hub.  These include (but are not limited to) dangerous goods as defined by the Dangerous Goods Act 1952, illegal drugs, weapons, hazardous materials, and certain restricted items.  Contact Postal Hub or refer to our detailed list of prohibited items for more information.  Attempts to ship or store prohibited items will be refused, and appropriate action may be taken, including notifying the authorities.\n* **Parcel Collection:**  Parcels received at the Hub must be collected by the next working day.  This policy helps us manage parcel volume and ensure efficient service for all customers.\n* **Unclaimed Packages:** Packages left unclaimed for more than 30 days will be disposed of.  We are unable to provide compensation or information regarding packages held beyond this period.  Please collect your parcels promptly.\n* **Service Charges:**  All service charges are clearly displayed and are subject to change.  Our pricing structure reflects the cost of providing our services and operational expenses.\n* **Privacy Policy:** Your personal information is collected solely for processing your shipments and will not be shared with third parties except as required by law or legal authorities.  We are committed to protecting your privacy.\n* **Compliance:** Customers must adhere to all Postal Hub policies.  We reserve the right to refuse any package or service request that does not meet our requirements.\n'),
+      ]),
+      Content.multi([
+        TextPart(
+            'This is the list of Postal Hub FAQ\n\nHow to check my parcel status?\n-- You can check your parcel status either it has arrived and ready to take or not at https://postalhub-tracker.web.app .\n\nWhat is the operating time for Postal Hub?\n-- Postal Hub are operating during weekdays from 10.30am to 8pm.\n\nWhere is the location of the Postal Hub?\n-- Here is the location of Postal Hub according to each branch\n--- UTP : Block M : https://maps.app.goo.gl/8D5iVjJMBt4Pn45Q9\n--- Others  : Coming Soon'),
+      ]),
+      Content.model([
+        TextPart(
+            '**Postal Hub Frequently Asked Questions (FAQ)**\n\n**Tracking Your Parcel:**\n\n* **How can I track my parcel\'s status?**  You can easily check the status of your parcel and see if it\'s arrived and ready for collection by visiting our online tracking portal: [https://postalhub-tracker.web.app](https://postalhub-tracker.web.app)\n\n**Postal Hub Locations and Hours:**\n\n* **What are the operating hours of Postal Hub?**  Our standard operating hours are Monday to Friday, 10:00 AM to 8:00 PM.  Please note that operating hours may vary on public holidays.  Check our website or contact us for holiday hours.\n* **Where are the Postal Hub locations?**\n    * **UTP Branch:** Block M, [https://maps.app.goo.gl/8D5iVjJMBt4Pn45Q9](https://maps.app.goo.gl/8D5iVjJMBt4Pn45Q9)\n    * **Other Branches:**  We\'re expanding!  More locations are coming soon.  Stay tuned for updates on our website and social media.\n'),
       ]),
     ]);
   }
@@ -69,7 +84,7 @@ class _AskOurAiState extends State<AskOurAi> {
   }
 
   // PRESET VALUE OF MODEL DATA
-  final int preSetChatHistory = 6;
+  final int preSetChatHistory = 8;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +151,7 @@ class _AskOurAiState extends State<AskOurAi> {
                         autofocus: true,
                         focusNode: _textFieldFocus,
                         decoration: textFieldDecoration(
-                            context, 'Ask anything regarding Postal Hub...'),
+                            context, 'Ask anything about Postal Hub...'),
                         controller: _textController,
                         onSubmitted: (String value) {
                           _sendChatMessage(value);
@@ -272,7 +287,7 @@ class MessageWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: isFromUser
                   ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.surfaceContainerHighest,
+                  : Theme.of(context).colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(18),
             ),
             padding: const EdgeInsets.symmetric(
@@ -282,6 +297,11 @@ class MessageWidget extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 8),
             child: MarkdownBody(
               data: text,
+              onTapLink: (text, href, title) {
+                if (href != null) {
+                  launchUrl(Uri.parse(href));
+                }
+              },
             ),
           ),
         ),
