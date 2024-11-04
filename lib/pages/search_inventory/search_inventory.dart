@@ -134,7 +134,7 @@ class _SearchInventoryState extends State<SearchInventory> {
       );
     }
 
-    return FutureBuilder<List<DocumentSnapshot<Map<String, dynamic>>>>(
+    return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
       future: _performSearch(searchTerm),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -145,7 +145,7 @@ class _SearchInventoryState extends State<SearchInventory> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final documents = snapshot.data ?? [];
+        final documents = snapshot.data?.docs ?? [];
         if (documents.isEmpty) {
           return Center(
             child: Column(
@@ -165,7 +165,7 @@ class _SearchInventoryState extends State<SearchInventory> {
           shrinkWrap: true,
           itemCount: documents.length,
           itemBuilder: (context, index) {
-            final data = documents[index].data()!;
+            final data = documents[index].data();
             final imageUrl = data['imageUrl'];
             final trackingId2 = data['trackingId2']?.toString() ?? '';
             final trackingId3 = data['trackingId3']?.toString() ?? '';
@@ -180,6 +180,8 @@ class _SearchInventoryState extends State<SearchInventory> {
             final timestampDelivered = data['timestamp_delivered'] != null
                 ? (data['timestamp_delivered'] as Timestamp).toDate()
                 : null;
+            final uniqueImageUrl =
+                '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}';
 
             List<StepperData> stepperDataDelivered = [
               StepperData(
@@ -392,9 +394,9 @@ class _SearchInventoryState extends State<SearchInventory> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
-                                  imageUrl,
+                                  uniqueImageUrl,
                                   width: 300.0,
-                                  height: 300.0,
+                                  //height: 300.0,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     String errorMessage;
@@ -554,39 +556,44 @@ class _SearchInventoryState extends State<SearchInventory> {
     );
   }
 
-  Future<List<DocumentSnapshot<Map<String, dynamic>>>> _performSearch(
+  Future<QuerySnapshot<Map<String, dynamic>>> _performSearch(
       String searchTerm) async {
-    final results1 = await _firestore
+    return _firestore
         .collection('parcelInventory')
         .where('trackingId1', isEqualTo: searchTerm)
-        .get();
+        .get()
+        .then((result1) {
+      if (result1.docs.isNotEmpty) {
+        return result1; // Return if found in trackingId1
+      }
 
-    final results2 = await _firestore
-        .collection('parcelInventory')
-        .where('trackingId2', isEqualTo: searchTerm)
-        .get();
+      // If not found in trackingId1, check trackingId2
+      return _firestore
+          .collection('parcelInventory')
+          .where('trackingId2', isEqualTo: searchTerm)
+          .get()
+          .then((result2) {
+        if (result2.docs.isNotEmpty) {
+          return result2; // Return if found in trackingId2
+        }
 
-    final results3 = await _firestore
-        .collection('parcelInventory')
-        .where('trackingId3', isEqualTo: searchTerm)
-        .get();
+        // If not found in trackingId2, check trackingId3
+        return _firestore
+            .collection('parcelInventory')
+            .where('trackingId3', isEqualTo: searchTerm)
+            .get()
+            .then((result3) {
+          if (result3.docs.isNotEmpty) {
+            return result3; // Return if found in trackingId3
+          }
 
-    final results4 = await _firestore
-        .collection('parcelInventory')
-        .where('trackingId4', isEqualTo: searchTerm)
-        .get();
-
-    final allResults = [
-      ...results1.docs,
-      ...results2.docs,
-      ...results3.docs,
-      ...results4.docs,
-    ];
-
-    // Remove duplicates by tracking document IDs
-    final uniqueResults =
-        {for (var doc in allResults) doc.id: doc}.values.toList();
-
-    return uniqueResults;
+          // Finally, check trackingId4
+          return _firestore
+              .collection('parcelInventory')
+              .where('trackingId4', isEqualTo: searchTerm)
+              .get();
+        });
+      });
+    });
   }
 }
