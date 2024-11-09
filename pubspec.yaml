@@ -3,7 +3,7 @@ description: "Postalhub Tracker"
 
 publish_to: 'none' 
 
-version: 24.5.30+1
+version: 24.11.9+2
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -26,6 +26,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_custom_tabs: ^2.1.0
   url_launcher: ^6.3.0
+  image_network: ^2.5.6
 
 
 dev_dependencies:

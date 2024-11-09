@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:another_stepper/another_stepper.dart';
+import 'package:image_network/image_network.dart';
 
 class SearchInventory extends StatefulWidget {
   const SearchInventory({super.key});
@@ -180,8 +181,8 @@ class _SearchInventoryState extends State<SearchInventory> {
             final timestampDelivered = data['timestamp_delivered'] != null
                 ? (data['timestamp_delivered'] as Timestamp).toDate()
                 : null;
-            final uniqueImageUrl =
-                '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}';
+            //final uniqueImageUrl =
+            //    '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}';
 
             List<StepperData> stepperDataDelivered = [
               StepperData(
@@ -392,30 +393,19 @@ class _SearchInventoryState extends State<SearchInventory> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  uniqueImageUrl,
-                                  width: 300.0,
-                                  //height: 300.0,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    String errorMessage;
-                                    if (error is NetworkImageLoadException) {
-                                      errorMessage = 'Network error: $error';
-                                    } else {
-                                      errorMessage =
-                                          'Failed to load image: $error';
-                                    }
-                                    return Column(
-                                      children: [
-                                        const Icon(
-                                            Icons.image_not_supported_outlined),
-                                        Text(errorMessage),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: ImageNetwork(
+                                    image: imageUrl,
+                                    height: 350,
+                                    width: 300,
+                                    onLoading: const CircularProgressIndicator(
+                                      color: Colors.indigoAccent,
+                                    ),
+                                    onError: const Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                    ),
+                                  )),
                             ],
                           )),
                       const SizedBox(
