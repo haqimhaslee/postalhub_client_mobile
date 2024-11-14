@@ -21,11 +21,11 @@ class _SearchInventoryState extends State<SearchInventory> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+      padding: const EdgeInsets.fromLTRB(5, 10, 5, 5),
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: TextField(
               controller: searchInput,
               decoration: InputDecoration(
@@ -334,45 +334,58 @@ class _SearchInventoryState extends State<SearchInventory> {
                 ),
                 Column(
                   children: [
-                    switch (status) {
-                      1 => AnotherStepper(
-                          stepperList: stepperDataSorted,
-                          stepperDirection: Axis.horizontal,
-                          iconWidth: 40,
-                          iconHeight: 40,
-                          activeBarColor: Colors.green,
-                          inActiveBarColor: Colors.grey,
-                          inverted: true,
-                          verticalGap: 20,
-                          activeIndex: 0,
-                          barThickness: 8,
+                    Card(
+                      color:
+                          Theme.of(context).colorScheme.surfaceContainerHighest,
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 15,
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
                         ),
-                      2 => AnotherStepper(
-                          stepperList: stepperDataOnDelivery,
-                          stepperDirection: Axis.horizontal,
-                          iconWidth: 40,
-                          iconHeight: 40,
-                          activeBarColor: Colors.green,
-                          inActiveBarColor: Colors.grey,
-                          inverted: true,
-                          verticalGap: 20,
-                          activeIndex: 1,
-                          barThickness: 8,
-                        ),
-                      3 => AnotherStepper(
-                          stepperList: stepperDataDelivered,
-                          stepperDirection: Axis.horizontal,
-                          iconWidth: 40,
-                          iconHeight: 40,
-                          activeBarColor: Colors.green,
-                          inActiveBarColor: Colors.grey,
-                          inverted: true,
-                          verticalGap: 20,
-                          activeIndex: 2,
-                          barThickness: 8,
-                        ),
-                      _ => Container(), // Handle default case if needed
-                    },
+                        child: switch (status) {
+                          1 => AnotherStepper(
+                              stepperList: stepperDataSorted,
+                              stepperDirection: Axis.horizontal,
+                              iconWidth: 40,
+                              iconHeight: 40,
+                              activeBarColor: Colors.green,
+                              inActiveBarColor: Colors.grey,
+                              inverted: true,
+                              verticalGap: 20,
+                              activeIndex: 0,
+                              barThickness: 8,
+                            ),
+                          2 => AnotherStepper(
+                              stepperList: stepperDataOnDelivery,
+                              stepperDirection: Axis.horizontal,
+                              iconWidth: 40,
+                              iconHeight: 40,
+                              activeBarColor: Colors.green,
+                              inActiveBarColor: Colors.grey,
+                              inverted: true,
+                              verticalGap: 20,
+                              activeIndex: 1,
+                              barThickness: 8,
+                            ),
+                          3 => AnotherStepper(
+                              stepperList: stepperDataDelivered,
+                              stepperDirection: Axis.horizontal,
+                              iconWidth: 40,
+                              iconHeight: 40,
+                              activeBarColor: Colors.green,
+                              inActiveBarColor: Colors.grey,
+                              inverted: true,
+                              verticalGap: 20,
+                              activeIndex: 2,
+                              barThickness: 8,
+                            ),
+                          _ => Container(), // Handle default case if needed
+                        },
+                      ),
+                    )
                   ],
                 ),
                 const SizedBox(
@@ -380,7 +393,7 @@ class _SearchInventoryState extends State<SearchInventory> {
                 ),
                 Card(
                   elevation: 0,
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -417,28 +430,76 @@ class _SearchInventoryState extends State<SearchInventory> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Tracking ID 1 : ${data['trackingId1']}',
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.qr_code_scanner_rounded,
+                                  size: 15,
+                                ),
+                                Text(
+                                  '   Tracking ID 1 :  ${data['trackingId1']}',
+                                ),
+                              ],
                             ),
                             if (trackingId2.isNotEmpty)
-                              Text(
-                                'Tracking ID 2 : $trackingId2',
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.qr_code_scanner_rounded,
+                                    size: 15,
+                                  ),
+                                  Text(
+                                    '   Tracking ID 2 :  ${data['trackingId2']}',
+                                  ),
+                                ],
                               ),
                             if (trackingId3.isNotEmpty)
-                              Text(
-                                'Tracking ID 3 : $trackingId3',
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.qr_code_scanner_rounded,
+                                    size: 15,
+                                  ),
+                                  Text(
+                                    '   Tracking ID 3 :  ${data['trackingId3']}',
+                                  ),
+                                ],
                               ),
                             if (trackingId4.isNotEmpty)
-                              Text(
-                                'Tracking ID 4 : $trackingId4',
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.qr_code_scanner_rounded,
+                                    size: 15,
+                                  ),
+                                  Text(
+                                    '   Tracking ID 4 :  ${data['trackingId4']}',
+                                  ),
+                                ],
                               ),
                             if (remarks.isNotEmpty)
-                              Text(
-                                'Remarks : $remarks',
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.description_rounded,
+                                    size: 15,
+                                  ),
+                                  Text(
+                                    '    Remarks :  $remarks',
+                                  ),
+                                ],
                               ),
                             if (timestampSorted != null)
-                              Text(
-                                'Arrived & sorted at: ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.schedule_rounded,
+                                    size: 15,
+                                  ),
+                                  Text(
+                                    '   Sorted at :  ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
+                                  ),
+                                ],
                               ),
                           ],
                         ),
@@ -457,7 +518,7 @@ class _SearchInventoryState extends State<SearchInventory> {
                 ),
                 Card(
                   elevation: 0,
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -469,20 +530,44 @@ class _SearchInventoryState extends State<SearchInventory> {
                           children: [
                             if (status == 3)
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(5, 5, 5, 1),
+                                padding: const EdgeInsets.fromLTRB(30, 5, 5, 1),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (timestampDelivered != null)
-                                      Text(
-                                        'Delivered at: ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.schedule_rounded,
+                                            size: 15,
+                                          ),
+                                          Text(
+                                            '   Delivered at :  ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
+                                          ),
+                                        ],
                                       ),
-                                    Text(
-                                      'Receiver: ${data['receiverId']}',
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.badge_rounded,
+                                          size: 15,
+                                        ),
+                                        Text(
+                                          '   Receiver :  ${data['receiverId']}',
+                                        ),
+                                      ],
                                     ),
                                     if (receiverRemarks.isNotEmpty)
-                                      Text(
-                                          'Remarks : ${data['receiverRemarks']}'),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.description_rounded,
+                                            size: 15,
+                                          ),
+                                          Text(
+                                              '   Remarks :  ${data['receiverRemarks']}'),
+                                        ],
+                                      ),
                                     const SizedBox(
                                       height: 10,
                                     ),

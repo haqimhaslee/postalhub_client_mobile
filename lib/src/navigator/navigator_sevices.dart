@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
-import 'package:postalhub_tracker/pages/about/about.dart';
-import 'package:postalhub_tracker/pages/how_to_use/how_to_use.dart';
+import 'package:postalhub_tracker/pages/more/more_page.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 //import 'package:postalhub_tracker/pages/updates_info/updates_info.dart';
-import 'package:postalhub_tracker/pages/updates_info/updates_info_at.dart';
-import 'package:shimmer/shimmer.dart';
 
 class NavigatorServices extends StatefulWidget {
   const NavigatorServices({super.key});
@@ -20,24 +17,37 @@ class _NavigatorServicesState extends State<NavigatorServices> {
   final List<Widget> _windgetOption = <Widget>[
     const SearchInventory(),
     const AskOurAi(),
-    const HowToUse(),
-    const UpdatesInfoAt(),
-    const About(),
+    const MorePage(),
   ];
-  void openDrawer() {
-    scaffoldKey.currentState!.openDrawer();
-  }
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width <= 590
+            ? NavigationBar(
+                onDestinationSelected: (i) =>
+                    setState(() => _selectedIndex = i),
+                selectedIndex: _selectedIndex,
+                destinations: const <Widget>[
+                  NavigationDestination(
+                    icon: Icon(Icons.search),
+                    label: 'Search',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.hub),
+                    label: 'Ask AI',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.more_horiz_rounded),
+                    label: 'More',
+                  ),
+                ],
+              )
+            : null,
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
+          elevation: 3,
           backgroundColor: Theme.of(context).colorScheme.surface,
-          elevation: 0,
-          scrolledUnderElevation: 0,
           title: Row(children: [
             Image.asset(
               'assets/images/postalhub_logo.jpg',
@@ -47,231 +57,82 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             ),
             const Text('  Postal Hub Tracker'),
           ]),
-          leading: width > 680
-              ? IconButton(
-                  icon: Icon(
-                    Icons.menu_rounded,
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  onPressed: null,
-                )
-              : null,
-        ),
-        drawer: NavigationDrawer(
-          surfaceTintColor: Theme.of(context).colorScheme.surface,
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          shadowColor: Theme.of(context).colorScheme.surface,
-          onDestinationSelected: (i) => setState(() => _selectedIndex = i),
-          selectedIndex: _selectedIndex,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-              child: Text(
-                'Menu',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-            ),
-            const NavigationDrawerDestination(
-              label: Text("Parcel Tracker"),
-              icon: Icon(Icons.search),
-              selectedIcon: Icon(Icons.search),
-            ),
-            NavigationDrawerDestination(
-              label: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      right: 0,
-                      left: 0,
-                      //top: 5,
-                      //bottom: 2,
-                    ),
-                    child: Text("[Ask AI]  by "),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                    ),
-                    child: Shimmer.fromColors(
-                      direction: ShimmerDirection.ltr,
-                      period: const Duration(milliseconds: 3800),
-                      baseColor: const Color.fromARGB(255, 106, 147, 252),
-                      highlightColor: const Color.fromARGB(255, 242, 106, 88),
-                      child: const Text(
-                        '✨Gemini',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  //const Flexible(fit: FlexFit.tight, child: SizedBox()),
-                ],
-              ),
-              icon: const Icon(Icons.hub_outlined),
-              selectedIcon: const Icon(Icons.hub_rounded),
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-              child: Divider(),
-            ),
-            const NavigationDrawerDestination(
-              label: Text("How to use"),
-              icon: Icon(Icons.question_mark_outlined),
-              selectedIcon: Icon(Icons.question_mark_rounded),
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-              child: Divider(),
-            ),
-            const NavigationDrawerDestination(
-              label: Text("Updates"),
-              icon: Icon(Icons.update_rounded),
-              selectedIcon: Icon(Icons.update_rounded),
-            ),
-            const NavigationDrawerDestination(
-              label: Text("About"),
-              icon: Icon(Icons.info_outline),
-              selectedIcon: Icon(Icons.info_rounded),
-            ),
-          ],
         ),
         body: Row(
-          mainAxisAlignment:
-              width > 680 ? MainAxisAlignment.start : MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            width > 680
-                ? SizedBox(
-                    width: 250,
-                    child: NavigationDrawer(
-                      surfaceTintColor: Theme.of(context).colorScheme.surface,
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      shadowColor: Theme.of(context).colorScheme.surface,
-                      onDestinationSelected: (i) =>
-                          setState(() => _selectedIndex = i),
-                      selectedIndex: _selectedIndex,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(28, 0, 16, 10),
-                          child: Text(
-                            ' ',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ),
-                        const NavigationDrawerDestination(
-                          label: Text("Parcel Tracker"),
-                          icon: Icon(Icons.search),
-                          selectedIcon: Icon(Icons.search),
-                        ),
-                        NavigationDrawerDestination(
-                          label: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(
-                                  right: 0,
-                                  left: 0,
-                                  //top: 5,
-                                  //bottom: 2,
-                                ),
-                                child: Text("[Ask AI]  by "),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 0,
-                                  bottom: 0,
-                                  left: 0,
-                                  right: 0,
-                                ),
-                                child: Shimmer.fromColors(
-                                  direction: ShimmerDirection.ltr,
-                                  period: const Duration(milliseconds: 3800),
-                                  baseColor:
-                                      const Color.fromARGB(255, 106, 147, 252),
-                                  highlightColor:
-                                      const Color.fromARGB(255, 242, 106, 88),
-                                  child: const Text(
-                                    '✨Gemini',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              //const Flexible(fit: FlexFit.tight, child: SizedBox()),
-                            ],
-                          ),
-                          icon: const Icon(Icons.hub_outlined),
-                          selectedIcon: const Icon(Icons.hub_rounded),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-                          child: Divider(),
-                        ),
-                        const NavigationDrawerDestination(
-                          label: Text("How to use"),
-                          icon: Icon(Icons.question_mark_outlined),
-                          selectedIcon: Icon(Icons.question_mark_rounded),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-                          child: Divider(),
-                        ),
-                        const NavigationDrawerDestination(
-                          label: Text("Updates"),
-                          icon: Icon(Icons.update_rounded),
-                          selectedIcon: Icon(Icons.update_rounded),
-                        ),
-                        const NavigationDrawerDestination(
-                          label: Text("About"),
-                          icon: Icon(Icons.info_outline),
-                          selectedIcon: Icon(Icons.info_rounded),
-                        ),
-                      ],
-                    ),
-                  )
-                : const SizedBox(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color:
-                          Theme.of(context).colorScheme.surfaceContainerHighest,
-                      border:
-                          Border.all(color: const Color.fromARGB(0, 0, 0, 0)),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(30))),
-                  child: SizedBox(
-                    height: width > 680 ? height - 100 : height - 20,
-                    width: width > 680 ? width - 270 : width - 10,
-                    child: PageTransitionSwitcher(
-                      transitionBuilder:
-                          (child, animation, secondaryAnimation) =>
-                              SharedAxisTransition(
-                        fillColor: const Color.fromARGB(0, 0, 0, 0),
-                        transitionType: SharedAxisTransitionType.vertical,
-                        animation: animation,
-                        secondaryAnimation: secondaryAnimation,
-                        child: child,
-                      ),
-                      child: _windgetOption.elementAt(_selectedIndex),
+            if (MediaQuery.of(context).size.width > 590 &&
+                MediaQuery.of(context).size.width <= 810)
+              NavigationRail(
+                selectedIndex: _selectedIndex,
+                groupAlignment: 0,
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+                labelType: NavigationRailLabelType.all,
+                destinations: const <NavigationRailDestination>[
+                  NavigationRailDestination(
+                    icon: Icon(Icons.search),
+                    label: Text('Search'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.hub),
+                    label: Text('Ask AI'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.more_horiz_rounded),
+                    label: Text('More'),
+                  ),
+                ],
+              ),
+            if (MediaQuery.of(context).size.width > 810)
+              NavigationDrawer(
+                onDestinationSelected: (i) =>
+                    setState(() => _selectedIndex = i),
+                selectedIndex: _selectedIndex,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+                    child: Text(
+                      ' ',
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
+                  const NavigationDrawerDestination(
+                    label: Text('Search'),
+                    icon: Icon(Icons.search),
+                  ),
+                  const NavigationDrawerDestination(
+                    label: Text('Ask AI'),
+                    icon: Icon(Icons.hub),
+                  ),
+                  const NavigationDrawerDestination(
+                    label: Text('More'),
+                    icon: Icon(Icons.more_horiz_rounded),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                    child: Divider(),
+                  ),
+                ],
+              ),
+            if (MediaQuery.of(context).size.width > 590)
+              const VerticalDivider(thickness: 1, width: 2),
+            Expanded(
+              child: PageTransitionSwitcher(
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  fillColor: Colors.transparent,
+                  transitionType: SharedAxisTransitionType.vertical,
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  child: child,
                 ),
-              ],
-            ),
+                child: _windgetOption.elementAt(_selectedIndex),
+              ),
+            )
           ],
         ));
   }

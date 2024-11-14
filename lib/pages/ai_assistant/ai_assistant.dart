@@ -32,7 +32,7 @@ class _AskOurAiState extends State<AskOurAi> {
     super.initState();
     _model = GenerativeModel(
       safetySettings: safetySettings,
-      model: 'gemini-1.5-pro-002',
+      model: 'gemini-1.5-flash-8b',
       apiKey: 'AIzaSyAWoWzJ-Qh-Gfos2r3cP3_QgzCcf2ewyNs',
     );
     _chat = _model.startChat(history: [
@@ -247,9 +247,10 @@ class _AskOurAiState extends State<AskOurAi> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Something went wrong'),
-          content: SingleChildScrollView(
-            child: Text(message),
+          title: const Text('Opps!'),
+          content: const SingleChildScrollView(
+            child: Text(
+                "Something big is brewing... New AI model in the works. Stay tuned!"),
           ),
           actions: [
             TextButton(
