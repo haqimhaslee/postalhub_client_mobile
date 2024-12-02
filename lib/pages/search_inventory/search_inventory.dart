@@ -20,102 +20,61 @@ class _SearchInventoryState extends State<SearchInventory> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(5, 10, 5, 5),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: TextField(
-              controller: searchInput,
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      searchInput.clear();
-                    });
-                  },
-                  icon: const Icon(Icons.cancel),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                labelText: 'Tracking Number*',
-              ),
+    return Scaffold(
+        backgroundColor: const Color.fromARGB(0, 158, 158, 158),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => setState(() => _searchTerm = searchInput.text),
+          label: const Text("Search"),
+          icon: const Icon(Icons.search),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.only(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
             ),
-          ),
-          //const Divider(),
-          Expanded(
-            child: _buildSearchResults(_searchTerm),
-          ),
-          Card(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            elevation: 0,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            child: SizedBox(
-                width: 200,
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.width > 590 ? 30 : 20,
+                    left: MediaQuery.of(context).size.width > 590 ? 30 : 20,
+                    right: MediaQuery.of(context).size.width > 590 ? 28 : 20,
+                    bottom: MediaQuery.of(context).size.width > 590 ? 28 : 10,
+                  ),
+                  child: TextField(
+                    controller: searchInput,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            searchInput.clear();
+                          });
+                        },
+                        icon: const Icon(Icons.cancel),
                       ),
-                      child: Material(
-                        color: const Color.fromARGB(0, 255, 193, 7),
-                        child: InkWell(
-                          onTap: () =>
-                              setState(() => _searchTerm = searchInput.text),
-                          child: const Padding(
-                            padding: EdgeInsets.only(
-                              top: 15,
-                              bottom: 15,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  //width: MediaQuery.of(context).size.width - 180,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                              child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 0),
-                                                  child: Text("Search",
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ))))
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      labelText: 'Tracking Number*',
                     ),
-                  ],
-                )),
-          ),
-        ],
-      ),
-    );
+                  ),
+                ),
+                //const Divider(),
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        10,
+                        0,
+                        10,
+                        0,
+                      ),
+                      child: _buildSearchResults(_searchTerm)),
+                ),
+              ],
+            )));
   }
 
   Widget _buildSearchResults(String searchTerm) {
@@ -127,6 +86,7 @@ class _SearchInventoryState extends State<SearchInventory> {
           children: [
             Image.asset(
               "assets/gif/search.gif",
+              scale: 2,
             ),
             const Text('Enter a tracking number to search.'),
             const Text('*Tracking numbers are case sensitive')
@@ -156,7 +116,18 @@ class _SearchInventoryState extends State<SearchInventory> {
                 Image.asset(
                   "assets/gif/not_found.gif",
                 ),
-                const Text('No items found for that tracking number.')
+                const Text('Sorry...'),
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 30,
+                    right: 30,
+                  ),
+                  child: Text(
+                    'No items found for that tracking number or your parcel might not be sorted yet.',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const Text('Please check again later.'),
               ],
             ),
           );
@@ -181,8 +152,7 @@ class _SearchInventoryState extends State<SearchInventory> {
             final timestampDelivered = data['timestamp_delivered'] != null
                 ? (data['timestamp_delivered'] as Timestamp).toDate()
                 : null;
-            //final uniqueImageUrl =
-            //    '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}';
+            final warehouseCode = data['warehouse']?.toString() ?? '';
 
             List<StepperData> stepperDataDelivered = [
               StepperData(
@@ -329,9 +299,6 @@ class _SearchInventoryState extends State<SearchInventory> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
                 Column(
                   children: [
                     Card(
@@ -498,6 +465,18 @@ class _SearchInventoryState extends State<SearchInventory> {
                                   ),
                                   Text(
                                     '   Sorted at :  ${DateFormat.yMMMd().add_jm().format(timestampSorted)}',
+                                  ),
+                                ],
+                              ),
+                            if (warehouseCode.isNotEmpty)
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.warehouse_rounded,
+                                    size: 15,
+                                  ),
+                                  Text(
+                                    '   Warehouse/Branch :  $warehouseCode',
                                   ),
                                 ],
                               ),

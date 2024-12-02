@@ -6,6 +6,7 @@ import 'package:postalhub_tracker/src/postalhub_ui.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

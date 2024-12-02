@@ -89,121 +89,126 @@ class _AskOurAiState extends State<AskOurAi> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _chat.history.length <= preSetChatHistory
-              ? Expanded(
-                  child: Center(
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 0, left: 0, right: 0, bottom: 0),
-                          child: SizedBox(
-                            child: Shimmer.fromColors(
-                              direction: ShimmerDirection.ltr,
-                              period: const Duration(milliseconds: 5000),
-                              baseColor:
-                                  const Color.fromARGB(255, 106, 147, 252),
-                              highlightColor:
-                                  const Color.fromARGB(255, 242, 106, 88),
-                              child: const Text(
-                                'Hi! How can I help?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.bold,
+      padding: const EdgeInsets.only(top: 0, left: 0, right: 0),
+      child: Container(
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _chat.history.length <= preSetChatHistory
+                ? Expanded(
+                    child: Center(
+                        child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0, left: 0, right: 0, bottom: 0),
+                            child: SizedBox(
+                              child: Shimmer.fromColors(
+                                direction: ShimmerDirection.ltr,
+                                period: const Duration(milliseconds: 5000),
+                                baseColor:
+                                    const Color.fromARGB(255, 106, 147, 252),
+                                highlightColor:
+                                    const Color.fromARGB(255, 242, 106, 88),
+                                child: const Text(
+                                  'Hi! How can I help?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ))))
-              : Expanded(
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    itemBuilder: (context, idx) {
-                      var content = _chat.history.toList()[
-                          idx + preSetChatHistory]; // Start from index 1
-                      var text = content.parts
-                          .whereType<TextPart>()
-                          .map<String>((e) => e.text)
-                          .join('');
-                      return MessageWidget(
-                        text: text,
-                        isFromUser: content.role == 'user',
-                      );
-                    },
-                    itemCount: _chat.history.length -
-                        preSetChatHistory, // Adjust itemCount accordingly
+                            ))))
+                : Expanded(
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemBuilder: (context, idx) {
+                        var content = _chat.history.toList()[
+                            idx + preSetChatHistory]; // Start from index 1
+                        var text = content.parts
+                            .whereType<TextPart>()
+                            .map<String>((e) => e.text)
+                            .join('');
+                        return MessageWidget(
+                          text: text,
+                          isFromUser: content.role == 'user',
+                        );
+                      },
+                      itemCount: _chat.history.length -
+                          preSetChatHistory, // Adjust itemCount accordingly
+                    ),
                   ),
-                ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 5,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        autofocus: true,
-                        focusNode: _textFieldFocus,
-                        decoration: textFieldDecoration(
-                            context, 'Ask anything about Postal Hub...'),
-                        controller: _textController,
-                        onSubmitted: (String value) {
-                          _sendChatMessage(value);
-                        },
-                        maxLines:
-                            null, // This allows the TextField to expand vertically for multiline input
-                      ),
-                    ),
-                    const SizedBox.square(
-                      dimension: 8,
-                    ),
-                    if (!_loading)
-                      ElevatedButton(
-                        onPressed: () async {
-                          _sendChatMessage(_textController.text);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: const CircleBorder(),
-                          padding: const EdgeInsets.all(20),
-                          backgroundColor: Theme.of(context)
-                              .colorScheme
-                              .primary, // <-- Button color
-                          foregroundColor: Theme.of(context)
-                              .colorScheme
-                              .onPrimary, // <-- Splash color
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 30,
+                left: 30,
+                right: 30,
+                bottom: 10,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          autofocus: true,
+                          focusNode: _textFieldFocus,
+                          decoration: textFieldDecoration(
+                              context, 'Ask anything about Postal Hub...'),
+                          controller: _textController,
+                          onSubmitted: (String value) {
+                            _sendChatMessage(value);
+                          },
+                          maxLines:
+                              null, // This allows the TextField to expand vertically for multiline input
                         ),
-                        child: Icon(
-                          Icons.send,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                      )
-                    else
-                      LoadingAnimationWidget.flickr(
-                        leftDotColor: Theme.of(context).colorScheme.primary,
-                        rightDotColor: Theme.of(context).colorScheme.error,
-                        size: 30,
                       ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                    "*Ask AI may display inaccurate info, including about people, so double-check its responses. Any conversation are not stored. Use it well.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 11,
-                    ))
-              ],
+                      const SizedBox.square(
+                        dimension: 8,
+                      ),
+                      if (!_loading)
+                        ElevatedButton(
+                          onPressed: () async {
+                            _sendChatMessage(_textController.text);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            padding: const EdgeInsets.all(20),
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .primary, // <-- Button color
+                            foregroundColor: Theme.of(context)
+                                .colorScheme
+                                .onPrimary, // <-- Splash color
+                          ),
+                          child: Icon(
+                            Icons.send,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        )
+                      else
+                        LoadingAnimationWidget.flickr(
+                          leftDotColor: Theme.of(context).colorScheme.primary,
+                          rightDotColor: Theme.of(context).colorScheme.error,
+                          size: 30,
+                        ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                      "*Ask AI may display inaccurate info, including about people, so double-check its responses. Any conversation are not stored. Use it well.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 11,
+                      ))
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -25,6 +25,9 @@ class _NavigatorServicesState extends State<NavigatorServices> {
     return Scaffold(
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerLow,
+                height: 70,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
@@ -44,10 +47,21 @@ class _NavigatorServicesState extends State<NavigatorServices> {
                 ],
               )
             : null,
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         appBar: AppBar(
-          elevation: 3,
-          backgroundColor: Theme.of(context).colorScheme.surface,
+          scrolledUnderElevation: 0,
+          elevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.notifications_rounded),
+              tooltip: 'Newsletter (Coming Soon)',
+              onPressed: () {},
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+          ],
           title: Row(children: [
             Image.asset(
               'assets/images/postalhub_logo.jpg',
@@ -55,7 +69,7 @@ class _NavigatorServicesState extends State<NavigatorServices> {
               height: 40,
               fit: BoxFit.cover,
             ),
-            const Text('  Postal Hub Tracker'),
+            const Text('  Campus Postal Hub'),
           ]),
         ),
         body: Row(
@@ -64,6 +78,8 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             if (MediaQuery.of(context).size.width > 590 &&
                 MediaQuery.of(context).size.width <= 810)
               NavigationRail(
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerLow,
                 selectedIndex: _selectedIndex,
                 groupAlignment: 0,
                 onDestinationSelected: (int index) {
@@ -89,48 +105,57 @@ class _NavigatorServicesState extends State<NavigatorServices> {
               ),
             if (MediaQuery.of(context).size.width > 810)
               NavigationDrawer(
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerLow,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
-                children: <Widget>[
+                children: const <Widget>[
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-                    child: Text(
-                      ' ',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
+                    padding: EdgeInsets.fromLTRB(28, 16, 16, 0),
                   ),
-                  const NavigationDrawerDestination(
+                  NavigationDrawerDestination(
                     label: Text('Search'),
                     icon: Icon(Icons.search),
                   ),
-                  const NavigationDrawerDestination(
+                  NavigationDrawerDestination(
                     label: Text('Ask AI'),
                     icon: Icon(Icons.hub),
                   ),
-                  const NavigationDrawerDestination(
+                  NavigationDrawerDestination(
                     label: Text('More'),
                     icon: Icon(Icons.more_horiz_rounded),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
                     child: Divider(),
                   ),
                 ],
               ),
-            if (MediaQuery.of(context).size.width > 590)
-              const VerticalDivider(thickness: 1, width: 2),
             Expanded(
-              child: PageTransitionSwitcher(
-                transitionBuilder: (child, animation, secondaryAnimation) =>
-                    SharedAxisTransition(
-                  fillColor: Colors.transparent,
-                  transitionType: SharedAxisTransitionType.vertical,
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  child: child,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(
+                      MediaQuery.of(context).size.width > 590 ? 40 : 25),
+                  topRight: Radius.circular(
+                      MediaQuery.of(context).size.width > 590 ? 0 : 25),
+                  bottomLeft: Radius.circular(
+                      MediaQuery.of(context).size.width > 590 ? 0 : 25),
+                  bottomRight: Radius.circular(
+                      MediaQuery.of(context).size.width > 590 ? 0 : 25),
                 ),
-                child: _windgetOption.elementAt(_selectedIndex),
+                child: PageTransitionSwitcher(
+                  transitionBuilder: (child, animation, secondaryAnimation) =>
+                      SharedAxisTransition(
+                    fillColor:
+                        Theme.of(context).colorScheme.surfaceContainerLowest,
+                    transitionType: SharedAxisTransitionType.vertical,
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    child: child,
+                  ),
+                  child: _windgetOption.elementAt(_selectedIndex),
+                ),
               ),
             )
           ],

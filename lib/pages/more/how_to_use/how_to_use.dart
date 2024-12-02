@@ -24,123 +24,134 @@ class _HowToUseState extends State<HowToUse> {
         title: Text('How to use'),
       ),
       SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'How to use?',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                '____________________________',
-                style: TextStyle(fontWeight: FontWeight.w100, fontSize: 15.0),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                'Track your parcel',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-              const SizedBox(height: 10.0),
-              const Text(
-                '• Enter your tracking number in the Tracking Number field*',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              const Text(
-                '(*Case sensitive)',
-                style: TextStyle(fontSize: 10.0),
-              ),
-              const SizedBox(height: 10.0),
-              Card(
-                elevation: 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    width: 400,
-                    'assets/images/How_to_use_1.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                "• Click 'Search' and this site will search your parcel information in our database",
-                style: TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 10.0),
-              Card(
-                elevation: 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    width: 400,
-                    'assets/images/How_to_use_2.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                '____________________________',
-                style: TextStyle(fontWeight: FontWeight.w100, fontSize: 15.0),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                "Interact with 'Ask AI'",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-              const SizedBox(height: 10.0),
-              const Text(
-                "• With 'Ask AI', you can ask nearly any question—from general queries to questions regarding Postal Hub.¹",
-                style: TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                '____________________________',
-                style: TextStyle(fontWeight: FontWeight.w100, fontSize: 15.0),
-              ),
-              const SizedBox(height: 20.0),
-              const Text(
-                'Parcel Library, Parcel Arrived Notification, Reward Points and more²',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-              const SizedBox(height: 10.0),
-              const Text(
-                '• More features are available in mobile app.',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(height: 10.0),
-              FilledButton(
-                  onPressed: ()
-                      //=> _launchUrl(
-                      //    'https://drive.google.com/drive/folders/1rL-EHsUW3CxwnvZuVDzSaLKbmmZcVkQo?usp=sharing'
-                      //    ),
-                      {},
-                  child: const Text("Download Mobile App³")),
-              const SizedBox(height: 50.0),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "¹ Powered by Gemini 1.5 Flash.There is no chat or interaction history saved by this AI model. The AI model, which was trained on a dataset that contains general data knowledge up to mid 2023 and is continuously updated, to learn and process information using Google's core algorithms.",
-                    style: TextStyle(fontSize: 10.0),
+                  ExpansionTile(
+                    initiallyExpanded: true,
+                    title: const Text(
+                      'Track your parcel',
+                      style: TextStyle(fontSize: 19.0),
+                    ),
+                    children: <Widget>[
+                      const Text(
+                        'Enter your tracking number in the Tracking Number field*',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      const Text(
+                        '(*Case sensitive)',
+                        style: TextStyle(fontSize: 10.0),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Card(
+                        elevation: 3,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            width: 400,
+                            'assets/images/How_to_use_1.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      const Text(
+                        "Click 'Search' and this site will search your parcel information in our database",
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Card(
+                        elevation: 3,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            width: 400,
+                            'assets/images/How_to_use_2.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                    ],
                   ),
-                  Text(
-                    "² Account registration required. Few features planned and still on development",
-                    style: TextStyle(fontSize: 10.0),
+                  const ExpansionTile(
+                    title: Text(
+                      "Interact with 'Ask AI'",
+                      style: TextStyle(fontSize: 19.0),
+                    ),
+                    children: <Widget>[
+                      Text(
+                        "With 'Ask AI', you can ask nearly any question—from general queries to questions regarding Postal Hub.¹",
+                      ),
+                    ],
                   ),
-                  Text(
-                    "³ Only available in Android via sideload. Coming soon in Google Play Store and Apple App Store.",
-                    style: TextStyle(fontSize: 10.0),
+                  const ExpansionTile(
+                    title: Text(
+                      'Parcel Library, Parcel Arrived Notification, Reward Points and more²',
+                      style: TextStyle(fontSize: 19.0),
+                    ),
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(
+                          'More features are available in mobile app.',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const ExpansionTile(
+                    title: Text(
+                      'Bringing the latest/exciting technology',
+                      style: TextStyle(fontSize: 19.0),
+                    ),
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(
+                          'Our team is dedicated to bringing you cutting-edge technology to enhance your shipping and tracking experience.',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const ExpansionTile(
+                    title: Text(
+                      'The beginning of a multi-year project',
+                      style: TextStyle(fontSize: 19.0),
+                    ),
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(
+                          'We are committed to expanding and improving this system over the coming years to provide even more features and reliability.',
+                        ),
+                      ),
+                    ],
                   ),
                 ],
-              )
-            ],
-          ),
-        ),
-      )
+              ),
+            )),
+        const Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "¹ Powered by Gemini 1.5 Flash. There is no chat or interaction history saved by this AI model. The AI model, which was trained on a dataset that contains general data knowledge up to mid 2023 and is continuously updated, to learn and process information using Google's core algorithms.",
+                  style: TextStyle(fontSize: 10.0),
+                ),
+                Text(
+                  "² Account registration required. Few features planned and still on development. Coming soon in Google Play Store and Apple App Store.",
+                  style: TextStyle(fontSize: 10.0),
+                ),
+                Text(
+                  "System UI may different as few improvement has been added over time, update to the latest version by refreshing this app/website a few times.",
+                  style: TextStyle(fontSize: 10.0),
+                ),
+              ],
+            ))
+      ]))
     ]));
   }
 }

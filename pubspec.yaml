@@ -3,7 +3,7 @@ description: "Postalhub Tracker"
 
 publish_to: 'none' 
 
-version: 24.11.9+2
+version: 24.11.183+3
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -29,6 +29,8 @@ dependencies:
   image_network: ^2.5.6
   carousel_slider: ^5.0.0
   cached_network_image: ^3.4.1
+  simple_animations: ^5.1.0
+  particles_flutter: ^1.0.1
 
 
 dev_dependencies:

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:postalhub_tracker/pages/more/about/about.dart';
+import 'package:postalhub_tracker/pages/more/branch_info/branch_info.dart';
 import 'package:postalhub_tracker/pages/more/carousel_ads.dart';
 import 'package:postalhub_tracker/pages/more/how_to_use/how_to_use.dart';
 import 'package:postalhub_tracker/pages/more/updates_info/updates_info_at.dart';
@@ -99,17 +100,28 @@ class _MorePageState extends State<MorePage> {
     // ... other widget code
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(0, 158, 158, 158),
       body: ListView(
         children: [
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
           const Column(
             children: [
-              SizedBox(
-                width: 600,
-                child: CarouselAds(),
-              ),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25),
+                    ),
+                    child: SizedBox(
+                      width: 700,
+                      child: CarouselAds(),
+                    ),
+                  ))
             ],
           ),
           const SizedBox(
@@ -158,6 +170,58 @@ class _MorePageState extends State<MorePage> {
                                                     EdgeInsets.only(left: 20),
                                                 child: Text(
                                                     "Share Feedback/Contact Us",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ))))
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(0),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
+                    ),
+                    child: Material(
+                      color:
+                          Theme.of(context).colorScheme.surfaceContainerHighest,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BranchInfo()));
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(
+                            top: 15,
+                            bottom: 15,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                //width: MediaQuery.of(context).size.width - 180,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                            child: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 20),
+                                                child: Text("Our Branch Info",
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -512,10 +576,7 @@ class _MorePageState extends State<MorePage> {
             ),
           ),
           const SizedBox(
-            height: 20,
-          ),
-          const SizedBox(
-            height: 20,
+            height: 10,
           ),
         ],
       ),

@@ -36,12 +36,12 @@ class _CarouselAdsState extends State<CarouselAds> {
               //height: 177,
               enlargeCenterPage: true,
               autoPlay: true,
-              aspectRatio: 16 / 9,
+              aspectRatio: 16 / 7,
               autoPlayCurve: Curves.easeInOut,
               enableInfiniteScroll: true,
               autoPlayAnimationDuration: const Duration(milliseconds: 1100),
               autoPlayInterval: const Duration(seconds: 7),
-              viewportFraction: 1,
+              viewportFraction: 0.78,
             ),
             items: items.map((item) {
               final imageUrl = item['image_url'] ?? '';
