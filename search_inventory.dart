@@ -128,8 +128,10 @@ class _SearchInventoryState extends State<SearchInventory> {
             final trackingId2 = data['trackingId2']?.toString() ?? '';
             final trackingId3 = data['trackingId3']?.toString() ?? '';
             final trackingId4 = data['trackingId4']?.toString() ?? '';
+            final receiverRemarks = data['receiverRemarks']?.toString() ?? '';
             final remarks = data['remarks']?.toString() ?? '';
             final status = data['status'];
+            final receiverImageUrl = data['receiverImageUrl'];
             final timestampSorted = data['timestamp_arrived_sorted'] != null
                 ? (data['timestamp_arrived_sorted'] as Timestamp).toDate()
                 : null;
@@ -464,23 +466,118 @@ class _SearchInventoryState extends State<SearchInventory> {
                                   ),
                                 ],
                               ),
-                            if (timestampDelivered != null)
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.schedule_rounded,
-                                    size: 15,
-                                  ),
-                                  Text(
-                                    '   Delivered at :  ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
-                                  ),
-                                ],
-                              ),
                           ],
                         ),
                       ),
                       const SizedBox(
                         height: 10,
+                      )
+                    ],
+                  ),
+                ),
+                Card(
+                  elevation: 0,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (status == 3)
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 5, 5, 1),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (timestampDelivered != null)
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.schedule_rounded,
+                                            size: 15,
+                                          ),
+                                          Text(
+                                            '   Delivered at :  ${DateFormat.yMMMd().add_jm().format(timestampDelivered)}',
+                                          ),
+                                        ],
+                                      ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.badge_rounded,
+                                          size: 15,
+                                        ),
+                                        Text(
+                                          '   Receiver :  ${data['receiverId']}',
+                                        ),
+                                      ],
+                                    ),
+                                    if (receiverRemarks.isNotEmpty)
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.description_rounded,
+                                            size: 15,
+                                          ),
+                                          Text(
+                                              '   Remarks :  ${data['receiverRemarks']}'),
+                                        ],
+                                      ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            receiverImageUrl,
+                                            width: 300.0,
+                                            height: 300.0,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              String errorMessage;
+                                              if (error
+                                                  is NetworkImageLoadException) {
+                                                errorMessage =
+                                                    'Network error: $error';
+                                              } else {
+                                                errorMessage =
+                                                    'Failed to load image: $error';
+                                              }
+                                              return Column(
+                                                children: [
+                                                  const Icon(Icons
+                                                      .image_not_supported_outlined),
+                                                  Text(errorMessage),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            else
+                              const Column(),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
                       )
                     ],
                   ),

@@ -1,28 +1,102 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'dart:math';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
+import 'package:postalhub_tracker/pages/home/home.dart';
 import 'package:postalhub_tracker/pages/more/more_page.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
+import 'package:postalhub_tracker/pages/services/services.dart';
 //import 'package:postalhub_tracker/pages/updates_info/updates_info.dart';
 
 class NavigatorServices extends StatefulWidget {
   const NavigatorServices({super.key});
+
   @override
   State<NavigatorServices> createState() => _NavigatorServicesState();
 }
 
-class _NavigatorServicesState extends State<NavigatorServices> {
+class _NavigatorServicesState extends State<NavigatorServices>
+    with TickerProviderStateMixin {
+  late final AnimationController _animationController;
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var _selectedIndex = 0;
   final List<Widget> _windgetOption = <Widget>[
+    const HomePage(),
     const SearchInventory(),
-    const AskOurAi(),
+    const ServicesPage(),
     const MorePage(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: AnimatedBuilder(
+          animation: _animationController,
+          builder: (context, child) {
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                shape: BoxShape.rectangle,
+                gradient: SweepGradient(
+                  colors: const [
+                    Colors.blue,
+                    Colors.red,
+                    Colors.blue,
+                  ],
+                  stops: const [0.0, 0.5, 1.0],
+                  transform:
+                      GradientRotation(_animationController.value * 2 * pi),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blue.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                  ),
+                  BoxShadow(
+                    color: Colors.red.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(2.5), // Border thickness
+              child: FloatingActionButton(
+                elevation: 0,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AskOurAi()));
+                },
+                tooltip: 'Ask AI',
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerLowest,
+                child: Icon(
+                  LucideIcons.bot,
+                  size: 28,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+            );
+          },
+        ),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
                 backgroundColor:
@@ -33,12 +107,16 @@ class _NavigatorServicesState extends State<NavigatorServices> {
                 selectedIndex: _selectedIndex,
                 destinations: const <Widget>[
                   NavigationDestination(
-                    icon: Icon(Icons.search),
-                    label: 'Search',
+                    icon: Icon(Icons.home_rounded),
+                    label: 'Home',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.hub),
-                    label: 'Ask AI',
+                    icon: Icon(Icons.search),
+                    label: 'Find Parcel',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.widgets_rounded),
+                    label: 'Services',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.more_horiz_rounded),
@@ -52,16 +130,16 @@ class _NavigatorServicesState extends State<NavigatorServices> {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.notifications_rounded),
-              tooltip: 'Newsletter (Coming Soon)',
-              onPressed: () {},
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-          ],
+          //actions: <Widget>[
+          //  IconButton(
+          //    icon: const Icon(Icons.notifications_rounded),
+          //    tooltip: 'Newsletter (Coming Soon)',
+          //    onPressed: () {},
+          //  ),
+          //  const SizedBox(
+          //    width: 8,
+          //  ),
+          //],
           title: Row(children: [
             Image.asset(
               'assets/images/postalhub_logo.jpg',
@@ -90,12 +168,16 @@ class _NavigatorServicesState extends State<NavigatorServices> {
                 labelType: NavigationRailLabelType.all,
                 destinations: const <NavigationRailDestination>[
                   NavigationRailDestination(
-                    icon: Icon(Icons.search),
-                    label: Text('Search'),
+                    icon: Icon(Icons.home_rounded),
+                    label: Text('Home'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.hub),
-                    label: Text('Ask AI'),
+                    icon: Icon(Icons.search),
+                    label: Text('Find Parcel'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.widgets_rounded),
+                    label: Text('Services'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.more_horiz_rounded),
@@ -115,20 +197,42 @@ class _NavigatorServicesState extends State<NavigatorServices> {
                     padding: EdgeInsets.fromLTRB(28, 16, 16, 0),
                   ),
                   NavigationDrawerDestination(
-                    label: Text('Search'),
+                    label: Text('Home'),
+                    icon: Icon(Icons.home_rounded),
+                  ),
+                  NavigationDrawerDestination(
+                    label: Text('Find Parcel'),
                     icon: Icon(Icons.search),
                   ),
                   NavigationDrawerDestination(
-                    label: Text('Ask AI'),
-                    icon: Icon(Icons.hub),
+                    label: Text('Services'),
+                    icon: Icon(Icons.widgets_rounded),
                   ),
                   NavigationDrawerDestination(
                     label: Text('More'),
                     icon: Icon(Icons.more_horiz_rounded),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                    padding: EdgeInsets.fromLTRB(28, 10, 28, 10),
                     child: Divider(),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(28, 0, 28, 0),
+                      child: Text(
+                        "Copyright Campus Postal Hub © 2024",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(28, 0, 28, 16),
+                      child: Text(
+                        "All rights reserved",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
                   ),
                 ],
               ),
