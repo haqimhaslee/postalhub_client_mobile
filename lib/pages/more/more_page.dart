@@ -12,32 +12,6 @@ class MorePage extends StatefulWidget {
   State<MorePage> createState() => _MorePageState();
 }
 
-Future<void> _feedback(BuildContext context) async {
-  final theme = Theme.of(context);
-  try {
-    await launchUrl(
-      Uri.parse('https://forms.gle/AS5ZHE4oiFt2HEhe7'),
-      customTabsOptions: CustomTabsOptions(
-        colorSchemes: CustomTabsColorSchemes.defaults(
-          toolbarColor: theme.colorScheme.surface,
-          navigationBarColor: theme.colorScheme.surface,
-        ),
-        shareState: CustomTabsShareState.off,
-        urlBarHidingEnabled: true,
-        showTitle: true,
-      ),
-      safariVCOptions: SafariViewControllerOptions(
-        preferredBarTintColor: theme.colorScheme.surface,
-        preferredControlTintColor: theme.colorScheme.onSurface,
-        barCollapsingEnabled: true,
-        entersReaderIfAvailable: false,
-      ),
-    );
-  } catch (e) {
-    debugPrint(e.toString());
-  }
-}
-
 Future<void> _privacypolicy(BuildContext context) async {
   final theme = Theme.of(context);
   try {
@@ -102,70 +76,23 @@ class _MorePageState extends State<MorePage> {
       body: ListView(
         children: [
           const SizedBox(
-            height: 10,
+            height: 12,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: Card(
               elevation: 0,
+              color: Colors.transparent,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: SizedBox(
                   child: Column(
                 children: [
                   ClipRRect(
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                    ),
-                    child: Material(
-                      color:
-                          Theme.of(context).colorScheme.surfaceContainerHighest,
-                      child: InkWell(
-                        onTap: () => _feedback(context),
-                        child: const Padding(
-                          padding: EdgeInsets.only(
-                            top: 15,
-                            bottom: 15,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
-                                //width: MediaQuery.of(context).size.width - 180,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                            child: Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 20),
-                                                child: Text(
-                                                    "Share Feedback/Contact Us",
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ))))
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(0),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                       bottomLeft: Radius.circular(0),
                       bottomRight: Radius.circular(0),
                     ),
@@ -317,8 +244,8 @@ class _MorePageState extends State<MorePage> {
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(0),
                       topRight: Radius.circular(0),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
                     ),
                     child: Material(
                       color:
@@ -371,20 +298,16 @@ class _MorePageState extends State<MorePage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: Card(
+              color: Colors.transparent,
               elevation: 0,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: SizedBox(
                   child: Column(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                     child: Material(
                       color:
                           Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -440,20 +363,16 @@ class _MorePageState extends State<MorePage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: Card(
+              color: Colors.transparent,
               elevation: 0,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: SizedBox(
                   child: Column(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(25)),
                     child: Material(
                       color:
                           Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -501,7 +420,7 @@ class _MorePageState extends State<MorePage> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 12,
           ),
         ],
       ),

@@ -142,7 +142,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
           //],
           title: Row(children: [
             Image.asset(
-              'assets/images/postalhub_logo.jpg',
+              'assets/images/favicon.png',
               width: 40,
               height: 40,
               fit: BoxFit.cover,

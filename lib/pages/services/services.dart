@@ -85,6 +85,51 @@ class _ServicesPageState extends State<ServicesPage>
                                 .surfaceContainerLow,
                             child: InkWell(
                               //splashColor: Theme.of(context).colorScheme.tertiary,
+                              onTap: () {},
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  ClipRRect(
+                                    child: SizedBox(
+                                      width: 40,
+                                      height: 45,
+                                      child: Icon(
+                                        Icons.newspaper_rounded,
+                                        size: 35,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "News and announcement",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Material(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerLow,
+                            child: InkWell(
+                              //splashColor: Theme.of(context).colorScheme.tertiary,
                               onTap: () {
                                 Navigator.push(
                                     context,
