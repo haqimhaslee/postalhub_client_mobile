@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shimmer/shimmer.dart';
 
 class UpdatesInfoAt extends StatefulWidget {
   const UpdatesInfoAt({super.key});
@@ -68,7 +69,21 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
         itemBuilder: (context, index) {
           if (index == _updates.length) {
             return _isLoading
-                ? const Center(child: CircularProgressIndicator())
+                ? Shimmer.fromColors(
+                    direction: ShimmerDirection.ltr,
+                    period: const Duration(milliseconds: 600),
+                    baseColor:
+                        Theme.of(context).colorScheme.surfaceContainerLowest,
+                    highlightColor:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
+                    child: const Card(
+                        elevation: 0,
+                        child: SizedBox(
+                          child: AspectRatio(
+                            aspectRatio: 16 / 9,
+                          ),
+                        )),
+                  )
                 : const SizedBox();
           }
           Map<String, dynamic> data =

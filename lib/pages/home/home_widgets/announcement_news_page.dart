@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 class AnnouncementNewsPage extends StatefulWidget {
   const AnnouncementNewsPage({super.key});
@@ -69,15 +70,28 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
         itemCount: documents.length + (hasMore ? 1 : 0),
         itemBuilder: (context, index) {
           if (index == documents.length) {
-            return const Center(child: CircularProgressIndicator());
+            return Shimmer.fromColors(
+              direction: ShimmerDirection.ltr,
+              period: const Duration(milliseconds: 600),
+              baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+              highlightColor:
+                  Theme.of(context).colorScheme.surfaceContainerHighest,
+              child: const Card(
+                  elevation: 0,
+                  child: SizedBox(
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                    ),
+                  )),
+            );
           }
 
           final doc = documents[index];
           final DateTime date = (doc['date'] as Timestamp).toDate();
-          final String formattedDate = DateFormat('dd/MM/yyyy').format(date);
+          final String formattedDate = DateFormat('d/M/yyyy').format(date);
 
           return Padding(
-            padding: const EdgeInsets.all(0.0),
+            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: Card(
               elevation: 0,
               color: Colors.transparent,
@@ -219,13 +233,15 @@ class AnnouncementDetailPage extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   Row(
                     children: [
-                      const Icon(Icons.calendar_today, size: 16),
+                      const Icon(Icons.calendar_month_rounded, size: 16),
                       const SizedBox(width: 4),
                       Text(date,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w400)),
                     ],
                   ),
+                  const SizedBox(height: 8.0),
+                  const Divider(),
                   const SizedBox(height: 8.0),
                   Text(description, style: const TextStyle(fontSize: 16)),
                 ],

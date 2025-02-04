@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:another_stepper/another_stepper.dart';
 import 'package:image_network/image_network.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 class SearchInventory extends StatefulWidget {
   const SearchInventory({super.key});
@@ -83,7 +85,7 @@ class _SearchInventoryState extends State<SearchInventory> {
               top: 0,
               left: 0,
               right: 0,
-              bottom: 0,
+              bottom: 8,
             ),
             child: Column(
               children: [
@@ -145,7 +147,20 @@ class _SearchInventoryState extends State<SearchInventory> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Shimmer.fromColors(
+            direction: ShimmerDirection.ltr,
+            period: const Duration(milliseconds: 500),
+            baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+            highlightColor:
+                Theme.of(context).colorScheme.surfaceContainerHighest,
+            child: const Card(
+                elevation: 0,
+                child: SizedBox(
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                  ),
+                )),
+          );
         }
 
         final documents = snapshot.data?.docs ?? [];
@@ -431,23 +446,21 @@ class _SearchInventoryState extends State<SearchInventory> {
                       const SizedBox(
                         height: 20,
                       ),
+                      Center(
+                          child: SizedBox(
+                        height: 60,
+                        width: 400,
+                        child: SfBarcodeGenerator(
+                          value: '${data['trackingId1']}',
+                          showValue: true,
+                        ),
+                      )),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 10),
+                        padding: const EdgeInsets.fromLTRB(30, 10, 0, 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.qr_code_scanner_rounded,
-                                  size: 15,
-                                ),
-                                Text(
-                                  '   Tracking ID 1 :  ${data['trackingId1']}',
-                                ),
-                              ],
-                            ),
                             if (trackingId2.isNotEmpty)
                               Row(
                                 children: [

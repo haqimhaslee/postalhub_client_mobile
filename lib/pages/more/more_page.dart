@@ -67,6 +67,32 @@ Future<void> _termsandcondition(BuildContext context) async {
   }
 }
 
+Future<void> _customerServices(BuildContext context) async {
+  final theme = Theme.of(context);
+  try {
+    await launchUrl(
+      Uri.parse('https://forms.gle/bZcSg3W2QrxSJrkL6'),
+      customTabsOptions: CustomTabsOptions(
+        colorSchemes: CustomTabsColorSchemes.defaults(
+          toolbarColor: theme.colorScheme.surface,
+          navigationBarColor: theme.colorScheme.surface,
+        ),
+        shareState: CustomTabsShareState.off,
+        urlBarHidingEnabled: true,
+        showTitle: true,
+      ),
+      safariVCOptions: SafariViewControllerOptions(
+        preferredBarTintColor: theme.colorScheme.surface,
+        preferredControlTintColor: theme.colorScheme.onSurface,
+        barCollapsingEnabled: true,
+        entersReaderIfAvailable: false,
+      ),
+    );
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+}
+
 class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
@@ -142,6 +168,58 @@ class _MorePageState extends State<MorePage> {
                                                       padding: EdgeInsets.only(
                                                           left: 20),
                                                       child: Text("FAQs",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ))))
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(0),
+                            topRight: Radius.circular(0),
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                          ),
+                          child: Material(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerHighest,
+                            child: InkWell(
+                              onTap: () {
+                                _customerServices(context);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.only(
+                                  top: 15,
+                                  bottom: 15,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      //width: MediaQuery.of(context).size.width - 180,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 20),
+                                                      child: Text(
+                                                          "Feedback Center",
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w600,
@@ -475,7 +553,7 @@ class _MorePageState extends State<MorePage> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(28, 20, 28, 0),
               child: Text(
-                "Copyright Campus Postal Hub © 2025",
+                "Copyright Campus Postal Hub © 2024 - 2025",
                 style: TextStyle(fontSize: 10),
               ),
             ),

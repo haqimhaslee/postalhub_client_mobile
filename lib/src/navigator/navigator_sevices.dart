@@ -5,6 +5,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'package:postalhub_tracker/pages/home/home.dart';
 import 'package:postalhub_tracker/pages/more/more_page.dart';
+//import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/services.dart';
 //import 'package:postalhub_tracker/pages/updates_info/updates_info.dart';
@@ -24,6 +25,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
   var _selectedIndex = 0;
   final List<Widget> _windgetOption = <Widget>[
     const HomePage(),
+    //const ParcelLibraryPage(),
     const SearchInventory(),
     const ServicesPage(),
     const MorePage(),
@@ -100,9 +102,13 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     icon: Icon(Icons.home_rounded),
                     label: 'Home',
                   ),
+                  //NavigationDestination(
+                  //  icon: Icon(Icons.inventory_2_rounded),
+                  //   label: 'My Parcel',
+                  // ),
                   NavigationDestination(
-                    icon: Icon(Icons.search),
-                    label: 'Find Parcel',
+                    icon: Icon(Icons.search_rounded),
+                    label: 'Search',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.widgets_rounded),
@@ -128,7 +134,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
               fit: BoxFit.cover,
             ),
             const Text(
-              '  Campus Postal Hub',
+              '  Postal Hub',
               style: TextStyle(fontSize: 18),
             ),
           ]),
@@ -154,9 +160,13 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     icon: Icon(Icons.home_rounded),
                     label: Text('Home'),
                   ),
+                  //NavigationRailDestination(
+                  //  icon: Icon(Icons.inventory_2_rounded),
+                  //  label: Text('My Parcel'),
+                  //),
                   NavigationRailDestination(
-                    icon: Icon(Icons.search),
-                    label: Text('Find Parcel'),
+                    icon: Icon(Icons.search_rounded),
+                    label: Text('Search'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.widgets_rounded),
@@ -183,8 +193,12 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: Text('Home'),
                     icon: Icon(Icons.home_rounded),
                   ),
+                  // NavigationDrawerDestination(
+                  //   label: Text('My Parcel'),
+                  //   icon: Icon(Icons.inventory_2_rounded),
+                  // ),
                   NavigationDrawerDestination(
-                    label: Text('Find Parcel'),
+                    label: Text('Search'),
                     icon: Icon(Icons.search),
                   ),
                   NavigationDrawerDestination(
@@ -203,7 +217,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(28, 0, 28, 0),
                       child: Text(
-                        "Copyright Campus Postal Hub © 2025",
+                        "Copyright Campus Postal Hub © 2024 - 2025",
                         style: TextStyle(fontSize: 10),
                       ),
                     ),
@@ -225,7 +239,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   topLeft: Radius.circular(
                       MediaQuery.of(context).size.width > 590 ? 40 : 25),
                   topRight: Radius.circular(
-                      MediaQuery.of(context).size.width > 590 ? 0 : 25),
+                      MediaQuery.of(context).size.width > 590 ? 40 : 25),
                   bottomLeft: Radius.circular(
                       MediaQuery.of(context).size.width > 590 ? 0 : 25),
                   bottomRight: Radius.circular(

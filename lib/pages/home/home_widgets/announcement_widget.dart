@@ -113,7 +113,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
         ...documents.map((doc) {
           Timestamp timestamp = doc['date'];
           String formattedDate =
-              DateFormat('dd-MM-yyyy').format(timestamp.toDate());
+              DateFormat('d/M/yyyy').format(timestamp.toDate());
           return Padding(
               padding: const EdgeInsets.all(0.0),
               child: Card(
@@ -261,13 +261,15 @@ class AnnouncementDetailPage extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   Row(
                     children: [
-                      const Icon(Icons.calendar_today, size: 16),
+                      const Icon(Icons.calendar_month_rounded, size: 16),
                       const SizedBox(width: 4),
                       Text(date,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w400)),
                     ],
                   ),
+                  const SizedBox(height: 8.0),
+                  const Divider(),
                   const SizedBox(height: 8.0),
                   Text(description, style: const TextStyle(fontSize: 16)),
                 ],
