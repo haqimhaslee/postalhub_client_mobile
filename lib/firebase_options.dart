@@ -21,15 +21,9 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -62,4 +56,24 @@ class DefaultFirebaseOptions {
     storageBucket: 'postalhub.appspot.com',
     measurementId: 'G-PGCG1QM2YM',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCTvdIXM1fotfBLeakmBTS_z7E1EulwhD4',
+    appId: '1:955163893298:ios:fe7027ba8e1bd91593e62b',
+    messagingSenderId: '955163893298',
+    projectId: 'postalhub',
+    databaseURL: 'https://postalhub-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'postalhub.appspot.com',
+    iosBundleId: 'com.example.postalhubTracker',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyADnzeTel4C2y0vLkcNrSh-FLjffrCtMCs',
+    appId: '1:955163893298:android:62a60c72ff83b44d93e62b',
+    messagingSenderId: '955163893298',
+    projectId: 'postalhub',
+    databaseURL: 'https://postalhub-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'postalhub.appspot.com',
+  );
+
 }

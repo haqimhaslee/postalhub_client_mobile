@@ -21,7 +21,63 @@ class _SearchInventoryState extends State<SearchInventory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              tooltip: 'Info',
+              icon: Icon(
+                Icons.info_rounded,
+                color: Theme.of(context).colorScheme.onErrorContainer,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Leaving soon'),
+                      content: const Text(
+                          "This page is being moved to a new directory as part of our ongoing system enhancements. Additionally, we’re introducing a new feature accessible from the Navigation Bar/Rail/Drawer. Don’t worry—you’ll still be able to track your parcel on the 'Services' page after this update."),
+                      actions: [
+                        TextButton(
+                          child: const Text('Okie dokie! ✌️'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+          elevation: 3,
+          scrolledUnderElevation: 3,
+          title: Row(
+            children: [
+              Text(
+                "Leaving soon (Click ",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).colorScheme.onErrorContainer,
+                ),
+              ),
+              Icon(
+                Icons.info_rounded,
+                color: Theme.of(context).colorScheme.onErrorContainer,
+              ),
+              Text(
+                " to learn more)",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).colorScheme.onErrorContainer,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Theme.of(context).colorScheme.errorContainer,
+        ),
         body: Padding(
             padding: const EdgeInsets.only(
               top: 0,

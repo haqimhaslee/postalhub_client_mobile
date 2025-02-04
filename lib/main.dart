@@ -4,12 +4,23 @@ import 'package:postalhub_tracker/src/navigator/navigator_sevices.dart';
 import 'firebase_options.dart';
 import 'package:postalhub_tracker/src/postalhub_ui.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarColor:
+        Colors.transparent, // transparent on Android, translucent on iOS
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.dark, // Or Brightness.light
+  ));
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   runApp(const MyApp());
 }
@@ -22,11 +33,13 @@ class MyApp extends StatelessWidget {
     return DynamicColorBuilder(builder: (lightDynamic, darkDynamic) {
       return MaterialApp(
           theme: ThemeData(
-            colorScheme: lightDynamic ?? lightColorScheme,
+            //colorScheme: lightDynamic ?? lightColorScheme,
+            colorScheme: lightColorScheme,
             fontFamily: 'GoogleSans',
           ),
           darkTheme: ThemeData(
-            colorScheme: darkDynamic ?? darkColorScheme,
+            //colorScheme: darkDynamic ?? darkColorScheme,
+            colorScheme: darkColorScheme,
             fontFamily: 'GoogleSans',
           ),
           themeMode: ThemeMode.system,

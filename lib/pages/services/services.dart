@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:postalhub_tracker/pages/home/home_widgets/announcement_news_page.dart';
 import 'package:postalhub_tracker/pages/more/branch_info/branch_info.dart';
+import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({super.key});
@@ -85,7 +87,64 @@ class _ServicesPageState extends State<ServicesPage>
                                 .surfaceContainerLow,
                             child: InkWell(
                               //splashColor: Theme.of(context).colorScheme.tertiary,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SearchInventory()));
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  ClipRRect(
+                                    child: SizedBox(
+                                      width: 40,
+                                      height: 45,
+                                      child: Icon(
+                                        Icons.search_rounded,
+                                        size: 35,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "Find Parcel",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Material(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerLow,
+                            child: InkWell(
+                              //splashColor: Theme.of(context).colorScheme.tertiary,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AnnouncementNewsPage()));
+                              },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[

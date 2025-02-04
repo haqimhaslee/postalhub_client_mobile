@@ -3,7 +3,7 @@ description: "Postalhub Tracker"
 
 publish_to: 'none' 
 
-version: 24.11.183+3
+version: 25.1.153+6
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -27,11 +27,12 @@ dependencies:
   flutter_custom_tabs: ^2.1.0
   url_launcher: ^6.3.0
   image_network: ^2.5.6
-  carousel_slider: ^5.0.0
   cached_network_image: ^3.4.1
   simple_animations: ^5.1.0
   particles_flutter: ^1.0.1
   lucide_icons: ^0.257.0
+
+
 
 
 dev_dependencies:
@@ -48,6 +49,12 @@ flutter:
   - assets/images/How_to_use_1.png
   - assets/images/How_to_use_2.png
   - assets/images/favicon.png
+  - assets/images/carousel/1.png
+  - assets/images/carousel/2.png
+  - assets/images/carousel/3.png
+  - assets/images/carousel/4.png
+  - assets/images/carousel/5.png
+  - assets/images/carousel/6.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
 

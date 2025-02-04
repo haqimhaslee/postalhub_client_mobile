@@ -46,6 +46,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: AnimatedBuilder(
           animation: _animationController,
           builder: (context, child) {
@@ -63,21 +64,10 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   transform:
                       GradientRotation(_animationController.value * 2 * pi),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                  ),
-                  BoxShadow(
-                    color: Colors.red.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                  ),
-                ],
               ),
               padding: const EdgeInsets.all(2.5), // Border thickness
               child: FloatingActionButton(
+                //shape: const CircleBorder(),
                 elevation: 0,
                 onPressed: () {
                   Navigator.push(
@@ -130,16 +120,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-          //actions: <Widget>[
-          //  IconButton(
-          //    icon: const Icon(Icons.notifications_rounded),
-          //    tooltip: 'Newsletter (Coming Soon)',
-          //    onPressed: () {},
-          //  ),
-          //  const SizedBox(
-          //    width: 8,
-          //  ),
-          //],
           title: Row(children: [
             Image.asset(
               'assets/images/favicon.png',
@@ -147,7 +127,10 @@ class _NavigatorServicesState extends State<NavigatorServices>
               height: 40,
               fit: BoxFit.cover,
             ),
-            const Text('  Campus Postal Hub'),
+            const Text(
+              '  Campus Postal Hub',
+              style: TextStyle(fontSize: 18),
+            ),
           ]),
         ),
         body: Row(
@@ -220,7 +203,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(28, 0, 28, 0),
                       child: Text(
-                        "Copyright Campus Postal Hub © 2024",
+                        "Copyright Campus Postal Hub © 2025",
                         style: TextStyle(fontSize: 10),
                       ),
                     ),

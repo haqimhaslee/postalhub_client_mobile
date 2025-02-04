@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:955163893298:android:7c00a8f4e9d0863d93e62b",
+        "mobilesdk_app_id": "1:955163893298:android:8df78cc13858f9ad93e62b",
         "android_client_info": {
-          "package_name": "com.postalhub.tracker"
+          "package_name": "com.example.postalhub_client"
         }
       },
       "oauth_client": [],
@@ -28,6 +28,25 @@
     {
       "client_info": {
         "mobilesdk_app_id": "1:955163893298:android:08d5e79414bb1d2e93e62b",
+        "android_client_info": {
+          "package_name": "com.postalhub.admincms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADnzeTel4C2y0vLkcNrSh-FLjffrCtMCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955163893298:android:62a60c72ff83b44d93e62b",
         "android_client_info": {
           "package_name": "com.postalhub.tracker"
         }
