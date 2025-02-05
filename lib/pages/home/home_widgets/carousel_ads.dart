@@ -78,7 +78,7 @@ class _CarouselAdsState extends State<CarouselAds> {
           child: Center(
               child: Shimmer.fromColors(
             direction: ShimmerDirection.ltr,
-            period: const Duration(milliseconds: 600),
+            period: const Duration(milliseconds: 1500),
             baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
             highlightColor:
                 Theme.of(context).colorScheme.surfaceContainerHighest,

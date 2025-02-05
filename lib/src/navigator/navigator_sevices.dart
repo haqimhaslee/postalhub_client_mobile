@@ -5,10 +5,9 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'package:postalhub_tracker/pages/home/home.dart';
 import 'package:postalhub_tracker/pages/more/more_page.dart';
-//import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/services.dart';
-//import 'package:postalhub_tracker/pages/updates_info/updates_info.dart';
 
 class NavigatorServices extends StatefulWidget {
   const NavigatorServices({super.key});
@@ -25,7 +24,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
   var _selectedIndex = 0;
   final List<Widget> _windgetOption = <Widget>[
     const HomePage(),
-    //const ParcelLibraryPage(),
+    const ParcelLibraryPage(),
     const SearchInventory(),
     const ServicesPage(),
     const MorePage(),
@@ -91,9 +90,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
         ),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
-                height: 70,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
@@ -102,10 +98,10 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     icon: Icon(Icons.home_rounded),
                     label: 'Home',
                   ),
-                  //NavigationDestination(
-                  //  icon: Icon(Icons.inventory_2_rounded),
-                  //   label: 'My Parcel',
-                  // ),
+                  NavigationDestination(
+                    icon: Icon(Icons.inventory_2_rounded),
+                    label: 'My Parcel',
+                  ),
                   NavigationDestination(
                     icon: Icon(Icons.search_rounded),
                     label: 'Search',
@@ -121,32 +117,12 @@ class _NavigatorServicesState extends State<NavigatorServices>
                 ],
               )
             : null,
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-          title: Row(children: [
-            Image.asset(
-              'assets/images/favicon.png',
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            ),
-            const Text(
-              '  Postal Hub',
-              style: TextStyle(fontSize: 18),
-            ),
-          ]),
-        ),
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (MediaQuery.of(context).size.width > 590 &&
                 MediaQuery.of(context).size.width <= 810)
               NavigationRail(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
                 selectedIndex: _selectedIndex,
                 groupAlignment: 0,
                 onDestinationSelected: (int index) {
@@ -160,10 +136,10 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     icon: Icon(Icons.home_rounded),
                     label: Text('Home'),
                   ),
-                  //NavigationRailDestination(
-                  //  icon: Icon(Icons.inventory_2_rounded),
-                  //  label: Text('My Parcel'),
-                  //),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.inventory_2_rounded),
+                    label: Text('My Parcel'),
+                  ),
                   NavigationRailDestination(
                     icon: Icon(Icons.search_rounded),
                     label: Text('Search'),
@@ -180,8 +156,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
               ),
             if (MediaQuery.of(context).size.width > 810)
               NavigationDrawer(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
@@ -193,10 +167,10 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: Text('Home'),
                     icon: Icon(Icons.home_rounded),
                   ),
-                  // NavigationDrawerDestination(
-                  //   label: Text('My Parcel'),
-                  //   icon: Icon(Icons.inventory_2_rounded),
-                  // ),
+                  NavigationDrawerDestination(
+                    label: Text('My Parcel'),
+                    icon: Icon(Icons.inventory_2_rounded),
+                  ),
                   NavigationDrawerDestination(
                     label: Text('Search'),
                     icon: Icon(Icons.search),
@@ -234,31 +208,17 @@ class _NavigatorServicesState extends State<NavigatorServices>
                 ],
               ),
             Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                      MediaQuery.of(context).size.width > 590 ? 40 : 25),
-                  topRight: Radius.circular(
-                      MediaQuery.of(context).size.width > 590 ? 40 : 25),
-                  bottomLeft: Radius.circular(
-                      MediaQuery.of(context).size.width > 590 ? 0 : 25),
-                  bottomRight: Radius.circular(
-                      MediaQuery.of(context).size.width > 590 ? 0 : 25),
+              child: PageTransitionSwitcher(
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  transitionType: SharedAxisTransitionType.vertical,
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  child: child,
                 ),
-                child: PageTransitionSwitcher(
-                  transitionBuilder: (child, animation, secondaryAnimation) =>
-                      SharedAxisTransition(
-                    fillColor:
-                        Theme.of(context).colorScheme.surfaceContainerLowest,
-                    transitionType: SharedAxisTransitionType.vertical,
-                    animation: animation,
-                    secondaryAnimation: secondaryAnimation,
-                    child: child,
-                  ),
-                  child: _windgetOption.elementAt(_selectedIndex),
-                ),
+                child: _windgetOption.elementAt(_selectedIndex),
               ),
-            )
+            ),
           ],
         ));
   }

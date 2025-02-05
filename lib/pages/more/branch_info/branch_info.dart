@@ -30,7 +30,7 @@ class _BranchInfoState extends State<BranchInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Branch Info"),
+        title: const Text('Branch Information'),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _branchesFuture,

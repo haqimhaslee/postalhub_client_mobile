@@ -23,7 +23,6 @@ class _SearchInventoryState extends State<SearchInventory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         appBar: AppBar(
           actions: [
             IconButton(
@@ -149,7 +148,7 @@ class _SearchInventoryState extends State<SearchInventory> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Shimmer.fromColors(
             direction: ShimmerDirection.ltr,
-            period: const Duration(milliseconds: 500),
+            period: const Duration(milliseconds: 1000),
             baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
             highlightColor:
                 Theme.of(context).colorScheme.surfaceContainerHighest,

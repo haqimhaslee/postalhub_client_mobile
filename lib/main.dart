@@ -33,14 +33,24 @@ class MyApp extends StatelessWidget {
     return DynamicColorBuilder(builder: (lightDynamic, darkDynamic) {
       return MaterialApp(
           theme: ThemeData(
-            //colorScheme: lightDynamic ?? lightColorScheme,
-            colorScheme: lightColorScheme,
+            colorScheme: lightDynamic ?? lightColorScheme,
+            //colorScheme: lightColorScheme,
             fontFamily: 'GoogleSans',
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: <TargetPlatform, PageTransitionsBuilder>{
+                TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+              },
+            ),
           ),
           darkTheme: ThemeData(
-            //colorScheme: darkDynamic ?? darkColorScheme,
-            colorScheme: darkColorScheme,
+            colorScheme: darkDynamic ?? darkColorScheme,
+            //colorScheme: darkColorScheme,
             fontFamily: 'GoogleSans',
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: <TargetPlatform, PageTransitionsBuilder>{
+                TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+              },
+            ),
           ),
           themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
