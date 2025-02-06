@@ -34,25 +34,22 @@ class _HomePageState extends State<HomePage> {
                       ),
                     )),
                 Padding(
-                    padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                     child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                       child: SizedBox(
                         width: 600,
                         child: CarouselAds(),
                       ),
                     )),
                 Padding(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                     child: ClipRRect(
                       child: SizedBox(
                         width: 600,
                         child: QuickactionWidget(),
                       ),
                     )),
-              ],
-            ),
-            Column(
-              children: [
                 Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: ClipRRect(

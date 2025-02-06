@@ -24,6 +24,8 @@ class _SearchInventoryState extends State<SearchInventory> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 90,
+/*
           actions: [
             IconButton(
               tooltip: 'Info',
@@ -53,31 +55,58 @@ class _SearchInventoryState extends State<SearchInventory> {
               },
             ),
           ],
-          elevation: 3,
-          scrolledUnderElevation: 3,
-          title: Row(
+          */
+
+          title: Column(
             children: [
-              Text(
-                "Leaving soon (Click ",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).colorScheme.onErrorContainer,
-                ),
+              /*
+              Row(
+                children: [
+                  Text(
+                    "Leaving soon (Click ",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.onErrorContainer,
+                    ),
+                  ),
+                  Icon(
+                    Icons.info_rounded,
+                    color: Theme.of(context).colorScheme.onErrorContainer,
+                  ),
+                  Text(
+                    " to learn more)",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.onErrorContainer,
+                    ),
+                  ),
+                ],
               ),
-              Icon(
-                Icons.info_rounded,
-                color: Theme.of(context).colorScheme.onErrorContainer,
-              ),
-              Text(
-                " to learn more)",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).colorScheme.onErrorContainer,
+
+              */
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
+                child: TextField(
+                  controller: searchInput,
+                  decoration: InputDecoration(
+                      labelText: 'Tracking Number*',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      suffixIcon: Padding(
+                        padding:
+                            const EdgeInsets.only(bottom: 5, top: 5, right: 5),
+                        child: IconButton.filledTonal(
+                          icon: const Icon(Icons.search_rounded),
+                          color: Theme.of(context).colorScheme.primary,
+                          onPressed: () =>
+                              setState(() => _searchTerm = searchInput.text),
+                        ),
+                      )),
                 ),
               ),
             ],
           ),
-          backgroundColor: Theme.of(context).colorScheme.errorContainer,
         ),
         body: Padding(
             padding: const EdgeInsets.only(
@@ -88,28 +117,6 @@ class _SearchInventoryState extends State<SearchInventory> {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width > 590 ? 30 : 20,
-                    left: MediaQuery.of(context).size.width > 590 ? 30 : 20,
-                    right: MediaQuery.of(context).size.width > 590 ? 28 : 20,
-                    bottom: MediaQuery.of(context).size.width > 590 ? 28 : 10,
-                  ),
-                  child: TextField(
-                    controller: searchInput,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () =>
-                            setState(() => _searchTerm = searchInput.text),
-                        icon: const Icon(Icons.search_rounded),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      labelText: 'Tracking Number*',
-                    ),
-                  ),
-                ),
                 //const Divider(),
                 Expanded(
                   child: Padding(

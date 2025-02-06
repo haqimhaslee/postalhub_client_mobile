@@ -97,7 +97,7 @@ class _CarouselAdsState extends State<CarouselAds> {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: SizedBox(
         child: AspectRatio(
           aspectRatio: 16 / 9,

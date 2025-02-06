@@ -39,8 +39,6 @@ class _ServicesPageState extends State<ServicesPage>
 
     return Scaffold(
         appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
           title: const Text('Services'),
         ),
         body: ListView(
@@ -50,15 +48,36 @@ class _ServicesPageState extends State<ServicesPage>
               child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 15, bottom: 0, top: 15),
-                        child: Text(
-                          "Postal Hub",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 13),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                              ),
+                              child: Text(
+                                "Postal Hub",
+                                style: TextStyle(
+                                  fontSize: 23,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              size: 25,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
+                            ),
+                          ],
                         ),
                       ),
                       Wrap(
@@ -74,7 +93,7 @@ class _ServicesPageState extends State<ServicesPage>
                               child: Material(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .surfaceContainerLow,
+                                    .surfaceVariant,
                                 child: InkWell(
                                   //splashColor: Theme.of(context).colorScheme.tertiary,
                                   onTap: () {
@@ -96,7 +115,7 @@ class _ServicesPageState extends State<ServicesPage>
                                             size: 35,
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .onSurface,
+                                                .onSurfaceVariant,
                                           ),
                                         ),
                                       ),
@@ -125,7 +144,7 @@ class _ServicesPageState extends State<ServicesPage>
                               child: Material(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .surfaceContainerLow,
+                                    .surfaceVariant,
                                 child: InkWell(
                                   //splashColor: Theme.of(context).colorScheme.tertiary,
                                   onTap: () {
@@ -152,7 +171,7 @@ class _ServicesPageState extends State<ServicesPage>
                                         ),
                                       ),
                                       Text(
-                                        "My Parcel",
+                                        "My Parcel Library",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 11,
@@ -176,7 +195,7 @@ class _ServicesPageState extends State<ServicesPage>
                               child: Material(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .surfaceContainerLow,
+                                    .surfaceVariant,
                                 child: InkWell(
                                   //splashColor: Theme.of(context).colorScheme.tertiary,
                                   onTap: () {
@@ -227,7 +246,7 @@ class _ServicesPageState extends State<ServicesPage>
                               child: Material(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .surfaceContainerLow,
+                                    .surfaceVariant,
                                 child: InkWell(
                                   //splashColor: Theme.of(context).colorScheme.tertiary,
                                   onTap: () {
@@ -270,7 +289,43 @@ class _ServicesPageState extends State<ServicesPage>
                               ),
                             ),
                           ),
-                          const Divider(),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 13),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                              ),
+                              child: Text(
+                                "More Services",
+                                style: TextStyle(
+                                  fontSize: 23,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              size: 25,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Wrap(
+                        runSpacing: 15,
+                        spacing: 15,
+                        alignment: WrapAlignment.center,
+                        children: [
                           SizedBox(
                             width: 100,
                             height: 100,
@@ -279,7 +334,52 @@ class _ServicesPageState extends State<ServicesPage>
                               child: Material(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .surfaceContainerLow,
+                                    .surfaceVariant,
+                                child: InkWell(
+                                  //splashColor: Theme.of(context).colorScheme.tertiary,
+                                  onTap: () {},
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        child: SizedBox(
+                                          width: 40,
+                                          height: 45,
+                                          child: Icon(
+                                            Icons.loyalty_rounded,
+                                            size: 35,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Reward Points",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Material(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .surfaceVariant,
                                 child: InkWell(
                                   //splashColor: Theme.of(context).colorScheme.tertiary,
                                   onTap: () {},
@@ -316,7 +416,43 @@ class _ServicesPageState extends State<ServicesPage>
                               ),
                             ),
                           ),
-                          const Divider(),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 13),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                              ),
+                              child: Text(
+                                "Utilities",
+                                style: TextStyle(
+                                  fontSize: 23,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              size: 25,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Wrap(
+                        runSpacing: 15,
+                        spacing: 15,
+                        alignment: WrapAlignment.center,
+                        children: [
                           SizedBox(
                             width: 100,
                             height: 100,
@@ -325,7 +461,7 @@ class _ServicesPageState extends State<ServicesPage>
                               child: Material(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .surfaceContainerLow,
+                                    .surfaceVariant,
                                 child: InkWell(
                                   //splashColor: Theme.of(context).colorScheme.tertiary,
                                   onTap: () {
@@ -419,24 +555,6 @@ class _ServicesPageState extends State<ServicesPage>
                             },
                           ),
                         ],
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 15, bottom: 0, top: 15),
-                        child: Text(
-                          "More Services",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 15, bottom: 0, top: 15),
-                        child: Text(
-                          "Utilities",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
                       ),
                     ],
                   )),

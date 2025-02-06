@@ -88,7 +88,8 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
 
           final doc = documents[index];
           final DateTime date = (doc['date'] as Timestamp).toDate();
-          final String formattedDate = DateFormat('d/M/yyyy').format(date);
+          final String formattedDate =
+              DateFormat('d/M/yyyy, h:mm a').format(date);
 
           return Column(
             children: [
@@ -170,7 +171,8 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
                   ],
                 ),
               ),
-              const Divider()
+              const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0), child: Divider())
             ],
           );
         },

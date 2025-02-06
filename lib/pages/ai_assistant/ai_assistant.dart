@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AskOurAi extends StatefulWidget {
@@ -46,18 +45,11 @@ class _AskOurAiState extends State<AskOurAi> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.info_rounded))
+        ],
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-        title: Row(
-          children: [
-            const Text("Ask AI by "),
-            Shimmer.fromColors(
-              baseColor: Colors.blue,
-              highlightColor: Colors.red,
-              period: const Duration(seconds: 5),
-              child: const Text('Gemini'),
-            ),
-          ],
-        ),
+        title: const Text("ParcelMate"),
       ),
       body: Column(
         children: [
@@ -79,30 +71,55 @@ class _AskOurAiState extends State<AskOurAi> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    focusNode: _textFieldFocus,
-                    decoration: textFieldDecoration(context, 'Ask anything...'),
-                    controller: _textController,
-                    onSubmitted: _sendChatMessage,
-                    maxLines: null,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                _loading
-                    ? LoadingAnimationWidget.flickr(
-                        leftDotColor: Colors.blue,
-                        rightDotColor: Colors.red,
-                        size: 30,
-                      )
-                    : IconButton(
-                        icon: const Icon(Icons.send),
-                        color: Theme.of(context).colorScheme.primary,
-                        onPressed: () => _sendChatMessage(_textController.text),
-                      ),
+                    child: Column(
+                  children: [
+                    TextField(
+                      focusNode: _textFieldFocus,
+                      decoration: InputDecoration(
+                          hintText: 'Ask anything regarding Postal Hub',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 5, top: 5, right: 5),
+                            child: _loading
+                                ? IconButton.filledTonal(
+                                    icon: LoadingAnimationWidget.flickr(
+                                      leftDotColor: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
+                                      rightDotColor: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      size: 20,
+                                    ),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    onPressed: null)
+                                : IconButton.filledTonal(
+                                    icon: const Icon(Icons.send),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    onPressed: () =>
+                                        _sendChatMessage(_textController.text),
+                                  ),
+                          )),
+                      controller: _textController,
+                      onSubmitted: _sendChatMessage,
+                      maxLines: null,
+                    ),
+                    const Padding(
+                        padding: EdgeInsets.only(top: 5),
+                        child: Text(
+                          'ParcelMate can make mistakes, so double-check it',
+                          style: TextStyle(fontSize: 12),
+                        ))
+                  ],
+                )),
               ],
             ),
           ),
@@ -178,7 +195,7 @@ class MessageWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isFromUser
                     ? Theme.of(context).colorScheme.primaryContainer
-                    : Theme.of(context).colorScheme.surfaceContainerHigh,
+                    : Theme.of(context).colorScheme.surfaceVariant,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: MarkdownBody(
@@ -204,5 +221,5 @@ class MessageWidget extends StatelessWidget {
 InputDecoration textFieldDecoration(BuildContext context, String hintText) =>
     InputDecoration(
       hintText: hintText,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
     );

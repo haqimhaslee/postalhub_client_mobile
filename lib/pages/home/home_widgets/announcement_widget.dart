@@ -13,19 +13,6 @@ class AnnouncementWidget extends StatefulWidget {
 class _AnnouncementWidgetState extends State<AnnouncementWidget> {
   List<DocumentSnapshot> documents = [];
 
-  double _calculateWidth(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth <= 590) {
-      return screenWidth - 200;
-    } else if (screenWidth <= 700) {
-      return screenWidth - 300;
-    } else if (screenWidth <= 809) {
-      return screenWidth - 260;
-    } else {
-      return screenWidth - 482;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -47,82 +34,46 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: Card(
-            color: Colors.transparent,
-            elevation: 0,
-            child: SizedBox(
-              child: Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
-                    ),
-                    child: Material(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 0, bottom: 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              child: Column(
-                                //crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 15, bottom: 0, top: 0),
-                                        child: Text(
-                                          "Newsletter ",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        size: 25,
-                                      ),
-                                      OutlinedButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const AnnouncementNewsPage()));
-                                          },
-                                          child: const Text(
-                                            'View More',
-                                            style: TextStyle(fontSize: 11),
-                                          ))
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16, bottom: 0, top: 0),
+              child: Text(
+                "Newsletter",
+                style: TextStyle(
+                  fontSize: 23,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
             ),
-          ),
+            Icon(
+              Icons.chevron_right_rounded,
+              size: 25,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
+            const Spacer(),
+            Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const AnnouncementNewsPage()));
+                    },
+                    child: const Text(
+                      'View More',
+                      style: TextStyle(fontSize: 14),
+                    )))
+          ],
         ),
         ...documents.map((doc) {
           Timestamp timestamp = doc['date'];
           String formattedDate =
-              DateFormat('d/M/yyyy').format(timestamp.toDate());
+              DateFormat('d/M/yyyy, h:mm a').format(timestamp.toDate());
           return Column(
             children: [
               ListTile(
@@ -148,7 +99,8 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                       child: SizedBox(
                         width: 600,
                         height: 200,
-                        child: Image.network(doc['img_url'], fit: BoxFit.cover),
+                        child:
+                            Image.network(doc['img_url'], fit: BoxFit.fitWidth),
                       ),
                     ),
                     const Padding(
@@ -203,7 +155,8 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                   ],
                 ),
               ),
-              const Divider()
+              const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0), child: Divider()),
             ],
           );
         }),

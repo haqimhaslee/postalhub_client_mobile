@@ -72,7 +72,7 @@ class _MorePageState extends State<MorePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings & More'),
+        title: const Text('More'),
       ),
       body: ListView(
         children: [
@@ -88,12 +88,13 @@ class _MorePageState extends State<MorePage> {
                   ))
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 15, bottom: 0, top: 15),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 0, top: 15),
             child: Text(
               "My Account",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 15,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
             ),
           ),
@@ -109,12 +110,13 @@ class _MorePageState extends State<MorePage> {
             leading: const Icon(Icons.password_rounded),
             onTap: () {},
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 15, bottom: 0, top: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 0, top: 20),
             child: Text(
               "App Settings",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 15,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
             ),
           ),
@@ -136,12 +138,13 @@ class _MorePageState extends State<MorePage> {
             leading: const Icon(Icons.notifications_rounded),
             onTap: () {},
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 15, bottom: 0, top: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 0, top: 20),
             child: Text(
               "Information",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 15,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
             ),
           ),
