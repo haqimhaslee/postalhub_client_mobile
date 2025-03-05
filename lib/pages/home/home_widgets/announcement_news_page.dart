@@ -210,9 +210,12 @@ class AnnouncementDetailPage extends StatelessWidget {
                     child: SizedBox(
                       width: 600,
                       child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Image.network(imageUrl),
-                      ),
+                          aspectRatio: 16 / 9,
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            child: Image.network(imageUrl),
+                          )),
                     ),
                   ),
                   const SizedBox(height: 10.0),

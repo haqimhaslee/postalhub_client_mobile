@@ -44,14 +44,14 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                 "Newsletter",
                 style: TextStyle(
                   fontSize: 23,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
             Icon(
               Icons.chevron_right_rounded,
               size: 25,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              color: Theme.of(context).colorScheme.primary,
             ),
             const Spacer(),
             Padding(
@@ -197,9 +197,12 @@ class AnnouncementDetailPage extends StatelessWidget {
                     child: SizedBox(
                       width: 600,
                       child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Image.network(imageUrl),
-                      ),
+                          aspectRatio: 16 / 9,
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            child: Image.network(imageUrl),
+                          )),
                     ),
                   ),
                   const SizedBox(height: 10.0),

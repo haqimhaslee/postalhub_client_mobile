@@ -92,33 +92,27 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
           DateTime dateTime = timestamp.toDate();
           String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Card(
-              color: Theme.of(context).colorScheme.surfaceContainerHighest,
-              elevation: 0,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(formattedDate, style: const TextStyle(fontSize: 15)),
-                    const SizedBox(height: 10),
-                    MarkdownBody(
-                      onTapLink: (text, href, title) {
-                        if (href != null) {
-                          launchUrl(Uri.parse(href));
-                        }
-                      },
-                      data: data['ver_info']?.replaceAll(r'\n', '\n') ??
-                          'No Content',
-                      styleSheet:
-                          MarkdownStyleSheet.fromTheme(Theme.of(context)),
-                    ),
-                  ],
+          return Column(
+            children: [
+              ListTile(
+                onTap: () {},
+                title: Text(
+                  formattedDate,
+                ),
+                subtitle: MarkdownBody(
+                  onTapLink: (text, href, title) {
+                    if (href != null) {
+                      launchUrl(Uri.parse(href));
+                    }
+                  },
+                  data:
+                      data['ver_info']?.replaceAll(r'\n', '\n') ?? 'No Content',
+                  styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
                 ),
               ),
-            ),
+              const Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0), child: Divider())
+            ],
           );
         },
       ),

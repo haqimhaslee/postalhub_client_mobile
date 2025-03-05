@@ -39,6 +39,8 @@ Future<void> _privacypolicy(BuildContext context) async {
   }
 }
 
+bool switchValue = false;
+
 Future<void> _customerServices(BuildContext context) async {
   final theme = Theme.of(context);
   try {
@@ -71,9 +73,9 @@ class _MorePageState extends State<MorePage> {
     // ... other widget code
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('More'),
-      ),
+      //appBar: AppBar(
+      //  title: const Text('More'),
+      //),
       body: ListView(
         children: [
           const Column(
@@ -91,10 +93,10 @@ class _MorePageState extends State<MorePage> {
           Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 0, top: 15),
             child: Text(
-              "My Account",
+              "My Account (Coming Soon)",
               style: TextStyle(
                 fontSize: 15,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -110,13 +112,31 @@ class _MorePageState extends State<MorePage> {
             leading: const Icon(Icons.password_rounded),
             onTap: () {},
           ),
+          ListTile(
+            title: const Text('Adressess'),
+            subtitle: const Text('Manage saved adressess'),
+            leading: const Icon(Icons.home_rounded),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Bank Account / Card'),
+            subtitle: const Text('Manage payment methods'),
+            leading: const Icon(Icons.credit_card_rounded),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Biometric Lock'),
+            subtitle: const Text('Biometric lock for better security'),
+            leading: const Icon(Icons.fingerprint_outlined),
+            onTap: () {},
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 0, top: 20),
             child: Text(
-              "App Settings",
+              "App Settings (Coming Soon)",
               style: TextStyle(
                 fontSize: 15,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -136,7 +156,19 @@ class _MorePageState extends State<MorePage> {
             title: const Text('Notification'),
             subtitle: const Text('Manage notification settings'),
             leading: const Icon(Icons.notifications_rounded),
-            onTap: () {},
+            trailing: Switch(
+              value: switchValue,
+              onChanged: (bool newValue) {
+                setState(() {
+                  switchValue = newValue;
+                });
+              },
+            ),
+            onTap: () {
+              setState(() {
+                switchValue = !switchValue; // Toggle the value manually
+              });
+            },
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 0, top: 20),
@@ -144,7 +176,7 @@ class _MorePageState extends State<MorePage> {
               "Information",
               style: TextStyle(
                 fontSize: 15,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -190,24 +222,19 @@ class _MorePageState extends State<MorePage> {
                   MaterialPageRoute(builder: (context) => const About()));
             },
           ),
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(28, 20, 28, 0),
-              child: Text(
-                "Copyright Campus Postal Hub © 2024 - 2025",
-                style: TextStyle(fontSize: 10),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 0, top: 20),
+            child: Text(
+              "App version : 25.2.124 (preview)",
+              style: TextStyle(
+                fontSize: 15,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(28, 0, 28, 25),
-              child: Text(
-                "All rights reserved",
-                style: TextStyle(fontSize: 10),
-              ),
-            ),
-          ),
+          const SizedBox(
+            height: 70,
+          )
         ],
       ),
     );

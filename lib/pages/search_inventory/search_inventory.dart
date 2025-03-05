@@ -24,6 +24,8 @@ class _SearchInventoryState extends State<SearchInventory> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
           toolbarHeight: 90,
 /*
           actions: [
@@ -138,8 +140,11 @@ class _SearchInventoryState extends State<SearchInventory> {
               "assets/gif/search.gif",
               scale: 2,
             ),
-            const Text('Enter a tracking number to search.'),
-            const Text('*Tracking numbers are case sensitive')
+            Text(
+              'Enter a tracking number to search. \n *Tracking numbers are case sensitive',
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       );
@@ -179,18 +184,12 @@ class _SearchInventoryState extends State<SearchInventory> {
                 Image.asset(
                   "assets/gif/not_found.gif",
                 ),
-                const Text('Sorry...'),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                  ),
-                  child: Text(
-                    'No items found for that tracking number or your parcel might not be sorted yet.',
-                    textAlign: TextAlign.center,
-                  ),
+                Text(
+                  'Sorry... \n No items found for that tracking number or your parcel might not be sorted yet. \n Please check again later.',
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  textAlign: TextAlign.center,
                 ),
-                const Text('Please check again later.'),
               ],
             ),
           );

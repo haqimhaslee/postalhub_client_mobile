@@ -9,8 +9,8 @@ class ParcelLibraryPage extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Parcel Library'),
-          bottom: const TabBar(
+          title: const TabBar(
+            dividerHeight: 1,
             isScrollable: true,
             //tabAlignment: TabAlignment.start,
             tabs: [
@@ -25,17 +25,57 @@ class ParcelLibraryPage extends StatelessWidget {
           child: TabBarView(
             children: [
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
             ],
           ),
         ),

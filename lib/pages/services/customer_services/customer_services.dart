@@ -25,11 +25,11 @@ class CustomerServices extends StatelessWidget {
                 icon: Icon(Icons.clear_all_rounded),
               ),
               Tab(
-                text: 'Pending',
+                text: 'Pending/Active',
                 icon: Icon(Icons.pending_rounded),
               ),
               Tab(
-                text: 'Closed',
+                text: 'Solved',
                 icon: Icon(Icons.done_all_rounded),
               ),
             ],
@@ -39,14 +39,44 @@ class CustomerServices extends StatelessWidget {
           child: TabBarView(
             children: [
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
               Center(
-                  child: Text(
-                      'This feature only avaiable in mobile version (Account registration required)')),
+                  child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'This feature only avaiable in mobile version. \n (Account registration required)',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )),
             ],
           ),
         ),

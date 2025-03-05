@@ -5,6 +5,7 @@ import 'firebase_options.dart';
 import 'package:postalhub_tracker/src/postalhub_ui.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +33,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightDynamic, darkDynamic) {
       return MaterialApp(
+          title: "Postal Hub Tracker",
           theme: ThemeData(
             colorScheme: lightDynamic ?? lightColorScheme,
-            //colorScheme: lightColorScheme,
-            fontFamily: 'GoogleSans',
+            textTheme: GoogleFonts.openSansTextTheme(),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
                 TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
@@ -44,8 +45,10 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData(
             colorScheme: darkDynamic ?? darkColorScheme,
-            //colorScheme: darkColorScheme,
-            fontFamily: 'GoogleSans',
+            textTheme: GoogleFonts.openSansTextTheme().apply(
+              bodyColor: darkColorScheme.onSurface,
+              displayColor: darkColorScheme.onSurface,
+            ),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
                 TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),

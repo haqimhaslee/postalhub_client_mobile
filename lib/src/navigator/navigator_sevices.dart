@@ -46,7 +46,15 @@ class _NavigatorServicesState extends State<NavigatorServices>
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+        appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          title: const Text("Campus Postal Hub"),
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: AnimatedBuilder(
           animation: _animationController,
@@ -76,7 +84,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
                       MaterialPageRoute(
                           builder: (context) => const AskOurAi()));
                 },
-                tooltip: 'Ask AI',
+                tooltip: 'ParcelMate',
                 backgroundColor:
                     Theme.of(context).colorScheme.surfaceContainerLowest,
                 child: Icon(
@@ -90,6 +98,8 @@ class _NavigatorServicesState extends State<NavigatorServices>
         ),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerLow,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
@@ -123,6 +133,8 @@ class _NavigatorServicesState extends State<NavigatorServices>
             if (MediaQuery.of(context).size.width > 590 &&
                 MediaQuery.of(context).size.width <= 810)
               NavigationRail(
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerLow,
                 selectedIndex: _selectedIndex,
                 groupAlignment: 0,
                 onDestinationSelected: (int index) {
@@ -208,17 +220,33 @@ class _NavigatorServicesState extends State<NavigatorServices>
                 ],
               ),
             Expanded(
-              child: PageTransitionSwitcher(
-                transitionBuilder: (child, animation, secondaryAnimation) =>
-                    SharedAxisTransition(
-                  transitionType: SharedAxisTransitionType.vertical,
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  child: child,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(
+                    screenWidth < 590 ? 20 : 30,
+                  ),
+                  topRight: Radius.circular(
+                    screenWidth < 590 ? 20 : 0,
+                  ),
+                  bottomLeft: Radius.circular(
+                    screenWidth < 590 ? 20 : 0,
+                  ),
+                  bottomRight: Radius.circular(
+                    screenWidth < 590 ? 20 : 0,
+                  ),
                 ),
-                child: _windgetOption.elementAt(_selectedIndex),
+                child: PageTransitionSwitcher(
+                  transitionBuilder: (child, animation, secondaryAnimation) =>
+                      SharedAxisTransition(
+                    transitionType: SharedAxisTransitionType.vertical,
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    child: child,
+                  ),
+                  child: _windgetOption.elementAt(_selectedIndex),
+                ),
               ),
-            ),
+            )
           ],
         ));
   }

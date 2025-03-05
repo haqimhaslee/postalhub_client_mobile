@@ -27,46 +27,65 @@ class _QuickactionWidgetState extends State<QuickactionWidget> {
                     "Quick Actions",
                     style: TextStyle(
                       fontSize: 23,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
                 Icon(
                   Icons.chevron_right_rounded,
                   size: 25,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ],
             ),
           ),
           Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            runSpacing: 10,
             children: [
-              Card(
-                elevation: 0,
-                child: Container(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  height: 80,
-                  width: 121,
+              SizedBox(
+                width: 150,
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text('Test'),
+                  icon: const Icon(Icons.abc),
                 ),
               ),
-              Card(
-                elevation: 0,
-                child: Container(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  height: 80,
-                  width: 121,
+              SizedBox(
+                width: 150,
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text('Test'),
+                  icon: const Icon(Icons.abc),
                 ),
               ),
-              Card(
-                elevation: 0,
-                child: Container(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  height: 80,
-                  width: 121,
+              SizedBox(
+                width: 150,
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text('Test'),
+                  icon: const Icon(Icons.abc),
+                ),
+              ),
+              SizedBox(
+                width: 150,
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text('Test'),
+                  icon: const Icon(Icons.abc),
+                ),
+              ),
+              SizedBox(
+                width: 150,
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text('Test'),
+                  icon: const Icon(Icons.abc),
                 ),
               ),
             ],
-          )
+          ),
         ]));
   }
 }
