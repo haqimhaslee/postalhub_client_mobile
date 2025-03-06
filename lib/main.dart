@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightDynamic, darkDynamic) {
       return MaterialApp(
-          title: "Postal Hub Tracker",
+          title: "Postal Hub | Tracker",
           theme: ThemeData(
             colorScheme: lightDynamic ?? lightColorScheme,
             textTheme: GoogleFonts.openSansTextTheme(),

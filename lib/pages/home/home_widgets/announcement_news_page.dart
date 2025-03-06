@@ -60,122 +60,93 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final screenWidth = MediaQuery.of(context).size.width - 190;
     return Scaffold(
       appBar: AppBar(
         title: const Text("News & Announcements"),
       ),
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: documents.length + (hasMore ? 1 : 0),
-        itemBuilder: (context, index) {
-          if (index == documents.length) {
-            return Shimmer.fromColors(
-              direction: ShimmerDirection.ltr,
-              period: const Duration(milliseconds: 1500),
-              baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-              highlightColor:
-                  Theme.of(context).colorScheme.surfaceContainerHighest,
-              child: const Card(
-                  elevation: 0,
-                  child: SizedBox(
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                    ),
-                  )),
-            );
-          }
-
-          final doc = documents[index];
-          final DateTime date = (doc['date'] as Timestamp).toDate();
-          final String formattedDate =
-              DateFormat('d/M/yyyy, h:mm a').format(date);
-
-          return Column(
-            children: [
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AnnouncementDetailPage(
-                        title: doc['title'],
-                        description: doc['description'],
-                        imageUrl: doc['img_url'],
-                        date: formattedDate,
-                      ),
-                    ),
-                  );
-                },
-                title: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 550),
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: documents.length + (hasMore ? 1 : 0),
+            itemBuilder: (context, index) {
+              if (index == documents.length) {
+                return Shimmer.fromColors(
+                  direction: ShimmerDirection.ltr,
+                  period: const Duration(milliseconds: 1500),
+                  baseColor:
+                      Theme.of(context).colorScheme.surfaceContainerLowest,
+                  highlightColor:
+                      Theme.of(context).colorScheme.surfaceContainerHighest,
+                  child: const Card(
+                      elevation: 0,
                       child: SizedBox(
-                        width: 600,
-                        height: 200,
-                        child: Image.network(doc['img_url'], fit: BoxFit.cover),
-                      ),
-                    ),
-                    const Padding(
-                        padding: EdgeInsets.fromLTRB(0, 13, 0, 5),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage(
-                                  'assets/images/postalhub_logo.jpg'),
-                              radius: 8,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              child: Text(
-                                'Postal Hub',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w100,
-                                  fontSize: 12,
-                                ),
-                                softWrap: true,
-                                //overflow: TextOverflow.ellipsis,
-                                //maxLines: 1,
-                              ),
-                            )
-                          ],
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      child: Text(
-                        doc['title'],
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w900,
-                            wordSpacing: 2),
-                        softWrap: true,
-                        //overflow: TextOverflow.ellipsis,
-                        //maxLines: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text(
-                        formattedDate,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
                         ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const Padding(
-                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0), child: Divider())
-            ],
-          );
-        },
+                      )),
+                );
+              }
+
+              final doc = documents[index];
+              final DateTime date = (doc['date'] as Timestamp).toDate();
+              final String formattedDate =
+                  DateFormat('d/M/yyyy, h:mm a').format(date);
+
+              return Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AnnouncementDetailPage(
+                            title: doc['title'],
+                            description: doc['description'],
+                            imageUrl: doc['img_url'],
+                            date: formattedDate,
+                          ),
+                        ),
+                      );
+                    },
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          child: SizedBox(
+                            width: 500,
+                            height: 200,
+                            child: Image.network(doc['img_url'],
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            doc['title'],
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Text(
+                          formattedDate,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Divider()
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -199,47 +170,35 @@ class AnnouncementDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text(title)),
-        body: ListView(
-          children: [
-            Padding(
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 550),
+            child: ListView(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: SizedBox(
-                      width: 600,
-                      child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                            child: Image.network(imageUrl),
-                          )),
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  Text(title,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      const Icon(Icons.calendar_month_rounded, size: 16),
-                      const SizedBox(width: 4),
-                      Text(date,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400)),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Divider(),
-                  const SizedBox(height: 8.0),
-                  Text(description, style: const TextStyle(fontSize: 16)),
-                ],
-              ),
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Image.network(imageUrl),
+                ),
+                const SizedBox(height: 10.0),
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_month_rounded, size: 16),
+                    const SizedBox(width: 4),
+                    Text(date,
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400)),
+                  ],
+                ),
+                const Divider(),
+                Text(description, style: const TextStyle(fontSize: 16)),
+              ],
             ),
-          ],
+          ),
         ));
   }
 }

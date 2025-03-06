@@ -54,20 +54,30 @@ class _AskOurAiState extends State<AskOurAi> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              itemCount: _chat.history.length,
-              itemBuilder: (context, idx) {
-                var content = _chat.history.toList()[idx];
-                var text = content.parts
-                    .whereType<TextPart>()
-                    .map((e) => e.text)
-                    .join('');
-                return MessageWidget(
-                  text: text,
-                  isFromUser: content.role == 'user',
-                );
-              },
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 650,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount: _chat.history.length,
+                    itemBuilder: (context, idx) {
+                      var content = _chat.history.toList()[idx];
+                      var text = content.parts
+                          .whereType<TextPart>()
+                          .map((e) => e.text)
+                          .join('');
+                      return MessageWidget(
+                        text: text,
+                        isFromUser: content.role == 'user',
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(
@@ -75,51 +85,68 @@ class _AskOurAiState extends State<AskOurAi> {
             child: Row(
               children: [
                 Expanded(
-                    child: Column(
-                  children: [
-                    TextField(
-                      focusNode: _textFieldFocus,
-                      decoration: InputDecoration(
-                          hintText: 'Ask anything regarding Postal Hub',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25)),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 5, top: 5, right: 5),
-                            child: _loading
-                                ? IconButton.filledTonal(
-                                    icon: LoadingAnimationWidget.flickr(
-                                      leftDotColor: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      rightDotColor: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      size: 20,
-                                    ),
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    onPressed: null)
-                                : IconButton.filledTonal(
-                                    icon: const Icon(Icons.send),
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    onPressed: () =>
-                                        _sendChatMessage(_textController.text),
-                                  ),
-                          )),
-                      controller: _textController,
-                      onSubmitted: _sendChatMessage,
-                      maxLines: null,
+                    child: Center(
+                        child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              focusNode: _textFieldFocus,
+                              decoration: InputDecoration(
+                                hintText: 'Ask anything regarding Postal Hub',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 5, top: 5, right: 5),
+                                  child: _loading
+                                      ? IconButton.filledTonal(
+                                          icon: LoadingAnimationWidget.flickr(
+                                            leftDotColor: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary,
+                                            rightDotColor: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                            size: 20,
+                                          ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          onPressed: null,
+                                        )
+                                      : IconButton(
+                                          icon: const Icon(Icons.send),
+                                          onPressed: () => _sendChatMessage(
+                                              _textController.text),
+                                        ),
+                                ),
+                              ),
+                              controller: _textController,
+                              onSubmitted: _sendChatMessage,
+                              maxLines: null,
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Text(
+                                'ParcelMate can make mistakes, so double-check it',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    const Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Text(
-                          'ParcelMate can make mistakes, so double-check it',
-                          style: TextStyle(fontSize: 12),
-                        ))
-                  ],
-                )),
+                  ),
+                )))
               ],
             ),
           ),
@@ -177,16 +204,19 @@ class MessageWidget extends StatelessWidget {
           isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         if (!isFromUser)
-          const CircleAvatar(
-            backgroundImage: AssetImage('assets/images/postalhub_logo.jpg'),
-            radius: 15,
+          const Padding(
+            padding: EdgeInsets.only(
+              top: 5,
+            ),
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/postalhub_logo.jpg'),
+              radius: 15,
+            ),
           ),
         Flexible(
           child: Padding(
             padding: const EdgeInsets.only(
-              top: 0,
-              left: 0,
-              right: 0,
+              top: 5,
               bottom: 15,
             ),
             child: Container(
@@ -209,10 +239,18 @@ class MessageWidget extends StatelessWidget {
           ),
         ),
         if (isFromUser)
-          const CircleAvatar(
-            backgroundImage: AssetImage('assets/user_icon.png'),
-            radius: 15,
-          ),
+          const Padding(
+            padding: EdgeInsets.only(
+              top: 5,
+              left: 0,
+              right: 0,
+            ),
+            child: CircleAvatar(
+              backgroundImage:
+                  AssetImage('assets/images/profile_image_icon.jpg'),
+              radius: 15,
+            ),
+          )
       ],
     );
   }

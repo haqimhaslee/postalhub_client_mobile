@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CarouselAds extends StatefulWidget {
   const CarouselAds({super.key});
@@ -40,7 +41,19 @@ class _CarouselAdsState extends State<CarouselAds> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Shimmer.fromColors(
+        direction: ShimmerDirection.ltr,
+        period: const Duration(milliseconds: 1500),
+        baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+        highlightColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+        child: const Card(
+            elevation: 0,
+            child: SizedBox(
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+              ),
+            )),
+      );
     }
     if (errorMessage != null) {
       return Center(child: Text(errorMessage!));
@@ -74,8 +87,17 @@ class _CarouselAdsState extends State<CarouselAds> {
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    direction: ShimmerDirection.ltr,
+                    period: const Duration(milliseconds: 1500),
+                    baseColor:
+                        Theme.of(context).colorScheme.surfaceContainerLowest,
+                    highlightColor:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
+                    child: const AspectRatio(
+                      aspectRatio: 16 / 9,
+                    ),
+                  ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               );

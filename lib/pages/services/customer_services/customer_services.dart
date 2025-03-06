@@ -17,20 +17,17 @@ class CustomerServices extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Customer Service'),
           bottom: const TabBar(
-            //isScrollable: true,
+            isScrollable: true,
             //tabAlignment: TabAlignment.start,
             tabs: [
               Tab(
                 text: 'All',
-                icon: Icon(Icons.clear_all_rounded),
               ),
               Tab(
                 text: 'Pending/Active',
-                icon: Icon(Icons.pending_rounded),
               ),
               Tab(
                 text: 'Solved',
-                icon: Icon(Icons.done_all_rounded),
               ),
             ],
           ),

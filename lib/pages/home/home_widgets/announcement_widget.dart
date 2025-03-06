@@ -186,47 +186,35 @@ class AnnouncementDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text(title)),
-        body: ListView(
-          children: [
-            Padding(
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 550),
+            child: ListView(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: SizedBox(
-                      width: 600,
-                      child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                            child: Image.network(imageUrl),
-                          )),
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  Text(title,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      const Icon(Icons.calendar_month_rounded, size: 16),
-                      const SizedBox(width: 4),
-                      Text(date,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400)),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Divider(),
-                  const SizedBox(height: 8.0),
-                  Text(description, style: const TextStyle(fontSize: 16)),
-                ],
-              ),
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Image.network(imageUrl),
+                ),
+                const SizedBox(height: 10.0),
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_month_rounded, size: 16),
+                    const SizedBox(width: 4),
+                    Text(date,
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400)),
+                  ],
+                ),
+                const Divider(),
+                Text(description, style: const TextStyle(fontSize: 16)),
+              ],
             ),
-          ],
+          ),
         ));
   }
 }

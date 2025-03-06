@@ -59,9 +59,10 @@ class _SearchInventoryState extends State<SearchInventory> {
           ],
           */
 
-          title: Column(
-            children: [
-              /*
+          title: Center(
+            child: Column(
+              children: [
+                /*
               Row(
                 children: [
                   Text(
@@ -86,28 +87,33 @@ class _SearchInventoryState extends State<SearchInventory> {
               ),
 
               */
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
-                child: TextField(
-                  controller: searchInput,
-                  decoration: InputDecoration(
-                      labelText: 'Tracking Number*',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      suffixIcon: Padding(
-                        padding:
-                            const EdgeInsets.only(bottom: 5, top: 5, right: 5),
-                        child: IconButton.filledTonal(
-                          icon: const Icon(Icons.search_rounded),
-                          color: Theme.of(context).colorScheme.primary,
-                          onPressed: () =>
-                              setState(() => _searchTerm = searchInput.text),
-                        ),
-                      )),
-                ),
-              ),
-            ],
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 600,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 0, left: 0, right: 0, bottom: 0),
+                    child: TextField(
+                      controller: searchInput,
+                      decoration: InputDecoration(
+                          labelText: 'Tracking Number*',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 5, top: 5, right: 5),
+                            child: IconButton(
+                              icon: const Icon(Icons.search_rounded),
+                              onPressed: () => setState(
+                                  () => _searchTerm = searchInput.text),
+                            ),
+                          )),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         body: Padding(
@@ -121,10 +127,17 @@ class _SearchInventoryState extends State<SearchInventory> {
               children: [
                 //const Divider(),
                 Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: _buildSearchResults(_searchTerm)),
-                ),
+                    child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 650,
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: _buildSearchResults(_searchTerm)),
+                  ),
+                ))
               ],
             )));
   }
@@ -159,19 +172,36 @@ class _SearchInventoryState extends State<SearchInventory> {
 
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Shimmer.fromColors(
-            direction: ShimmerDirection.ltr,
-            period: const Duration(milliseconds: 1000),
-            baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-            highlightColor:
-                Theme.of(context).colorScheme.surfaceContainerHighest,
-            child: const Card(
-                elevation: 0,
-                child: SizedBox(
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                  ),
-                )),
-          );
+              direction: ShimmerDirection.ltr,
+              period: const Duration(milliseconds: 1000),
+              baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+              highlightColor:
+                  Theme.of(context).colorScheme.surfaceContainerHighest,
+              child: ListView(
+                children: const [
+                  Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 5,
+                        ),
+                      )),
+                  Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 5,
+                        ),
+                      )),
+                  Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 5,
+                        ),
+                      )),
+                ],
+              ));
         }
 
         final documents = snapshot.data?.docs ?? [];

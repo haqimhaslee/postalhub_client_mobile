@@ -69,21 +69,29 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
         itemBuilder: (context, index) {
           if (index == _updates.length) {
             return _isLoading
-                ? Shimmer.fromColors(
-                    direction: ShimmerDirection.ltr,
-                    period: const Duration(milliseconds: 600),
-                    baseColor:
-                        Theme.of(context).colorScheme.surfaceContainerLowest,
-                    highlightColor:
-                        Theme.of(context).colorScheme.surfaceContainerHighest,
-                    child: const Card(
-                        elevation: 0,
-                        child: SizedBox(
-                          child: AspectRatio(
-                            aspectRatio: 16 / 9,
-                          ),
-                        )),
-                  )
+                ? Align(
+                    alignment: Alignment.topCenter,
+                    child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: 650,
+                        ),
+                        child: Shimmer.fromColors(
+                          direction: ShimmerDirection.ltr,
+                          period: const Duration(milliseconds: 600),
+                          baseColor: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerLowest,
+                          highlightColor: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHighest,
+                          child: const Card(
+                              elevation: 0,
+                              child: SizedBox(
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                ),
+                              )),
+                        )))
                 : const SizedBox();
           }
           Map<String, dynamic> data =
@@ -92,28 +100,36 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
           DateTime dateTime = timestamp.toDate();
           String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
 
-          return Column(
-            children: [
-              ListTile(
-                onTap: () {},
-                title: Text(
-                  formattedDate,
-                ),
-                subtitle: MarkdownBody(
-                  onTapLink: (text, href, title) {
-                    if (href != null) {
-                      launchUrl(Uri.parse(href));
-                    }
-                  },
-                  data:
-                      data['ver_info']?.replaceAll(r'\n', '\n') ?? 'No Content',
-                  styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
-                ),
-              ),
-              const Padding(
-                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0), child: Divider())
-            ],
-          );
+          return Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 650,
+                  ),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: () {},
+                        title: Text(
+                          formattedDate,
+                        ),
+                        subtitle: MarkdownBody(
+                          onTapLink: (text, href, title) {
+                            if (href != null) {
+                              launchUrl(Uri.parse(href));
+                            }
+                          },
+                          data: data['ver_info']?.replaceAll(r'\n', '\n') ??
+                              'No Content',
+                          styleSheet:
+                              MarkdownStyleSheet.fromTheme(Theme.of(context)),
+                        ),
+                      ),
+                      const Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          child: Divider())
+                    ],
+                  )));
         },
       ),
     );
