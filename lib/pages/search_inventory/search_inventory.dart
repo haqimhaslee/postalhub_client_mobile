@@ -23,8 +23,11 @@ class _SearchInventoryState extends State<SearchInventory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          toolbarHeight: 90,
+/*
           actions: [
             IconButton(
               tooltip: 'Info',
@@ -54,31 +57,64 @@ class _SearchInventoryState extends State<SearchInventory> {
               },
             ),
           ],
-          elevation: 3,
-          scrolledUnderElevation: 3,
-          title: Row(
-            children: [
-              Text(
-                "Leaving soon (Click ",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).colorScheme.onErrorContainer,
-                ),
+          */
+
+          title: Center(
+            child: Column(
+              children: [
+                /*
+              Row(
+                children: [
+                  Text(
+                    "Leaving soon (Click ",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.onErrorContainer,
+                    ),
+                  ),
+                  Icon(
+                    Icons.info_rounded,
+                    color: Theme.of(context).colorScheme.onErrorContainer,
+                  ),
+                  Text(
+                    " to learn more)",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.onErrorContainer,
+                    ),
+                  ),
+                ],
               ),
-              Icon(
-                Icons.info_rounded,
-                color: Theme.of(context).colorScheme.onErrorContainer,
-              ),
-              Text(
-                " to learn more)",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).colorScheme.onErrorContainer,
-                ),
-              ),
-            ],
+
+              */
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 600,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 0, left: 0, right: 0, bottom: 0),
+                    child: TextField(
+                      controller: searchInput,
+                      decoration: InputDecoration(
+                          labelText: 'Tracking Number*',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 5, top: 5, right: 5),
+                            child: IconButton(
+                              icon: const Icon(Icons.search_rounded),
+                              onPressed: () => setState(
+                                  () => _searchTerm = searchInput.text),
+                            ),
+                          )),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          backgroundColor: Theme.of(context).colorScheme.errorContainer,
         ),
         body: Padding(
             padding: const EdgeInsets.only(
@@ -89,34 +125,19 @@ class _SearchInventoryState extends State<SearchInventory> {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width > 590 ? 30 : 20,
-                    left: MediaQuery.of(context).size.width > 590 ? 30 : 20,
-                    right: MediaQuery.of(context).size.width > 590 ? 28 : 20,
-                    bottom: MediaQuery.of(context).size.width > 590 ? 28 : 10,
-                  ),
-                  child: TextField(
-                    controller: searchInput,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () =>
-                            setState(() => _searchTerm = searchInput.text),
-                        icon: const Icon(Icons.search_rounded),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      labelText: 'Tracking Number*',
-                    ),
-                  ),
-                ),
                 //const Divider(),
                 Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: _buildSearchResults(_searchTerm)),
-                ),
+                    child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 650,
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: _buildSearchResults(_searchTerm)),
+                  ),
+                ))
               ],
             )));
   }
@@ -132,8 +153,11 @@ class _SearchInventoryState extends State<SearchInventory> {
               "assets/gif/search.gif",
               scale: 2,
             ),
-            const Text('Enter a tracking number to search.'),
-            const Text('*Tracking numbers are case sensitive')
+            Text(
+              'Enter a tracking number to search. \n *Tracking numbers are case sensitive',
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       );
@@ -148,19 +172,36 @@ class _SearchInventoryState extends State<SearchInventory> {
 
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Shimmer.fromColors(
-            direction: ShimmerDirection.ltr,
-            period: const Duration(milliseconds: 500),
-            baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-            highlightColor:
-                Theme.of(context).colorScheme.surfaceContainerHighest,
-            child: const Card(
-                elevation: 0,
-                child: SizedBox(
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                  ),
-                )),
-          );
+              direction: ShimmerDirection.ltr,
+              period: const Duration(milliseconds: 1000),
+              baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+              highlightColor:
+                  Theme.of(context).colorScheme.surfaceContainerHighest,
+              child: ListView(
+                children: const [
+                  Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 5,
+                        ),
+                      )),
+                  Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 5,
+                        ),
+                      )),
+                  Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 5,
+                        ),
+                      )),
+                ],
+              ));
         }
 
         final documents = snapshot.data?.docs ?? [];
@@ -173,18 +214,12 @@ class _SearchInventoryState extends State<SearchInventory> {
                 Image.asset(
                   "assets/gif/not_found.gif",
                 ),
-                const Text('Sorry...'),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                  ),
-                  child: Text(
-                    'No items found for that tracking number or your parcel might not be sorted yet.',
-                    textAlign: TextAlign.center,
-                  ),
+                Text(
+                  'Sorry... \n No items found for that tracking number or your parcel might not be sorted yet. \n Please check again later.',
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  textAlign: TextAlign.center,
                 ),
-                const Text('Please check again later.'),
               ],
             ),
           );

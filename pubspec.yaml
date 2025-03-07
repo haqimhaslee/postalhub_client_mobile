@@ -32,6 +32,9 @@ dependencies:
   particles_flutter: ^1.0.1
   lucide_icons: ^0.257.0
   syncfusion_flutter_barcodes: ^28.2.4
+  firebase_app_check: ^0.2.2
+  carousel_slider: ^5.0.0
+  google_fonts: ^6.2.1
 
 
 
@@ -56,6 +59,7 @@ flutter:
   - assets/images/carousel/4.png
   - assets/images/carousel/5.png
   - assets/images/carousel/6.png
+  - assets/images/profile_image_icon.jpg
   - assets/gif/not_found.gif
   - assets/gif/search.gif
 
