@@ -8,10 +8,10 @@ class CarouselViewer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
       child: AspectRatio(
-        aspectRatio: 16 / 7.1, // Ensures a 16:9 ratio
+        aspectRatio: 16 / 8, // Ensures a 16:9 ratio
         child: CarouselView.weighted(
           itemSnapping: true,
-          flexWeights: const [1, 7, 1],
+          flexWeights: const [7, 1],
           enableSplash: false,
           children: [
             Image.asset(

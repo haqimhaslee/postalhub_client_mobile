@@ -30,7 +30,7 @@ class _BranchInfoState extends State<BranchInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Branch Info"),
+        title: const Text('Branch Information'),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _branchesFuture,
@@ -50,44 +50,64 @@ class _BranchInfoState extends State<BranchInfo> {
             return const Center(child: Text('No branches found.'));
           }
 
-          return Padding(
-            padding: const EdgeInsets.only(top: 5, bottom: 15),
-            child: ListView.builder(
-              itemCount: branches.length,
-              itemBuilder: (context, index) {
-                final data = branches[index];
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: branches.length,
+                itemBuilder: (context, index) {
+                  final data = branches[index];
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Card(
-                    elevation: 0,
-                    child: ListTile(
-                      title: Text(data['campusName'] ?? 'N/A'),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                              'Operating time: ${data['openTime'] ?? 'N/A'} to ${data['closingTime'] ?? 'N/A'}'),
-                          Row(
-                            children: [
-                              const Text("Status: "),
-                              data['openStatus'] == true
-                                  ? const Text("OPEN")
-                                  : const Text("CLOSE"),
-                            ],
-                          ),
-                        ],
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ListTile(
+                        title: Text(data['campusName'] ?? 'N/A'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                'Operating time: ${data['openTime'] ?? 'N/A'} to ${data['closingTime'] ?? 'N/A'}'),
+                            Row(
+                              children: [
+                                const Text("Status: "),
+                                data['openStatus'] == true
+                                    ? Text(
+                                        "OPEN",
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                      )
+                                    : Text(
+                                        "CLOSE",
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .error,
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {
+                            // Add your functionality here
+                          },
+                          icon: const Icon(Icons.pin_drop_rounded),
+                        ),
                       ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          // Add your functionality here
-                        },
-                        icon: const Icon(Icons.pin_drop_rounded),
-                      ),
-                    ),
-                  ),
-                );
-              },
+                      const Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          child: Divider())
+                    ],
+                  );
+                },
+              ),
             ),
           );
         },

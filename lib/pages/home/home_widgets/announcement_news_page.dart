@@ -15,7 +15,7 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
   bool isLoading = false;
   bool hasMore = true;
   DocumentSnapshot? lastDocument;
-  final int limit = 8;
+  final int limit = 5;
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -60,46 +60,43 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width - 190;
     return Scaffold(
       appBar: AppBar(
         title: const Text("News & Announcements"),
       ),
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: documents.length + (hasMore ? 1 : 0),
-        itemBuilder: (context, index) {
-          if (index == documents.length) {
-            return Shimmer.fromColors(
-              direction: ShimmerDirection.ltr,
-              period: const Duration(milliseconds: 600),
-              baseColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-              highlightColor:
-                  Theme.of(context).colorScheme.surfaceContainerHighest,
-              child: const Card(
-                  elevation: 0,
-                  child: SizedBox(
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                    ),
-                  )),
-            );
-          }
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 550),
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: documents.length + (hasMore ? 1 : 0),
+            itemBuilder: (context, index) {
+              if (index == documents.length) {
+                return Shimmer.fromColors(
+                  direction: ShimmerDirection.ltr,
+                  period: const Duration(milliseconds: 1500),
+                  baseColor:
+                      Theme.of(context).colorScheme.surfaceContainerLowest,
+                  highlightColor:
+                      Theme.of(context).colorScheme.surfaceContainerHighest,
+                  child: const Card(
+                      elevation: 0,
+                      child: SizedBox(
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                        ),
+                      )),
+                );
+              }
 
-          final doc = documents[index];
-          final DateTime date = (doc['date'] as Timestamp).toDate();
-          final String formattedDate = DateFormat('d/M/yyyy').format(date);
+              final doc = documents[index];
+              final DateTime date = (doc['date'] as Timestamp).toDate();
+              final String formattedDate =
+                  DateFormat('d/M/yyyy, h:mm a').format(date);
 
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-            child: Card(
-              elevation: 0,
-              color: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                child: Material(
-                  color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                  child: InkWell(
+              return Column(
+                children: [
+                  ListTile(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -113,80 +110,43 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
                         ),
                       );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 160,
-                                height: 90,
-                                child: Image.network(doc['img_url'],
-                                    fit: BoxFit.cover),
-                              ),
-                              SizedBox(
-                                width: screenWidth,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        doc['title'],
-                                        textAlign: TextAlign.start,
-                                        style: const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w900),
-                                        softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
-                                      const SizedBox(height: 5.0),
-                                      Text(
-                                        doc['description'],
-                                        style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w100),
-                                        softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                      ),
-                                      const SizedBox(height: 5.0),
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.calendar_month_rounded,
-                                            size: 11.5,
-                                          ),
-                                          const Text('  '),
-                                          Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          child: SizedBox(
+                            width: 500,
+                            height: 200,
+                            child: Image.network(doc['img_url'],
+                                fit: BoxFit.cover),
                           ),
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            doc['title'],
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Text(
+                          formattedDate,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                ),
-              ),
-            ),
-          );
-        },
+                  const Divider()
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -210,44 +170,35 @@ class AnnouncementDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text(title)),
-        body: ListView(
-          children: [
-            Padding(
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 550),
+            child: ListView(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: SizedBox(
-                      width: 600,
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Image.network(imageUrl),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  Text(title,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      const Icon(Icons.calendar_month_rounded, size: 16),
-                      const SizedBox(width: 4),
-                      Text(date,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400)),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Divider(),
-                  const SizedBox(height: 8.0),
-                  Text(description, style: const TextStyle(fontSize: 16)),
-                ],
-              ),
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Image.network(imageUrl),
+                ),
+                const SizedBox(height: 10.0),
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_month_rounded, size: 16),
+                    const SizedBox(width: 4),
+                    Text(date,
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400)),
+                  ],
+                ),
+                const Divider(),
+                Text(description, style: const TextStyle(fontSize: 16)),
+              ],
             ),
-          ],
+          ),
         ));
   }
 }
