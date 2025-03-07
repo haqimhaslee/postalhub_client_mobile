@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
           title: "Postal Hub | Tracker",
           theme: ThemeData(
-            colorScheme: lightDynamic ?? lightColorScheme,
+            colorScheme: lightColorScheme,
+            //colorScheme: lightDynamic ?? lightColorScheme,
             textTheme: GoogleFonts.openSansTextTheme(),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -44,7 +45,8 @@ class MyApp extends StatelessWidget {
             ),
           ),
           darkTheme: ThemeData(
-            colorScheme: darkDynamic ?? darkColorScheme,
+            colorScheme: darkColorScheme,
+            //colorScheme: darkDynamic ?? darkColorScheme,
             textTheme: GoogleFonts.openSansTextTheme().apply(
               bodyColor: darkColorScheme.onSurface,
               displayColor: darkColorScheme.onSurface,

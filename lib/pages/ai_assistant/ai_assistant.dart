@@ -43,10 +43,27 @@ class _AskOurAiState extends State<AskOurAi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+      //backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.info_rounded))
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('About ParcelMate'),
+                  content: const Text('This is a dialog box.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            icon: const Icon(Icons.info_rounded),
+          ),
         ],
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         title: const Text("ParcelMate"),
@@ -225,7 +242,7 @@ class MessageWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isFromUser
                     ? Theme.of(context).colorScheme.primaryContainer
-                    : Theme.of(context).colorScheme.surfaceVariant,
+                    : Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: MarkdownBody(

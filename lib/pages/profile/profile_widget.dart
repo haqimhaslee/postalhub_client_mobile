@@ -14,9 +14,9 @@ class _ProfileOverviewWidgetState extends State<ProfileOverviewWidget> {
         padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
         child: Center(
             child: Card(
-          elevation: 0,
+          //elevation: 5,
           child: SizedBox(
-            height: 95,
+            height: 120,
             width: 600,
           ),
         )));

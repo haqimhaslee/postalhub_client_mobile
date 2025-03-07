@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:postalhub_tracker/pages/home/home_widgets/announcement_news_page.dart';
-import 'package:postalhub_tracker/pages/more/branch_info/branch_info.dart';
+import 'package:postalhub_tracker/pages/services/branch_locator/branch_info.dart';
 import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/customer_services/customer_services.dart';
@@ -508,7 +508,7 @@ class _ServicesPageState extends State<ServicesPage>
                                                 ),
                                               ),
                                               Text(
-                                                "Customer Service (Coming Soon)",
+                                                "Customer Services",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,

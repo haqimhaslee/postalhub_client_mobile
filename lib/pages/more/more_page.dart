@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
-import 'package:postalhub_tracker/pages/more/about/about.dart';
-import 'package:postalhub_tracker/pages/more/updates_info/updates_info_at.dart';
-import 'package:postalhub_tracker/pages/home/home_widgets/carousel_viewer.dart';
+import 'package:postalhub_tracker/pages/more/information/about.dart';
+import 'package:postalhub_tracker/pages/more/information/updates_info_at.dart';
+import 'package:postalhub_tracker/pages/profile/profile_widget.dart';
+//import 'package:postalhub_tracker/pages/home/home_widgets/carousel_viewer.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({super.key});
@@ -41,32 +42,6 @@ Future<void> _privacypolicy(BuildContext context) async {
 
 bool switchValue = false;
 
-Future<void> _customerServices(BuildContext context) async {
-  final theme = Theme.of(context);
-  try {
-    await launchUrl(
-      Uri.parse('https://forms.gle/bZcSg3W2QrxSJrkL6'),
-      customTabsOptions: CustomTabsOptions(
-        colorSchemes: CustomTabsColorSchemes.defaults(
-          toolbarColor: theme.colorScheme.surface,
-          navigationBarColor: theme.colorScheme.surface,
-        ),
-        shareState: CustomTabsShareState.off,
-        urlBarHidingEnabled: true,
-        showTitle: true,
-      ),
-      safariVCOptions: SafariViewControllerOptions(
-        preferredBarTintColor: theme.colorScheme.surface,
-        preferredControlTintColor: theme.colorScheme.onSurface,
-        barCollapsingEnabled: true,
-        entersReaderIfAvailable: false,
-      ),
-    );
-  } catch (e) {
-    debugPrint(e.toString());
-  }
-}
-
 class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
@@ -91,7 +66,7 @@ class _MorePageState extends State<MorePage> {
                           child: ClipRRect(
                             child: SizedBox(
                               width: 600,
-                              child: CarouselViewer(),
+                              child: ProfileOverviewWidget(),
                             ),
                           ))
                     ],
@@ -190,14 +165,6 @@ class _MorePageState extends State<MorePage> {
                     ),
                   ),
                   ListTile(
-                    title: const Text('Feedback Center'),
-                    subtitle: const Text('Send feedback to us'),
-                    leading: const Icon(Icons.info_rounded),
-                    onTap: () {
-                      _customerServices(context);
-                    },
-                  ),
-                  ListTile(
                     title: const Text('Terms and Privacy Policy'),
                     subtitle: const Text('View Terms and Privacy Policy'),
                     leading: const Icon(Icons.developer_board_rounded),
@@ -224,7 +191,7 @@ class _MorePageState extends State<MorePage> {
                   ),
                   ListTile(
                     title: const Text('App info'),
-                    subtitle: const Text('View app information'),
+                    subtitle: const Text('Version : 25.3.809-mobile'),
                     leading: const Icon(Icons.info_outline_rounded),
                     onTap: () {
                       Navigator.push(
@@ -233,16 +200,12 @@ class _MorePageState extends State<MorePage> {
                               builder: (context) => const About()));
                     },
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, bottom: 0, top: 20),
-                    child: Text(
-                      "App version : 25.3.615 (cross-platform)",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
+                  ListTile(
+                    title: const Text('Log Out',
+                        style: TextStyle(color: Colors.red)),
+                    leading:
+                        const Icon(Icons.logout_rounded, color: Colors.red),
+                    onTap: () {},
                   ),
                   const SizedBox(
                     height: 70,
