@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/case_all.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/case_pending.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/case_solved.dart';
 
 class CustomerServices extends StatelessWidget {
   const CustomerServices({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
@@ -15,11 +21,16 @@ class CustomerServices extends StatelessWidget {
           icon: const Icon(Icons.add),
         ),
         appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           title: const Text('Customer Service'),
-          bottom: const TabBar(
+          bottom: TabBar(
+            dividerHeight: 0,
+            splashBorderRadius: BorderRadius.circular(15),
             isScrollable: true,
-            //tabAlignment: TabAlignment.start,
-            tabs: [
+            tabAlignment: TabAlignment.start,
+            tabs: const [
               Tab(
                 text: 'All',
               ),
@@ -32,48 +43,26 @@ class CustomerServices extends StatelessWidget {
             ],
           ),
         ),
-        body: const ClipRRect(
-          child: TabBarView(
+        body: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(
+              screenWidth < 590 ? 20 : 30,
+            ),
+            topRight: Radius.circular(
+              screenWidth < 590 ? 20 : 0,
+            ),
+            bottomLeft: Radius.circular(
+              screenWidth < 590 ? 20 : 0,
+            ),
+            bottomRight: Radius.circular(
+              screenWidth < 590 ? 20 : 0,
+            ),
+          ),
+          child: const TabBarView(
             children: [
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
+              CaseAll(),
+              CasePending(),
+              CaseSolved(),
             ],
           ),
         ),

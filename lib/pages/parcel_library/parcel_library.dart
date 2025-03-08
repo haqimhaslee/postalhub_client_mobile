@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_all.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_delivered.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_onDelivery.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_sorted.dart';
 
 class ParcelLibraryPage extends StatelessWidget {
   const ParcelLibraryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           title: TabBar(
-            dividerHeight: 0.5,
+            dividerHeight: 0,
             splashBorderRadius: BorderRadius.circular(15),
             isScrollable: true,
             tabAlignment: TabAlignment.center,
@@ -22,61 +32,27 @@ class ParcelLibraryPage extends StatelessWidget {
             ],
           ),
         ),
-        body: const ClipRRect(
-          child: TabBarView(
+        body: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(
+              screenWidth < 590 ? 20 : 30,
+            ),
+            topRight: Radius.circular(
+              screenWidth < 590 ? 20 : 0,
+            ),
+            bottomLeft: Radius.circular(
+              screenWidth < 590 ? 20 : 0,
+            ),
+            bottomRight: Radius.circular(
+              screenWidth < 590 ? 20 : 0,
+            ),
+          ),
+          child: const TabBarView(
             children: [
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
+              ParcelAll(),
+              ParcelSorted(),
+              ParcelOndelivery(),
+              ParcelDelivered()
             ],
           ),
         ),

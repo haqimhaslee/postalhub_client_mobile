@@ -316,7 +316,7 @@ class _ServicesPageState extends State<ServicesPage>
                                         left: 16,
                                       ),
                                       child: Text(
-                                        "More Services (Coming Soon)",
+                                        "More Services",
                                         style: TextStyle(
                                           fontSize: 23,
                                           color: Theme.of(context)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ParcelSorted extends StatelessWidget {
-  const ParcelSorted({super.key});
+class ParcelOndelivery extends StatelessWidget {
+  const ParcelOndelivery({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class ParcelSorted extends StatelessWidget {
         body: Center(
       child: Card(
         child: SizedBox(
-          height: 600,
+          height: 300,
           width: 1000,
         ),
       ),

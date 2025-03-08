@@ -249,6 +249,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.5+7"
+  firebase_vertexai:
+    dependency: "direct main"
+    description:
+      name: firebase_vertexai
+      sha256: "6e61f6717bee3ab563e8e506e0fed98761f98c181626c62d924d06598786e95e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   fixnum:
     dependency: transitive
     description:
