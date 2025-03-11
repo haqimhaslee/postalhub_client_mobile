@@ -19,6 +19,7 @@ class _AskOurAiState extends State<AskOurAi> {
   final FocusNode _textFieldFocus = FocusNode(debugLabel: 'TextField');
   bool _loading = false;
   final List<Message> _messages = [];
+  final ChatSession _chatSession = ChatSession(); // Maintain chat history
 
   @override
   void initState() {
@@ -54,9 +55,7 @@ class _AskOurAiState extends State<AskOurAi> {
           Expanded(
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
-                Radius.circular(
-                  20,
-                ),
+                Radius.circular(20),
               ),
               child: Container(
                 color: Theme.of(context).colorScheme.surface,
@@ -132,7 +131,8 @@ class _AskOurAiState extends State<AskOurAi> {
     });
 
     try {
-      final stream = _model.generateContentStream([Content.text(message)]);
+      _chatSession.addUserMessage(message); // Add user message to session
+      final stream = _model.generateContentStream(_chatSession.history);
       await for (final event in stream) {
         final part = event.text;
         if (part != null) {
@@ -143,6 +143,7 @@ class _AskOurAiState extends State<AskOurAi> {
           _scrollDown();
         }
       }
+      _chatSession.addBotMessage(responseText); // Store bot response
     } catch (e) {
       _showError(e.toString());
     } finally {
@@ -165,6 +166,18 @@ class _AskOurAiState extends State<AskOurAi> {
         ],
       ),
     );
+  }
+}
+
+class ChatSession {
+  final List<Content> history = [];
+
+  void addUserMessage(String message) {
+    history.add(Content.text(message));
+  }
+
+  void addBotMessage(String response) {
+    history.add(Content.text(response));
   }
 }
 
@@ -204,7 +217,6 @@ class MessageWidget extends StatelessWidget {
             ),
           ),
         ),
-        if (isFromUser) Container()
       ],
     );
   }

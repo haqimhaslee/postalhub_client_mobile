@@ -5,6 +5,8 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:postalhub_tracker/pages/more/information/about.dart';
 import 'package:postalhub_tracker/pages/more/information/updates_info_at.dart';
 import 'package:postalhub_tracker/pages/profile/profile_widget.dart';
+import 'package:postalhub_tracker/src/auth_services/login.dart';
+import 'package:postalhub_tracker/src/auth_services/register.dart';
 //import 'package:postalhub_tracker/pages/home/home_widgets/carousel_viewer.dart';
 
 class MorePage extends StatefulWidget {
@@ -198,6 +200,24 @@ class _MorePageState extends State<MorePage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const About()));
+                    },
+                  ),
+                  ListTile(
+                    title: const Text('Login Test'),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    },
+                  ),
+                  ListTile(
+                    title: const Text('Register Test'),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()));
                     },
                   ),
                   ListTile(

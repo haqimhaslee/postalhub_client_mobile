@@ -36,6 +36,7 @@ dependencies:
   carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
   firebase_vertexai: ^0.1.0
+  firebase_auth: ^4.16.0
 
 
 
@@ -61,6 +62,9 @@ flutter:
   - assets/images/carousel/5.png
   - assets/images/carousel/6.png
   - assets/images/profile_image_icon.jpg
+  - assets/images/login/login.png
+  - assets/images/login/register.png
+  - assets/images/login/vector-3.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
 
