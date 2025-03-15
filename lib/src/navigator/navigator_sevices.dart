@@ -131,8 +131,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
             if (MediaQuery.of(context).size.width > 590 &&
                 MediaQuery.of(context).size.width <= 810)
               NavigationRail(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
                 selectedIndex: _selectedIndex,
                 groupAlignment: 0,
                 onDestinationSelected: (int index) {
@@ -166,6 +164,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
               ),
             if (MediaQuery.of(context).size.width > 810)
               NavigationDrawer(
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,

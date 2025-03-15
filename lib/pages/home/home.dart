@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         Column(
           children: [
             Padding(
-                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                padding: EdgeInsets.fromLTRB(15, 18, 15, 30),
                 child: ClipRRect(
                   child: SizedBox(
                     width: 600,

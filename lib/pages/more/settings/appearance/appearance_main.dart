@@ -7,6 +7,8 @@ class AppearanceMain extends StatefulWidget {
 }
 
 class _AppearanceMainState extends State<AppearanceMain> {
+  String selectedOption = 'Auto'; // Default selection
+
   @override
   Widget build(BuildContext context) {
     // ... other widget code
@@ -34,19 +36,37 @@ class _AppearanceMainState extends State<AppearanceMain> {
                       ),
                     ),
                   ),
-                  ListTile(
+                  RadioListTile<String>(
                     title: const Text('Light'),
-                    onTap: () {},
+                    value: 'Light',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value!;
+                      });
+                    },
                   ),
-                  ListTile(
+                  RadioListTile<String>(
                     title: const Text('Dark'),
-                    onTap: () {},
+                    value: 'Dark',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value!;
+                      });
+                    },
                   ),
-                  ListTile(
+                  RadioListTile<String>(
                     title: const Text('Use device settings'),
                     subtitle: const Text(
                         'Apply the same theme set on your device to the app.'),
-                    onTap: () {},
+                    value: 'Auto',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value!;
+                      });
+                    },
                   ),
                 ],
               ),

@@ -65,6 +65,7 @@ flutter:
   - assets/images/login/login.png
   - assets/images/login/register.png
   - assets/images/login/vector-3.png
+  - assets/images/profile_card.jpg
   - assets/gif/not_found.gif
   - assets/gif/search.gif
 

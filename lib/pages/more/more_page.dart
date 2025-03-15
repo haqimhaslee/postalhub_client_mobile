@@ -40,7 +40,7 @@ class _MorePageState extends State<MorePage> {
                   const Column(
                     children: [
                       Padding(
-                          padding: EdgeInsets.fromLTRB(10, 15, 10, 8),
+                          padding: EdgeInsets.fromLTRB(15, 18, 15, 10),
                           child: ClipRRect(
                             child: SizedBox(
                               width: 600,
