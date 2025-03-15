@@ -9,16 +9,10 @@ class ParcelLibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           title: TabBar(
             dividerHeight: 0,
             splashBorderRadius: BorderRadius.circular(15),
@@ -32,22 +26,8 @@ class ParcelLibraryPage extends StatelessWidget {
             ],
           ),
         ),
-        body: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(
-              screenWidth < 590 ? 20 : 30,
-            ),
-            topRight: Radius.circular(
-              screenWidth < 590 ? 20 : 0,
-            ),
-            bottomLeft: Radius.circular(
-              screenWidth < 590 ? 20 : 0,
-            ),
-            bottomRight: Radius.circular(
-              screenWidth < 590 ? 20 : 0,
-            ),
-          ),
-          child: const TabBarView(
+        body: const ClipRRect(
+          child: TabBarView(
             children: [
               ParcelAll(),
               ParcelSorted(),

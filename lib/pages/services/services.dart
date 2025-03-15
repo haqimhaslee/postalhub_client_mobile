@@ -169,11 +169,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.inventory_2_rounded,
+                                                    Icons.inventory_2_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
@@ -221,11 +221,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.newspaper_rounded,
+                                                    Icons.newspaper_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
@@ -273,11 +273,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.warehouse_rounded,
+                                                    Icons.warehouse_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
@@ -360,11 +360,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.loyalty_rounded,
+                                                    Icons.loyalty_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
@@ -406,11 +406,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.store_rounded,
+                                                    Icons.store_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
@@ -499,11 +499,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.feedback_rounded,
+                                                    Icons.feedback_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),

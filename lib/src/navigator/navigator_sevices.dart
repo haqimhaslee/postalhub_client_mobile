@@ -48,12 +48,8 @@ class _NavigatorServicesState extends State<NavigatorServices>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
           title: const Text("Campus Postal Hub"),
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: AnimatedBuilder(
@@ -98,18 +94,18 @@ class _NavigatorServicesState extends State<NavigatorServices>
         ),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
                 destinations: const <Widget>[
                   NavigationDestination(
-                    icon: Icon(Icons.home_rounded),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
                     label: 'Home',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.inventory_2_rounded),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    selectedIcon: Icon(Icons.inventory_2_rounded),
                     label: 'My Parcel',
                   ),
                   NavigationDestination(
@@ -117,12 +113,14 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: 'Search',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.widgets_outlined),
+                    selectedIcon: Icon(Icons.widgets_rounded),
                     label: 'Services',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.more_horiz_rounded),
-                    label: 'More',
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: 'Profile',
                   ),
                 ],
               )
@@ -223,16 +221,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(
-                    screenWidth < 590 ? 20 : 30,
-                  ),
-                  topRight: Radius.circular(
-                    screenWidth < 590 ? 20 : 0,
-                  ),
-                  bottomLeft: Radius.circular(
-                    screenWidth < 590 ? 20 : 0,
-                  ),
-                  bottomRight: Radius.circular(
-                    screenWidth < 590 ? 20 : 0,
+                    screenWidth < 590 ? 0 : 30,
                   ),
                 ),
                 child: PageTransitionSwitcher(

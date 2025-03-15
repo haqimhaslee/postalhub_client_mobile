@@ -43,32 +43,23 @@ class _AskOurAiState extends State<AskOurAi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       appBar: AppBar(
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         title: const Text("ParcelMate (Preview)"),
       ),
       body: Column(
         children: [
           Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20),
-              ),
-              child: Container(
-                color: Theme.of(context).colorScheme.surface,
-                child: ListView.builder(
-                  controller: _scrollController,
-                  itemCount: _messages.length,
-                  itemBuilder: (context, idx) {
-                    return MessageWidget(
-                      text: _messages[idx].text,
-                      isFromUser: _messages[idx].isFromUser,
-                    );
-                  },
-                ),
+            child: Container(
+              color: Theme.of(context).colorScheme.surface,
+              child: ListView.builder(
+                controller: _scrollController,
+                itemCount: _messages.length,
+                itemBuilder: (context, idx) {
+                  return MessageWidget(
+                    text: _messages[idx].text,
+                    isFromUser: _messages[idx].isFromUser,
+                  );
+                },
               ),
             ),
           ),
@@ -205,8 +196,8 @@ class MessageWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: isFromUser
                   ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.surfaceContainerLow,
-              borderRadius: BorderRadius.circular(15),
+                  : null,
+              borderRadius: BorderRadius.circular(13),
             ),
             child: MarkdownBody(
               selectable: true,

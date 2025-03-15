@@ -8,12 +8,9 @@ class CustomerServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
@@ -21,9 +18,6 @@ class CustomerServices extends StatelessWidget {
           icon: const Icon(Icons.add),
         ),
         appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           title: const Text('Customer Service'),
           bottom: TabBar(
             dividerHeight: 0,
@@ -43,22 +37,8 @@ class CustomerServices extends StatelessWidget {
             ],
           ),
         ),
-        body: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(
-              screenWidth < 590 ? 20 : 30,
-            ),
-            topRight: Radius.circular(
-              screenWidth < 590 ? 20 : 0,
-            ),
-            bottomLeft: Radius.circular(
-              screenWidth < 590 ? 20 : 0,
-            ),
-            bottomRight: Radius.circular(
-              screenWidth < 590 ? 20 : 0,
-            ),
-          ),
-          child: const TabBarView(
+        body: const ClipRRect(
+          child: TabBarView(
             children: [
               CaseAll(),
               CasePending(),
