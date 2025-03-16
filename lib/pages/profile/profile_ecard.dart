@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PaymentHistoryMain extends StatefulWidget {
-  const PaymentHistoryMain({super.key});
+class ProfileEcard extends StatefulWidget {
+  const ProfileEcard({super.key});
   @override
-  State<PaymentHistoryMain> createState() => _PaymentHistoryMainState();
+  State<ProfileEcard> createState() => _ProfileEcardState();
 }
 
-class _PaymentHistoryMainState extends State<PaymentHistoryMain> {
+class _ProfileEcardState extends State<ProfileEcard> {
   @override
   Widget build(BuildContext context) {
     // ... other widget code
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Payment history'),
+          title: const Text('Digital Card'),
         ),
         body: Center(
           child: Column(

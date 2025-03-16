@@ -15,19 +15,25 @@ class _ProfileMainState extends State<ProfileMain> {
         appBar: AppBar(
           title: const Text('Profile'),
         ),
-        body: Align(
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 750,
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/components/not_available.png",
+                scale: 3,
               ),
-              child: ListView(
-                children: const [
-                  Center(
-                    child: Text('Coming soon'),
-                  )
-                ],
+              Text(
+                'Not available yet',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
-            )));
+            ],
+          ),
+        ));
   }
 }

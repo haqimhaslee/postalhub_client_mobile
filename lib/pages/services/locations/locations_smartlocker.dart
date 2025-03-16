@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CaseAll extends StatelessWidget {
-  const CaseAll({super.key});
+class LocationsSmartlocker extends StatefulWidget {
+  const LocationsSmartlocker({super.key});
+  @override
+  State<LocationsSmartlocker> createState() => _LocationsSmartlockerState();
+}
 
+class _LocationsSmartlockerState extends State<LocationsSmartlocker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

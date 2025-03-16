@@ -141,24 +141,29 @@ class _NavigatorServicesState extends State<NavigatorServices>
                 labelType: NavigationRailLabelType.all,
                 destinations: const <NavigationRailDestination>[
                   NavigationRailDestination(
-                    icon: Icon(Icons.home_rounded),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
                     label: Text('Home'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.inventory_2_rounded),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    selectedIcon: Icon(Icons.inventory_2_rounded),
                     label: Text('My Parcel'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.search_rounded),
+                    icon: Icon(Icons.search_outlined),
+                    selectedIcon: Icon(Icons.search_rounded),
                     label: Text('Search'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.widgets_outlined),
+                    selectedIcon: Icon(Icons.widgets_rounded),
                     label: Text('Services'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.more_horiz_rounded),
-                    label: Text('More'),
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: Text('Profile'),
                   ),
                 ],
               ),
@@ -174,23 +179,28 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   ),
                   NavigationDrawerDestination(
                     label: Text('Home'),
-                    icon: Icon(Icons.home_rounded),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
                   ),
                   NavigationDrawerDestination(
                     label: Text('My Parcel'),
-                    icon: Icon(Icons.inventory_2_rounded),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    selectedIcon: Icon(Icons.inventory_2_rounded),
                   ),
                   NavigationDrawerDestination(
                     label: Text('Search'),
-                    icon: Icon(Icons.search),
+                    icon: Icon(Icons.search_outlined),
+                    selectedIcon: Icon(Icons.search),
                   ),
                   NavigationDrawerDestination(
                     label: Text('Services'),
-                    icon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.widgets_outlined),
+                    selectedIcon: Icon(Icons.widgets_rounded),
                   ),
                   NavigationDrawerDestination(
-                    label: Text('More'),
-                    icon: Icon(Icons.more_horiz_rounded),
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: Text('Profile'),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(28, 10, 28, 10),

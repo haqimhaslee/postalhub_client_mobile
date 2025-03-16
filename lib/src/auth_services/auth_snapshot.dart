@@ -1,3 +1,4 @@
+/*
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:postalhub_tracker/src/auth_services/login.dart';
@@ -21,3 +22,4 @@ class AuthSnapshot extends StatelessWidget {
     );
   }
 }
+*/

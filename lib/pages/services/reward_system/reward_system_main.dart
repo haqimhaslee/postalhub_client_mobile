@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PaymentHistoryMain extends StatefulWidget {
-  const PaymentHistoryMain({super.key});
+class RewardSystemMain extends StatefulWidget {
+  const RewardSystemMain({super.key});
   @override
-  State<PaymentHistoryMain> createState() => _PaymentHistoryMainState();
+  State<RewardSystemMain> createState() => _RewardSystemMainState();
 }
 
-class _PaymentHistoryMainState extends State<PaymentHistoryMain> {
+class _RewardSystemMainState extends State<RewardSystemMain> {
   @override
   Widget build(BuildContext context) {
     // ... other widget code
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Payment history'),
+          title: const Text('Rewards'),
         ),
         body: Center(
           child: Column(

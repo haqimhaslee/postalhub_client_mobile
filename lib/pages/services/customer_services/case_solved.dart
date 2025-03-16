@@ -5,13 +5,25 @@ class CaseSolved extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: Center(
-      child: Card(
-        child: SizedBox(
-          height: 100,
-          width: 1000,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/images/components/not_available.png",
+            scale: 3,
+          ),
+          Text(
+            'Not available yet',
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 13,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     ));
   }

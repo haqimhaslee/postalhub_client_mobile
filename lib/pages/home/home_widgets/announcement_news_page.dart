@@ -131,17 +131,19 @@ class _AnnouncementNewsPageState extends State<AnnouncementNewsPage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Text(
-                          formattedDate,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w300,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                          child: Text(
+                            formattedDate,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              //fontWeight: FontWeight.w300,
+                            ),
                           ),
                         )
                       ],
                     ),
                   ),
-                  const Divider()
                 ],
               );
             },

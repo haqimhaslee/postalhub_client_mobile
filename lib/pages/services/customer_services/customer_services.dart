@@ -22,14 +22,13 @@ class CustomerServices extends StatelessWidget {
           bottom: TabBar(
             dividerHeight: 0,
             splashBorderRadius: BorderRadius.circular(15),
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
+            isScrollable: false,
             tabs: const [
               Tab(
                 text: 'All',
               ),
               Tab(
-                text: 'Pending/Active',
+                text: 'Active',
               ),
               Tab(
                 text: 'Solved',

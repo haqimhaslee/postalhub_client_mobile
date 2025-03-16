@@ -35,8 +35,8 @@ dependencies:
   firebase_app_check: ^0.2.2
   carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
-  firebase_vertexai: ^0.1.0
-  firebase_auth: ^4.16.0
+  #firebase_vertexai: ^0.1.0
+  #firebase_auth: ^4.16.0
 
 
 
@@ -66,6 +66,12 @@ flutter:
   - assets/images/login/register.png
   - assets/images/login/vector-3.png
   - assets/images/profile_card.jpg
+  - assets/images/components/not_available.png
+  - assets/images/components/parcel_mate.png
+  - assets/images/components/parcel_not_found.png
+  - assets/images/components/search_parcel.png
+  - assets/images/components/smart_locker_comingsoon.png
+  - assets/images/components/smart_locker_comingsoon1.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
 
