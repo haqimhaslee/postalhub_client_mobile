@@ -150,12 +150,13 @@ class _SearchInventoryState extends State<SearchInventory> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/gif/search.gif",
-              scale: 2,
+              "assets/images/components/search_parcel.png",
+              scale: 3,
             ),
             Text(
-              'Enter a tracking number to search. \n *Tracking numbers are case sensitive',
-              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              '*Case sensitive',
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface, fontSize: 12),
               textAlign: TextAlign.center,
             ),
           ],
@@ -212,10 +213,18 @@ class _SearchInventoryState extends State<SearchInventory> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/gif/not_found.gif",
+                  "assets/images/components/parcel_not_found.png",
+                  scale: 3,
                 ),
                 Text(
-                  'Sorry... \n No items found for that tracking number or your parcel might not be sorted yet. \n Please check again later.',
+                  'Sorry...',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  '\nNo items found for that tracking number or\nyour parcel might not be sorted yet.\nPlease check again later.',
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   textAlign: TextAlign.center,

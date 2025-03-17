@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class BranchInfo extends StatefulWidget {
-  const BranchInfo({super.key});
+class LocationsAll extends StatefulWidget {
+  const LocationsAll({super.key});
   @override
-  State<BranchInfo> createState() => _BranchInfoState();
+  State<LocationsAll> createState() => _LocationsAllState();
 }
 
-class _BranchInfoState extends State<BranchInfo> {
+class _LocationsAllState extends State<LocationsAll> {
   late Future<List<Map<String, dynamic>>> _branchesFuture;
 
   @override
@@ -29,9 +29,6 @@ class _BranchInfoState extends State<BranchInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Branch Information'),
-      ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _branchesFuture,
         builder: (BuildContext context,

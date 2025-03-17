@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/case_all.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/case_pending.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/case_solved.dart';
 
 class CustomerServices extends StatelessWidget {
   const CustomerServices({super.key});
@@ -16,15 +19,16 @@ class CustomerServices extends StatelessWidget {
         ),
         appBar: AppBar(
           title: const Text('Customer Service'),
-          bottom: const TabBar(
-            isScrollable: true,
-            //tabAlignment: TabAlignment.start,
-            tabs: [
+          bottom: TabBar(
+            dividerHeight: 0,
+            splashBorderRadius: BorderRadius.circular(15),
+            isScrollable: false,
+            tabs: const [
               Tab(
                 text: 'All',
               ),
               Tab(
-                text: 'Pending/Active',
+                text: 'Active',
               ),
               Tab(
                 text: 'Solved',
@@ -35,45 +39,9 @@ class CustomerServices extends StatelessWidget {
         body: const ClipRRect(
           child: TabBarView(
             children: [
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'This feature only avaiable in mobile version. \n (Account registration required)',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )),
+              CaseAll(),
+              CasePending(),
+              CaseSolved(),
             ],
           ),
         ),
