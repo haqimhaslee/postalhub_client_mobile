@@ -65,8 +65,10 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                                   const AnnouncementNewsPage()));
                     },
                     child: const Text(
-                      'View More',
-                      style: TextStyle(fontSize: 14),
+                      'VIEW MORE',
+                      style: TextStyle(
+                        fontSize: 11,
+                      ),
                     )))
           ],
         ),
@@ -143,20 +145,18 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                       child: Text(
                         formattedDate,
                         style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                          fontSize: 11,
+                          //fontWeight: FontWeight.w300,
                         ),
                       ),
                     )
                   ],
                 ),
               ),
-              const Padding(
-                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0), child: Divider()),
             ],
           );
         }),

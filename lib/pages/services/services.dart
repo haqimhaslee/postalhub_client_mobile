@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:postalhub_tracker/pages/home/home_widgets/announcement_news_page.dart';
-import 'package:postalhub_tracker/pages/more/branch_info/branch_info.dart';
+import 'package:postalhub_tracker/pages/services/locations/locations_main.dart';
 import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/customer_services/customer_services.dart';
+import 'package:postalhub_tracker/pages/services/reward_system/reward_system_main.dart';
+import 'package:postalhub_tracker/pages/services/smart_locker/smart_locker_main.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({super.key});
@@ -169,16 +171,68 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.inventory_2_rounded,
+                                                    Icons.inventory_2_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
                                               Text(
-                                                "My Parcel Library",
+                                                "My Parcel",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 100,
+                                    height: 100,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Material(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surfaceVariant,
+                                        child: InkWell(
+                                          //splashColor: Theme.of(context).colorScheme.tertiary,
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const SmartLockerMain()));
+                                          },
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              ClipRRect(
+                                                child: SizedBox(
+                                                  width: 40,
+                                                  height: 45,
+                                                  child: Icon(
+                                                    Icons.kitchen_outlined,
+                                                    size: 35,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSurfaceVariant,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                "Smart Locker",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,
@@ -221,16 +275,16 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.newspaper_rounded,
+                                                    Icons.newspaper_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
                                               Text(
-                                                "News and announcement",
+                                                "Newletter",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,
@@ -262,7 +316,7 @@ class _ServicesPageState extends State<ServicesPage>
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const BranchInfo()));
+                                                        const LocationsMain()));
                                           },
                                           child: Column(
                                             mainAxisAlignment:
@@ -273,16 +327,16 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.warehouse_rounded,
+                                                    Icons.warehouse_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
                                               Text(
-                                                "Branch Locator",
+                                                "Locations",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,
@@ -316,7 +370,7 @@ class _ServicesPageState extends State<ServicesPage>
                                         left: 16,
                                       ),
                                       child: Text(
-                                        "More Services (Coming Soon)",
+                                        "More Services",
                                         style: TextStyle(
                                           fontSize: 23,
                                           color: Theme.of(context)
@@ -350,7 +404,13 @@ class _ServicesPageState extends State<ServicesPage>
                                             .surfaceVariant,
                                         child: InkWell(
                                           //splashColor: Theme.of(context).colorScheme.tertiary,
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const RewardSystemMain()));
+                                          },
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -360,16 +420,16 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.loyalty_rounded,
+                                                    Icons.redeem_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
                                               Text(
-                                                "Reward Points",
+                                                "Rewards",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,
@@ -406,11 +466,11 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.store_rounded,
+                                                    Icons.store_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
@@ -499,16 +559,16 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.feedback_rounded,
+                                                    Icons.feedback_outlined,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSurface,
+                                                        .onSurfaceVariant,
                                                   ),
                                                 ),
                                               ),
                                               Text(
-                                                "Customer Service (Coming Soon)",
+                                                "Customer Services",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,

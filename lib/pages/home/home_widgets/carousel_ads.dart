@@ -50,7 +50,7 @@ class _CarouselAdsState extends State<CarouselAds> {
             elevation: 0,
             child: SizedBox(
               child: AspectRatio(
-                aspectRatio: 16 / 9,
+                aspectRatio: 16 / 8.03,
               ),
             )),
       );

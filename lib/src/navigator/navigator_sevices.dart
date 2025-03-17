@@ -48,12 +48,8 @@ class _NavigatorServicesState extends State<NavigatorServices>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
           title: const Text("Campus Postal Hub"),
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: AnimatedBuilder(
@@ -98,18 +94,18 @@ class _NavigatorServicesState extends State<NavigatorServices>
         ),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
                 destinations: const <Widget>[
                   NavigationDestination(
-                    icon: Icon(Icons.home_rounded),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
                     label: 'Home',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.inventory_2_rounded),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    selectedIcon: Icon(Icons.inventory_2_rounded),
                     label: 'My Parcel',
                   ),
                   NavigationDestination(
@@ -117,12 +113,14 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: 'Search',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.widgets_outlined),
+                    selectedIcon: Icon(Icons.widgets_rounded),
                     label: 'Services',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.more_horiz_rounded),
-                    label: 'More',
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: 'Profile',
                   ),
                 ],
               )
@@ -133,8 +131,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
             if (MediaQuery.of(context).size.width > 590 &&
                 MediaQuery.of(context).size.width <= 810)
               NavigationRail(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLow,
                 selectedIndex: _selectedIndex,
                 groupAlignment: 0,
                 onDestinationSelected: (int index) {
@@ -145,29 +141,35 @@ class _NavigatorServicesState extends State<NavigatorServices>
                 labelType: NavigationRailLabelType.all,
                 destinations: const <NavigationRailDestination>[
                   NavigationRailDestination(
-                    icon: Icon(Icons.home_rounded),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
                     label: Text('Home'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.inventory_2_rounded),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    selectedIcon: Icon(Icons.inventory_2_rounded),
                     label: Text('My Parcel'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.search_rounded),
+                    icon: Icon(Icons.search_outlined),
+                    selectedIcon: Icon(Icons.search_rounded),
                     label: Text('Search'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.widgets_outlined),
+                    selectedIcon: Icon(Icons.widgets_rounded),
                     label: Text('Services'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.more_horiz_rounded),
-                    label: Text('More'),
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: Text('Profile'),
                   ),
                 ],
               ),
             if (MediaQuery.of(context).size.width > 810)
               NavigationDrawer(
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 onDestinationSelected: (i) =>
                     setState(() => _selectedIndex = i),
                 selectedIndex: _selectedIndex,
@@ -177,23 +179,28 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   ),
                   NavigationDrawerDestination(
                     label: Text('Home'),
-                    icon: Icon(Icons.home_rounded),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
                   ),
                   NavigationDrawerDestination(
                     label: Text('My Parcel'),
-                    icon: Icon(Icons.inventory_2_rounded),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    selectedIcon: Icon(Icons.inventory_2_rounded),
                   ),
                   NavigationDrawerDestination(
                     label: Text('Search'),
-                    icon: Icon(Icons.search),
+                    icon: Icon(Icons.search_outlined),
+                    selectedIcon: Icon(Icons.search),
                   ),
                   NavigationDrawerDestination(
                     label: Text('Services'),
-                    icon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.widgets_outlined),
+                    selectedIcon: Icon(Icons.widgets_rounded),
                   ),
                   NavigationDrawerDestination(
-                    label: Text('More'),
-                    icon: Icon(Icons.more_horiz_rounded),
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: Text('Profile'),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(28, 10, 28, 10),
@@ -223,16 +230,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(
-                    screenWidth < 590 ? 20 : 30,
-                  ),
-                  topRight: Radius.circular(
-                    screenWidth < 590 ? 20 : 0,
-                  ),
-                  bottomLeft: Radius.circular(
-                    screenWidth < 590 ? 20 : 0,
-                  ),
-                  bottomRight: Radius.circular(
-                    screenWidth < 590 ? 20 : 0,
+                    screenWidth < 590 ? 0 : 30,
                   ),
                 ),
                 child: PageTransitionSwitcher(
