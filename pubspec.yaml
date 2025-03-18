@@ -12,16 +12,16 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  firebase_core: ^2.32.0
+  firebase_core: ^3.12.1
   dynamic_color: ^1.5.4
   animations: ^2.0.8
-  cloud_firestore: ^4.14.0
+  cloud_firestore: ^5.6.5
   path: ^1.9.0
-  firebase_database: ^10.5.5
+  firebase_database: ^11.3.4
   flutter_markdown: ^0.7.1
   google_generative_ai: ^0.4.1
   loading_animation_widget: ^1.2.1
-  intl: ^0.17.0
+  intl: ^0.20.2
   another_stepper: ^1.2.2
   shimmer: ^3.0.0
   flutter_custom_tabs: ^2.1.0
@@ -32,10 +32,10 @@ dependencies:
   particles_flutter: ^1.0.1
   lucide_icons: ^0.257.0
   syncfusion_flutter_barcodes: ^28.2.4
-  firebase_app_check: ^0.2.2
+  firebase_app_check: ^0.3.2+4
   carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
-  #firebase_vertexai: ^0.1.0
+  firebase_vertexai: ^1.4.0
   #firebase_auth: ^4.16.0
 
 
@@ -44,7 +44,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
