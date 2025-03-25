@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:postalhub_tracker/src/navigator/navigator_sevices.dart';
+import 'package:postalhub_tracker/src/auth_services/auth_snapshot.dart';
 import 'firebase_options.dart';
 import 'package:postalhub_tracker/src/postalhub_ui.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
-          home: const NavigatorServices());
+          home: const AuthSnapshot());
     });
   }
 }
