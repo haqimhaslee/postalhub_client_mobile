@@ -3,7 +3,7 @@ description: "Postalhub Tracker"
 
 publish_to: 'none' 
 
-version: 25.1.153+6
+version: 25.4.1605+8
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -37,7 +37,6 @@ dependencies:
   google_fonts: ^6.2.1
   firebase_vertexai: ^1.4.0
   firebase_auth: ^5.5.1
-  #firebase_auth: ^4.16.0
 
 
 
