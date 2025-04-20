@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^6.2.1
   firebase_vertexai: ^1.4.0
   firebase_auth: ^5.5.1
+  shared_preferences: ^2.5.3
 
 
 
@@ -74,6 +75,7 @@ flutter:
   - assets/images/components/smart_locker_comingsoon1.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
+  - assets/images/logo/google_logo.webp
 
   fonts:
       - family: GoogleSans
