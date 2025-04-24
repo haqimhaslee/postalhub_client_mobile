@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:postalhub_tracker/src/auth_services/auth_snapshot.dart';
 import 'package:postalhub_tracker/src/components/theme_manager.dart';
 import 'package:postalhub_tracker/src/navigator/navigator_sevices.dart';
+import 'package:flutter/foundation.dart'; // for kIsWeb
+
 import 'firebase_options.dart';
 import 'package:postalhub_tracker/src/postalhub_ui.dart';
 //import 'package:dynamic_color/dynamic_color.dart';
@@ -18,7 +20,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAppCheck.instance.activate(
-    //webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+    webProvider: ReCaptchaV3Provider('key'),
     androidProvider: AndroidProvider.playIntegrity,
     appleProvider: AppleProvider.deviceCheck,
   );
@@ -70,8 +72,7 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: themeMode,
           debugShowCheckedModeBanner: false,
-          home: const AuthSnapshot(),
-          //home: NavigatorServices(),
+          home: kIsWeb ? NavigatorServices() : const AuthSnapshot(),
         );
       },
     );

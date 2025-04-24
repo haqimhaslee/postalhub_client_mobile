@@ -31,13 +31,14 @@ dependencies:
   simple_animations: ^5.1.0
   particles_flutter: ^1.0.1
   lucide_icons: ^0.257.0
-  syncfusion_flutter_barcodes: ^28.2.4
+  syncfusion_flutter_barcodes: ^29.1.39
   firebase_app_check: ^0.3.2+4
   carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
   firebase_vertexai: ^1.4.0
   firebase_auth: ^5.5.1
   shared_preferences: ^2.5.3
+  google_sign_in: ^6.3.0
 
 
 
