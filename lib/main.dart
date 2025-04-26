@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       valueListenable: themeManager,
       builder: (context, themeMode, _) {
         return MaterialApp(
-          title: "Postal Hub | Tracker",
+          title: "Postal Hub",
           theme: ThemeData(
             colorScheme: lightColorScheme,
             textTheme: GoogleFonts.nunitoTextTheme(),

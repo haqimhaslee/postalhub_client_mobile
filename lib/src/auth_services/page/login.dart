@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:postalhub_tracker/src/auth_services/page/forgot_pass.dart';
 import 'package:postalhub_tracker/src/auth_services/page/register.dart';
+import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -49,6 +52,9 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 15,
                   ),
+                  //CircularProgressIndicator(
+                  //  year2023: false,
+                  //),
                   TextField(
                     controller: _emailController,
                     textAlign: TextAlign.start,
@@ -166,7 +172,20 @@ class _LoginPageState extends State<LoginPage> {
                         width: 329,
                         height: 50,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            try {
+                              final userCredential =
+                                  await AuthService.signInWithGoogle();
+                              if (kDebugMode) {
+                                print(
+                                    'Signed in: ${userCredential.user?.displayName}');
+                              }
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print('Google Sign-In Error: $e');
+                              }
+                            }
+                          },
                           style: OutlinedButton.styleFrom(),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -226,7 +245,12 @@ class _LoginPageState extends State<LoginPage> {
                     height: 5,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ForgotPassPage()));
+                    },
                     child: Text(
                       'Forget Password?',
                       style: TextStyle(
@@ -239,9 +263,6 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [Divider()],
-                  )
                 ],
               ),
             ),

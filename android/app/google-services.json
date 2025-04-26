@@ -59,11 +59,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "955163893298-0r6imit2gtb22s2ebueomtvbh6agph35.apps.googleusercontent.com",
+          "client_id": "955163893298-q88gju68fggippqohrs2kv2uo99mroo4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.postalhub.tracker",
-            "certificate_hash": "046557c10594ee60177c6ba286801b23a48e184d"
+            "certificate_hash": "21254d805e12efad1d67ffee7c8afa4512d5c741"
           }
         },
         {
