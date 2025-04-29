@@ -6,7 +6,7 @@ import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'package:postalhub_tracker/pages/home/home.dart';
 import 'package:postalhub_tracker/pages/more/more_page.dart';
 import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
-import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
+//import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/services.dart';
 
 class NavigatorServices extends StatefulWidget {
@@ -25,7 +25,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
   final List<Widget> _windgetOption = <Widget>[
     const HomePage(),
     const ParcelLibraryPage(),
-    const SearchInventory(),
+    //const SearchInventory(),
     const ServicesPage(),
     const MorePage(),
   ];
@@ -109,10 +109,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: 'My Parcel',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.search_rounded),
-                    label: 'Search',
-                  ),
-                  NavigationDestination(
                     icon: Icon(Icons.widgets_outlined),
                     selectedIcon: Icon(Icons.widgets_rounded),
                     label: 'Services',
@@ -151,11 +147,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: Text('My Parcel'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.search_outlined),
-                    selectedIcon: Icon(Icons.search_rounded),
-                    label: Text('Search'),
-                  ),
-                  NavigationRailDestination(
                     icon: Icon(Icons.widgets_outlined),
                     selectedIcon: Icon(Icons.widgets_rounded),
                     label: Text('Services'),
@@ -186,11 +177,6 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     label: Text('My Parcel'),
                     icon: Icon(Icons.inventory_2_outlined),
                     selectedIcon: Icon(Icons.inventory_2_rounded),
-                  ),
-                  NavigationDrawerDestination(
-                    label: Text('Search'),
-                    icon: Icon(Icons.search_outlined),
-                    selectedIcon: Icon(Icons.search),
                   ),
                   NavigationDrawerDestination(
                     label: Text('Services'),

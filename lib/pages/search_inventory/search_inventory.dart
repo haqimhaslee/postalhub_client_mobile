@@ -6,6 +6,7 @@ import 'package:another_stepper/another_stepper.dart';
 import 'package:image_network/image_network.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
+import 'package:timelines_plus/timelines_plus.dart';
 
 class SearchInventory extends StatefulWidget {
   const SearchInventory({super.key});

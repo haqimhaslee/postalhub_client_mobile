@@ -70,20 +70,6 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          width: 1.5,
-                          color: Color.fromARGB(255, 135, 135, 135),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
                     ),
                   ),
                   const SizedBox(
@@ -115,20 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          width: 1.5,
-                          color: Color.fromARGB(255, 135, 135, 135),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
                       ),
                     ),
                   ),

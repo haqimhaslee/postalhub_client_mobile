@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -60,20 +62,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                        width: 1.5,
-                        color: Color.fromARGB(255, 143, 143, 143),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
                   ),
                 ),
                 const SizedBox(
@@ -107,20 +95,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1.5,
-                              color: Color.fromARGB(255, 143, 143, 143),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
                         ),
                       ),
                     ),
@@ -148,20 +122,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: Theme.of(context).colorScheme.primary,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 1.5,
-                              color: Color.fromARGB(255, 143, 143, 143),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
                           ),
                         ),
                       ),
@@ -231,7 +191,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: 329,
                       height: 50,
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          try {
+                            final userCredential =
+                                await AuthService.signInWithGoogle();
+                            if (kDebugMode) {
+                              print(
+                                  'Signed in: ${userCredential.user?.displayName}');
+                            }
+                          } catch (e) {
+                            if (kDebugMode) {
+                              print('Google Sign-In Error: $e');
+                            }
+                          }
+                        },
                         style: OutlinedButton.styleFrom(),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

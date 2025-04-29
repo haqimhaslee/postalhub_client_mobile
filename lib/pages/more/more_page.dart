@@ -11,19 +11,11 @@ import 'package:postalhub_tracker/pages/more/settings/security/security_main.dar
 import 'package:postalhub_tracker/pages/profile/points_history.dart';
 import 'package:postalhub_tracker/pages/profile/profile_main.dart';
 import 'package:postalhub_tracker/pages/profile/profile_widget.dart';
-import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({super.key});
   @override
   State<MorePage> createState() => _MorePageState();
-}
-
-Future<void> logout() async {
-  try {
-    await AuthService.logout();
-    // ignore: empty_catches
-  } catch (e) {}
 }
 
 bool switchValue = false;
@@ -228,13 +220,6 @@ class _MorePageState extends State<MorePage> {
                           MaterialPageRoute(
                               builder: (context) => const AboutMain()));
                     },
-                  ),
-                  ListTile(
-                    title: const Center(
-                      child:
-                          Text('Log Out', style: TextStyle(color: Colors.red)),
-                    ),
-                    onTap: logout,
                   ),
                   const SizedBox(
                     height: 35,

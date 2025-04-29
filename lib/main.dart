@@ -1,16 +1,18 @@
+//INTERNAL PACKAGE
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:postalhub_tracker/src/auth_services/auth_snapshot.dart';
 import 'package:postalhub_tracker/src/components/theme_manager.dart';
 import 'package:postalhub_tracker/src/navigator/navigator_sevices.dart';
-import 'package:flutter/foundation.dart'; // for kIsWeb
-
+import 'package:flutter/foundation.dart';
 import 'firebase_options.dart';
 import 'package:postalhub_tracker/src/postalhub_ui.dart';
-//import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/services.dart';
+
+//EXTERNAL PACKAGE
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_core/firebase_core.dart';
+//import 'package:dynamic_color/dynamic_color.dart';
 
 final themeManager = ThemeManager();
 
@@ -50,8 +52,24 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: "Postal Hub",
           theme: ThemeData(
+            inputDecorationTheme: InputDecorationTheme(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(
+                  width: 1.5,
+                  color: Color.fromARGB(255, 135, 135, 135),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(
+                  width: 2,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
             colorScheme: lightColorScheme,
-            textTheme: GoogleFonts.nunitoTextTheme(),
+            //textTheme: GoogleFonts.nunitoTextTheme(),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
@@ -59,11 +77,27 @@ class MyApp extends StatelessWidget {
             ),
           ),
           darkTheme: ThemeData(
-            colorScheme: darkColorScheme,
-            textTheme: GoogleFonts.nunitoTextTheme().apply(
-              bodyColor: darkColorScheme.onSurface,
-              displayColor: darkColorScheme.onSurface,
+            inputDecorationTheme: InputDecorationTheme(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(
+                  width: 1.5,
+                  color: Color.fromARGB(255, 135, 135, 135),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(
+                  width: 2,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ),
+            colorScheme: darkColorScheme,
+            //textTheme: GoogleFonts.nunitoTextTheme().apply(
+            //  bodyColor: darkColorScheme.onSurface,
+            //  displayColor: darkColorScheme.onSurface,
+            //),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
