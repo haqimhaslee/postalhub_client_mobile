@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             colorScheme: lightColorScheme,
-            //textTheme: GoogleFonts.nunitoTextTheme(),
+            textTheme: GoogleFonts.nunitoTextTheme(),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
@@ -94,10 +94,10 @@ class MyApp extends StatelessWidget {
               ),
             ),
             colorScheme: darkColorScheme,
-            //textTheme: GoogleFonts.nunitoTextTheme().apply(
-            //  bodyColor: darkColorScheme.onSurface,
-            //  displayColor: darkColorScheme.onSurface,
-            //),
+            textTheme: GoogleFonts.nunitoTextTheme().apply(
+              bodyColor: darkColorScheme.onSurface,
+              displayColor: darkColorScheme.onSurface,
+            ),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),

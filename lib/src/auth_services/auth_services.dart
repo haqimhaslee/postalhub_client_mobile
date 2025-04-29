@@ -9,10 +9,8 @@ class AuthService {
   static Future<void> login(
       {required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
@@ -37,9 +35,7 @@ class AuthService {
         await googleUser!.authentication;
 
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
     final userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
@@ -57,7 +53,7 @@ class AuthService {
           'regAt': FieldValue.serverTimestamp(),
           'provider': 'google',
           'membershipPoints': 5,
-          'profileSetup': false,
+          'profileSetup': false
         });
       }
     }
@@ -88,7 +84,7 @@ class AuthService {
           'regAt': FieldValue.serverTimestamp(),
           'provider': 'email',
           'membershipPoints': 5,
-          'profileSetup': false,
+          'profileSetup': false
         });
       }
     } on FirebaseAuthException catch (e) {
