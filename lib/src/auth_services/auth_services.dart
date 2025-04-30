@@ -80,7 +80,7 @@ class AuthService {
           'uid': user.uid,
           'username': username,
           'email': email,
-          'profilePic': null,
+          'profilePic': '',
           'regAt': FieldValue.serverTimestamp(),
           'provider': 'email',
           'membershipPoints': 5,

@@ -29,10 +29,9 @@ Future<void> main() async {
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    systemNavigationBarColor:
-        Colors.transparent, // transparent on Android, translucent on iOS
+    systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.dark, // Or Brightness.light
+    systemNavigationBarIconBrightness: Brightness.dark,
   ));
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);

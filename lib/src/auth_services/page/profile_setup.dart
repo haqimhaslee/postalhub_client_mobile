@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -155,7 +156,9 @@ class _ProfileSetupState extends State<ProfileSetup> {
                     onChanged: (SingingCharacter? value) {
                       setState(() {
                         _character = value;
-                        print('Selected: $_character');
+                        if (kDebugMode) {
+                          print('Selected: $_character');
+                        }
                       });
                     }),
                 const Text('Yes')
@@ -169,7 +172,9 @@ class _ProfileSetupState extends State<ProfileSetup> {
                     onChanged: (SingingCharacter? value) {
                       setState(() {
                         _character = value;
-                        print('Selected: $_character');
+                        if (kDebugMode) {
+                          print('Selected: $_character');
+                        }
                       });
                     }),
                 const Text('No')
@@ -241,7 +246,9 @@ class _ProfileSetupState extends State<ProfileSetup> {
                   onChanged: (bool? newValue) {
                     setState(() {
                       _isConfirmed = newValue ?? false;
-                      print('Checkbox is checked: $_isConfirmed');
+                      if (kDebugMode) {
+                        print('Checkbox is checked: $_isConfirmed');
+                      }
                     });
                   }),
               const Text('Yes, I confirmed.')

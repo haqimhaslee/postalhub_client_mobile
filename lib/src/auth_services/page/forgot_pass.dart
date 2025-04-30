@@ -1,4 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgotPassPage extends StatefulWidget {
   const ForgotPassPage({super.key});
@@ -8,6 +12,64 @@ class ForgotPassPage extends StatefulWidget {
 
 class _ForgotPassPageState extends State<ForgotPassPage> {
   final TextEditingController _emailController = TextEditingController();
+  bool _isCooldown = false;
+  int _secondsLeft = 0;
+  Timer? _timer;
+
+  void _startCooldown() {
+    // Check if the widget is mounted before calling setState initially
+    if (!mounted) return;
+
+    setState(() {
+      _isCooldown = true;
+      _secondsLeft = 60;
+    });
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Check if the widget is mounted before calling setState
+      if (!mounted) {
+        _timer?.cancel(); // Cancel the timer if the widget is not mounted
+        return;
+      }
+
+      setState(() {
+        _secondsLeft--;
+        if (_secondsLeft <= 0) {
+          _isCooldown = false;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _resetPassword() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your email')),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password reset email sent')),
+      );
+      _startCooldown();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +87,12 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
               child: Image.asset(
                 "assets/images/login/login.png",
                 width: 413,
-                height: 457,
+                height: 413,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
-                textDirection: TextDirection.ltr,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -43,34 +104,9 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        "Don't have an account? ",
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 2.5,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   TextField(
                     controller: _emailController,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                    ),
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(
@@ -78,7 +114,7 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           width: 1.5,
@@ -86,7 +122,8 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           width: 2,
                           color: Theme.of(context).colorScheme.primary,
@@ -94,34 +131,67 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     child: SizedBox(
                       width: 329,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: _isCooldown ? null : _resetPassword,
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Theme.of(context).colorScheme.primary,
                         ),
                         child: Text(
-                          'Reset password',
+                          _isCooldown
+                              ? 'Try again in $_secondsLeft s'
+                              : 'Reset password',
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: _isCooldown
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onPrimary,
                             fontSize: 15,
-                            //fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
+                  if (_isCooldown == true)
+                    Center(
+                        child: Card(
+                      color: Theme.of(context).colorScheme.errorContainer,
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onErrorContainer,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                "We've sent an email with instructions to reset your password. Kindly check your mailbox and spam folder", // Keeps the text content, Sir
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onErrorContainer,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )),
+                  const SizedBox(height: 15),
                   Row(
                     children: [
                       InkWell(
@@ -139,9 +209,7 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  const SizedBox(height: 5),
                 ],
               ),
             ),

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
@@ -13,11 +15,11 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _repassController = TextEditingController();
   bool _obscureText = true;
+  bool _isRegistering = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Image.asset(
               "assets/images/login/register.png",
               width: 428,
-              height: 457,
+              height: 428,
             ),
           ),
           Padding(
@@ -40,8 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 27,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(
@@ -78,7 +79,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _passController,
                         textAlign: TextAlign.left,
                         style: const TextStyle(
-                          color: Color(0xFF393939),
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
                         ),
@@ -142,7 +142,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       'Show password',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        //color: Color(0xFF837E93),
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
@@ -161,18 +160,61 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 329,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final email = _emailController.text.trim();
+                        final password = _passController.text;
+                        final confirmPassword = _repassController.text;
+                        final username = email.split('@')[0];
+                        if (password != confirmPassword) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Passwords do not match")),
+                          );
+                          return;
+                        }
+
+                        try {
+                          setState(() {
+                            _isRegistering = true;
+                          });
+                          await AuthService.register(
+                            email: email,
+                            password: password,
+                            username: username,
+                          );
+                          setState(() {
+                            _isRegistering = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Account created successfully")),
+                          );
+                          Navigator.pop(context);
+                        } catch (e) {
+                          setState(() {
+                            _isRegistering = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e.toString())),
+                          );
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                       ),
-                      child: Text(
-                        'Create account',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      child: _isRegistering
+                          ? CircularProgressIndicator(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              year2023: false,
+                            )
+                          : Text(
+                              'Create account',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                     ),
                   ),
                 ),
@@ -193,8 +235,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: OutlinedButton(
                         onPressed: () async {
                           try {
+                            setState(() {
+                              _isRegistering = true;
+                            });
                             final userCredential =
                                 await AuthService.signInWithGoogle();
+                            setState(() {
+                              _isRegistering = false;
+                            });
+                            Navigator.pop(context);
                             if (kDebugMode) {
                               print(
                                   'Signed in: ${userCredential.user?.displayName}');
@@ -206,23 +255,28 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         },
                         style: OutlinedButton.styleFrom(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Sign up with Google   |   ',
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontSize: 15,
-                                //fontWeight: FontWeight.w500,
+                        child: _isRegistering
+                            ? CircularProgressIndicator(
+                                year2023: false,
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Sign up with Google   |   ',
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    "assets/images/logo/google_logo.webp",
+                                    height: 23,
+                                  ),
+                                ],
                               ),
-                            ),
-                            Image.asset(
-                              "assets/images/logo/google_logo.webp",
-                              height: 23,
-                            ),
-                          ],
-                        ),
                       )),
                 ),
                 const SizedBox(
