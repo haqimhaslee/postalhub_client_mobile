@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _repassController = TextEditingController();
   bool _obscureText = true;
   bool _isRegistering = false;
+  bool _isRegisteringWithGoogle = false;
 
   @override
   Widget build(BuildContext context) {
@@ -236,12 +237,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () async {
                           try {
                             setState(() {
-                              _isRegistering = true;
+                              _isRegisteringWithGoogle = true;
                             });
                             final userCredential =
                                 await AuthService.signInWithGoogle();
                             setState(() {
-                              _isRegistering = false;
+                              _isRegisteringWithGoogle = false;
                             });
                             Navigator.pop(context);
                             if (kDebugMode) {
@@ -249,13 +250,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                   'Signed in: ${userCredential.user?.displayName}');
                             }
                           } catch (e) {
+                            setState(() {
+                              _isRegisteringWithGoogle = false;
+                            });
                             if (kDebugMode) {
                               print('Google Sign-In Error: $e');
                             }
                           }
                         },
                         style: OutlinedButton.styleFrom(),
-                        child: _isRegistering
+                        child: _isRegisteringWithGoogle
                             ? CircularProgressIndicator(
                                 year2023: false,
                               )

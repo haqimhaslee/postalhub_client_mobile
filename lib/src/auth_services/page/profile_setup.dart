@@ -7,6 +7,8 @@ import 'package:collection/collection.dart';
 
 import 'dart:io';
 
+import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
+
 class ProfileSetup extends StatefulWidget {
   const ProfileSetup({super.key});
 
@@ -52,6 +54,7 @@ class _ProfileSetupState extends State<ProfileSetup> {
   final TextEditingController _phone = TextEditingController();
   final TextEditingController _homeAdress = TextEditingController();
   SingingCharacter? _character = SingingCharacter.no;
+  String? _imgUrl;
 
   List<Step> _buildSteps() {
     return [
@@ -71,12 +74,15 @@ class _ProfileSetupState extends State<ProfileSetup> {
               child: Stack(
                 children: [
                   CircleAvatar(
-                      radius: 60,
-                      backgroundImage: _imageFile != null
-                          ? AssetImage('assets/default_avatar.png')
-                              as ImageProvider
-                          : AssetImage('assets/images/profile_image_icon.jpg')
-                              as ImageProvider),
+                    radius: 60,
+                    backgroundImage: _imageFile != null
+                        ? FileImage(_imageFile!) as ImageProvider
+                        : (_imgUrl != null
+                                ? NetworkImage(_imgUrl!)
+                                : const AssetImage(
+                                    'assets/images/profile_image_icon.jpg'))
+                            as ImageProvider,
+                  ),
                   Positioned(
                       bottom: 0,
                       right: 0,
@@ -272,19 +278,131 @@ class _ProfileSetupState extends State<ProfileSetup> {
     ];
   }
 
+  Future<void> loadUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    try {
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection('client_user') // change if your collection name differs
+          .doc(user.uid)
+          .get();
+
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data()!;
+        setState(() {
+          _name.text = data['username'] ?? '';
+          _phone.text = data['phone'] ?? '';
+          _homeAdress.text = data['address'] ?? '';
+          _character = (data['referred'] == true)
+              ? SingingCharacter.yes
+              : SingingCharacter.no;
+          _imgUrl = data['profilePic']; // Add this line
+
+          final campusColor = data['campusColor'];
+          if (campusColor != null) {
+            selectedColor = ColorLabel.values.firstWhereOrNull((label) =>
+                label.label.toLowerCase() == campusColor.toLowerCase());
+          }
+
+          // You could also preload an image URL from Firebase Storage if stored
+          // and use `NetworkImage` instead of `AssetImage`
+        });
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error loading user data: $e');
+      }
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      await AuthService.logout();
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     double progress = (_currentStep + 1) / _totalSteps;
     if (progress > 1.0) progress = 1.0;
 
     return Scaffold(
-        appBar: AppBar(actions: [
-          IconButton(
-              icon: const Icon(Icons.info),
-              onPressed: () {
-                Navigator.pop(context);
-              })
-        ], title: const Text('Setup your profile')),
+        appBar: AppBar(
+          title: const Text('Setup your profile'),
+          actions: [
+            PopupMenuButton<String>(
+              onSelected: (value) async {
+                switch (value) {
+                  case 'logout':
+                    final shouldLogout = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Logout'),
+                        content: const Text('Are you sure you want to logout?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, true); // return true
+                            },
+                            child: const Text('Logout'),
+                          ),
+                        ],
+                      ),
+                    );
+
+                    if (shouldLogout == true) {
+                      // Go back to root
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      logout(); // Call your logout function
+                    }
+                    print('User tapped Log Out');
+
+                    break;
+                  case 'info':
+                    print('User tapped Info');
+                    break;
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: 'info',
+                  child: Row(
+                    children: [
+                      Icon(Icons.info),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Text('Info'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem<String>(
+                    value: 'logout',
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text('Log out'),
+                      ],
+                    )),
+              ],
+            ),
+          ],
+        ),
         body: Column(children: [
           LinearProgressIndicator(year2023: false, value: progress),
           Expanded(

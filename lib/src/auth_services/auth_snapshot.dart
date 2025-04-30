@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:postalhub_tracker/src/auth_services/page/account_verification.dart';
 import 'package:postalhub_tracker/src/auth_services/page/login.dart';
 import 'package:postalhub_tracker/src/navigator/navigator_sevices.dart';
 import 'package:postalhub_tracker/src/auth_services/page/profile_setup.dart';
@@ -22,10 +21,6 @@ class AuthSnapshot extends StatelessWidget {
 
                 if (user == null) {
                   return const LoginPage();
-                  //return const NavigatorServices();
-                } else if (!user.emailVerified) {
-                  //return const NavigatorServices();
-                  const VerifyEmailPage();
                 } else {
                   return FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance
@@ -50,7 +45,6 @@ class AuthSnapshot extends StatelessWidget {
                           if (userData != null &&
                               userData['profileSetup'] == false) {
                             return const ProfileSetup();
-                            //return const NavigatorServices();
                           } else {
                             return const NavigatorServices();
                           }

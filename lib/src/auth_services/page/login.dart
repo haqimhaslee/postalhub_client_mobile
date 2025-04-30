@@ -16,7 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   bool _obscureText = true;
-  bool _signingIn = false;
+  bool _isSigninIn = false;
+  bool _isSigninInWithGoogle = false;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
 
                                             try {
                                               setState(() {
-                                                _signingIn = true;
+                                                _isSigninIn = true;
                                               });
                                               await AuthService.login(
                                                   email: email,
@@ -136,9 +137,12 @@ class _LoginPageState extends State<LoginPage> {
                                                 ),
                                               );
                                               setState(() {
-                                                _signingIn = false;
+                                                _isSigninIn = false;
                                               });
                                             } catch (e) {
+                                              setState(() {
+                                                _isSigninIn = false;
+                                              });
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -146,16 +150,13 @@ class _LoginPageState extends State<LoginPage> {
                                                   backgroundColor: Colors.red,
                                                 ),
                                               );
-                                              setState(() {
-                                                _signingIn = false;
-                                              });
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Theme.of(context)
                                                   .colorScheme
                                                   .primary),
-                                          child: _signingIn
+                                          child: _isSigninIn
                                               ? CircularProgressIndicator(
                                                   year2023: false,
                                                   valueColor:
@@ -188,9 +189,15 @@ class _LoginPageState extends State<LoginPage> {
                                         child: OutlinedButton(
                                             onPressed: () async {
                                               try {
+                                                setState(() {
+                                                  _isSigninInWithGoogle = true;
+                                                });
                                                 final userCredential =
                                                     await AuthService
                                                         .signInWithGoogle();
+                                                setState(() {
+                                                  _isSigninInWithGoogle = false;
+                                                });
                                                 if (kDebugMode) {
                                                   print(
                                                       'Signed in: ${userCredential.user?.displayName}');
@@ -203,22 +210,34 @@ class _LoginPageState extends State<LoginPage> {
                                               }
                                             },
                                             style: OutlinedButton.styleFrom(),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                      'Sign in with Google   |   ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .onSurface,
-                                                          fontSize: 15)),
-                                                  Image.asset(
-                                                      "assets/images/logo/google_logo.webp",
-                                                      height: 23)
-                                                ])))),
+                                            child: _isSigninInWithGoogle
+                                                ? CircularProgressIndicator(
+                                                    year2023: false,
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .primary,
+                                                    ),
+                                                  )
+                                                : Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                        Text(
+                                                            'Sign in with Google   |   ',
+                                                            style: TextStyle(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onSurface,
+                                                                fontSize: 15)),
+                                                        Image.asset(
+                                                            "assets/images/logo/google_logo.webp",
+                                                            height: 23)
+                                                      ])))),
                                 const SizedBox(height: 15),
                                 Row(children: [
                                   const Text("Don't have an account? ",

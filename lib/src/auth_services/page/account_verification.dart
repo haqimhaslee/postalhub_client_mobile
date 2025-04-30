@@ -29,8 +29,6 @@ class VerifyEmailPage extends StatelessWidget {
               onPressed: () async {
                 await user?.reload();
                 if (FirebaseAuth.instance.currentUser!.emailVerified) {
-                  // Force widget rebuild
-                  // ignore: invalid_use_of_protected_member
                   (context as Element).reassemble();
                 }
               },
