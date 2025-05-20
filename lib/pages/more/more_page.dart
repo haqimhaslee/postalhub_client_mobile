@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:postalhub_tracker/pages/more/about/about_main.dart';
-import 'package:postalhub_tracker/pages/more/payments/payment_history/payment_history_main.dart';
-import 'package:postalhub_tracker/pages/more/payments/payment_methods/payment_methods_main.dart';
+//import 'package:postalhub_tracker/pages/more/payments/payment_history/payment_history_main.dart';
+//import 'package:postalhub_tracker/pages/more/payments/payment_methods/payment_methods_main.dart';
 import 'package:postalhub_tracker/pages/more/settings/appearance/appearance_main.dart';
 import 'package:postalhub_tracker/pages/more/settings/language/language_main.dart';
-import 'package:postalhub_tracker/pages/more/settings/notification/notification_settings.dart';
-import 'package:postalhub_tracker/pages/more/settings/security/security_main.dart';
+//import 'package:postalhub_tracker/pages/more/settings/notification/notification_settings.dart';
+//import 'package:postalhub_tracker/pages/more/settings/security/security_main.dart';
 import 'package:postalhub_tracker/pages/profile/points_history.dart';
 import 'package:postalhub_tracker/pages/profile/profile_main.dart';
 import 'package:postalhub_tracker/pages/profile/profile_widget.dart';
@@ -69,6 +69,7 @@ class _MorePageState extends State<MorePage> {
                               builder: (context) => const ProfileMain()));
                     },
                   ),
+                  /*
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 15, bottom: 0, top: 20),
@@ -104,6 +105,7 @@ class _MorePageState extends State<MorePage> {
                                   const PaymentHistoryMain()));
                     },
                   ),
+                  */
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 15, bottom: 0, top: 20),
@@ -143,6 +145,7 @@ class _MorePageState extends State<MorePage> {
                       ),
                     ),
                   ),
+                  /*
                   ListTile(
                     title: const Text('Security'),
                     leading: const Icon(Icons.lock_outline_rounded),
@@ -154,6 +157,8 @@ class _MorePageState extends State<MorePage> {
                               builder: (context) => const SecurityMain()));
                     },
                   ),
+
+                  */
                   ListTile(
                     title: const Text('Appearance'),
                     leading: const Icon(Icons.palette_outlined),
@@ -176,6 +181,8 @@ class _MorePageState extends State<MorePage> {
                               builder: (context) => const LanguageMain()));
                     },
                   ),
+
+                  /*
                   ListTile(
                     title: const Text('Notifications'),
                     leading: const Icon(Icons.notifications_outlined),
@@ -187,6 +194,8 @@ class _MorePageState extends State<MorePage> {
                               builder: (context) => const NotificationMain()));
                     },
                   ),
+
+                  */
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 15, bottom: 0, top: 20),

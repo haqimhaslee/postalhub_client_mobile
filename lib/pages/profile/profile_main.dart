@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
 
@@ -32,34 +33,39 @@ class _ProfileMainState extends State<ProfileMain> {
                   title: const Center(
                     child: Text('Log Out', style: TextStyle(color: Colors.red)),
                   ),
-                  onTap: () async {
-                    final shouldLogout = await showDialog<bool>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Logout'),
-                        content: const Text('Are you sure you want to logout?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, false),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context,
-                                  true); // return true to previous route
-                              Navigator.of(context).popUntil(
-                                  (route) => route.isFirst); // go to root
-                            },
-                            child: const Text('Logout'),
-                          ),
-                        ],
-                      ),
-                    );
+                  enabled: !kIsWeb,
+                  onTap: kIsWeb
+                      ? null
+                      : () async {
+                          final shouldLogout = await showDialog<bool>(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Logout'),
+                              content: const Text(
+                                  'Are you sure you want to logout?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context,
+                                        true); // return true to previous route
+                                    Navigator.of(context).popUntil(
+                                        (route) => route.isFirst); // go to root
+                                  },
+                                  child: const Text('Logout'),
+                                ),
+                              ],
+                            ),
+                          );
 
-                    if (shouldLogout == true) {
-                      logout();
-                    }
-                  }),
+                          if (shouldLogout == true) {
+                            logout();
+                          }
+                        }),
             ],
           ),
         ));

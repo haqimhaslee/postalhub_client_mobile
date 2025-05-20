@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
+//import 'package:collection/collection.dart';
 
 import 'dart:io';
 
@@ -17,29 +17,7 @@ class ProfileSetup extends StatefulWidget {
   _ProfileSetupState createState() => _ProfileSetupState();
 }
 
-typedef ColorEntry = DropdownMenuEntry<ColorLabel>;
-
 // DropdownMenuEntry labels and values for the first dropdown menu.
-enum ColorLabel {
-  blue('Blue', Colors.blue),
-  pink('Pink', Colors.pink),
-  green('Green', Colors.green),
-  yellow('Orange', Colors.orange),
-  grey('Grey', Colors.grey);
-
-  const ColorLabel(this.label, this.color);
-  final String label;
-  final Color color;
-
-  static final List<ColorEntry> entries = UnmodifiableListView<ColorEntry>(
-    values.map<ColorEntry>(
-      (ColorLabel color) => ColorEntry(
-        value: color,
-        label: color.label,
-      ),
-    ),
-  );
-}
 
 enum SingingCharacter { yes, no }
 
@@ -47,7 +25,6 @@ class _ProfileSetupState extends State<ProfileSetup> {
   int _currentStep = 0;
   File? _imageFile;
   final TextEditingController colorController = TextEditingController();
-  ColorLabel? selectedColor;
   bool _isConfirmed = false;
   final int _totalSteps = 3;
   final TextEditingController _name = TextEditingController();
@@ -55,6 +32,8 @@ class _ProfileSetupState extends State<ProfileSetup> {
   final TextEditingController _homeAdress = TextEditingController();
   SingingCharacter? _character = SingingCharacter.no;
   String? _imgUrl;
+  List<String> campusNames = [];
+  String? selectedCampusName;
 
   List<Step> _buildSteps() {
     return [
@@ -146,13 +125,13 @@ class _ProfileSetupState extends State<ProfileSetup> {
           content:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(height: 5),
-            Text("Campus Refferal",
+            Text("Campus/Company Refferal",
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 18,
                     fontWeight: FontWeight.w900)),
-            SizedBox(height: 25),
-            const Text('Register under referral campus?'),
+            SizedBox(height: 20),
+            const Text('Register under referral campus/company?'),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               SizedBox(
                   child: Row(children: [
@@ -188,24 +167,43 @@ class _ProfileSetupState extends State<ProfileSetup> {
             ]),
             SizedBox(height: 5),
             Divider(),
-            SizedBox(height: 20),
             if (SingingCharacter.yes == _character)
-              Column(children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                SizedBox(height: 10),
+                Text("Campus/Company Details",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900)),
+                SizedBox(height: 25),
                 SizedBox(
-                    width: double.infinity,
-                    child: DropdownMenu<ColorLabel>(
-                        leadingIcon: Icon(Icons.apartment),
-                        initialSelection: ColorLabel.green,
-                        menuStyle: MenuStyle(),
-                        controller: colorController,
-                        requestFocusOnTap: true,
-                        label: const Text('Campus Name'),
-                        onSelected: (ColorLabel? color) {
-                          setState(() {
-                            selectedColor = color;
-                          });
-                        },
-                        dropdownMenuEntries: ColorLabel.entries)),
+                  width: double.infinity,
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.apartment_outlined),
+                      labelText: 'Name',
+                    ),
+                    value: selectedCampusName,
+                    isExpanded: true, // This prevents overflow
+                    items: campusNames.map((name) {
+                      return DropdownMenuItem<String>(
+                        value: name,
+                        child: Text(
+                          name,
+                          overflow:
+                              TextOverflow.ellipsis, // Prevent text overflow
+                          softWrap: false,
+                          maxLines: 1,
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCampusName = value;
+                      });
+                    },
+                  ),
+                ),
                 SizedBox(height: 15),
                 TextField(
                     controller: _homeAdress,
@@ -215,7 +213,17 @@ class _ProfileSetupState extends State<ProfileSetup> {
                         fontSize: 15,
                         fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
-                        icon: Icon(Icons.email), labelText: 'Campus Email')),
+                        icon: Icon(Icons.badge_outlined), labelText: 'ID')),
+                SizedBox(height: 15),
+                TextField(
+                    controller: _homeAdress,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400),
+                    decoration: InputDecoration(
+                        icon: Icon(Icons.email_outlined), labelText: 'Email')),
                 SizedBox(height: 15),
                 TextField(
                     controller: _homeAdress,
@@ -297,21 +305,32 @@ class _ProfileSetupState extends State<ProfileSetup> {
           _character = (data['referred'] == true)
               ? SingingCharacter.yes
               : SingingCharacter.no;
-          _imgUrl = data['profilePic']; // Add this line
-
-          final campusColor = data['campusColor'];
-          if (campusColor != null) {
-            selectedColor = ColorLabel.values.firstWhereOrNull((label) =>
-                label.label.toLowerCase() == campusColor.toLowerCase());
-          }
-
-          // You could also preload an image URL from Firebase Storage if stored
-          // and use `NetworkImage` instead of `AssetImage`
+          _imgUrl = data['profilePic'];
         });
       }
     } catch (e) {
       if (kDebugMode) {
         print('Error loading user data: $e');
+      }
+    }
+  }
+
+  Future<void> fetchReferralCampuses() async {
+    try {
+      final snapshot =
+          await FirebaseFirestore.instance.collection('referral_Campus').get();
+
+      final names = snapshot.docs
+          .map((doc) => doc['campusName']?.toString() ?? '')
+          .where((name) => name.isNotEmpty)
+          .toList();
+
+      setState(() {
+        campusNames = names;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error fetching referral campuses: $e');
       }
     }
   }
@@ -327,6 +346,7 @@ class _ProfileSetupState extends State<ProfileSetup> {
   void initState() {
     super.initState();
     loadUserData();
+    fetchReferralCampuses();
   }
 
   @override
@@ -361,17 +381,13 @@ class _ProfileSetupState extends State<ProfileSetup> {
                         ],
                       ),
                     );
-
                     if (shouldLogout == true) {
-                      // Go back to root
+                      logout();
+                      // ignore: use_build_context_synchronously
                       Navigator.of(context).popUntil((route) => route.isFirst);
-                      logout(); // Call your logout function
                     }
-                    print('User tapped Log Out');
-
                     break;
                   case 'info':
-                    print('User tapped Info');
                     break;
                 }
               },

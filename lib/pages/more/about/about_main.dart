@@ -82,7 +82,7 @@ class _AboutMainState extends State<AboutMain> {
                       ),
                       ListTile(
                         title: const Text('Version'),
-                        trailing: const Text('25.3.2575-web'),
+                        trailing: const Text('pre-25.5.0317-multi_p'),
                         onTap: () {
                           Navigator.push(
                             context,

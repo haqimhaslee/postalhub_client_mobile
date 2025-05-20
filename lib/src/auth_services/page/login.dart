@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                                             .colorScheme
                                             .primary,
                                         fontSize: 27,
-                                        fontWeight: FontWeight.w500)),
+                                        fontWeight: FontWeight.w900)),
                                 const SizedBox(height: 15),
                                 TextField(
                                     controller: _emailController,

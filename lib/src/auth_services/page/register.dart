@@ -21,7 +21,11 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: SingleChildScrollView(
+            child: Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -244,7 +248,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             setState(() {
                               _isRegisteringWithGoogle = false;
                             });
-                            Navigator.pop(context);
+                            Navigator.pop(
+                                context, true); // return true to previous route
+                            Navigator.of(context).popUntil(
+                                (route) => route.isFirst); // go to root
                             if (kDebugMode) {
                               print(
                                   'Signed in: ${userCredential.user?.displayName}');
@@ -320,6 +327,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ],
       ),
-    );
+    )));
   }
 }

@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:postalhub_tracker/pages/home/home_widgets/announcement_news_page.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_library_scaffold.dart';
 import 'package:postalhub_tracker/pages/services/locations/locations_main.dart';
-import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
+//import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/customer_services/customer_services.dart';
 import 'package:postalhub_tracker/pages/services/reward_system/reward_system_main.dart';
@@ -160,7 +161,7 @@ class _ServicesPageState extends State<ServicesPage>
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const ParcelLibraryPage()));
+                                                        const ParcelLibraryScaffold()));
                                           },
                                           child: Column(
                                             mainAxisAlignment:

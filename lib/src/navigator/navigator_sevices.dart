@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'dart:math';
@@ -52,46 +53,48 @@ class _NavigatorServicesState extends State<NavigatorServices>
           title: const Text("Campus Postal Hub"),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: AnimatedBuilder(
-          animation: _animationController,
-          builder: (context, child) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                shape: BoxShape.rectangle,
-                gradient: SweepGradient(
-                  colors: const [
-                    Colors.blue,
-                    Colors.red,
-                    Colors.blue,
-                  ],
-                  stops: const [0.0, 0.5, 1.0],
-                  transform:
-                      GradientRotation(_animationController.value * 2 * pi),
-                ),
-              ),
-              padding: const EdgeInsets.all(2.5), // Border thickness
-              child: FloatingActionButton(
-                //shape: const CircleBorder(),
-                elevation: 0,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AskOurAi()));
+        floatingActionButton: kIsWeb
+            ? null
+            : AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      shape: BoxShape.rectangle,
+                      gradient: SweepGradient(
+                        colors: const [
+                          Colors.blue,
+                          Colors.red,
+                          Colors.blue,
+                        ],
+                        stops: const [0.0, 0.5, 1.0],
+                        transform: GradientRotation(
+                            _animationController.value * 2 * pi),
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(2.5), // Border thickness
+                    child: FloatingActionButton(
+                      //shape: const CircleBorder(),
+                      elevation: 0,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AskOurAi()));
+                      },
+                      tooltip: 'ParcelMate',
+                      backgroundColor:
+                          Theme.of(context).colorScheme.surfaceContainerLowest,
+                      child: Icon(
+                        LucideIcons.bot,
+                        size: 28,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                  );
                 },
-                tooltip: 'ParcelMate',
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLowest,
-                child: Icon(
-                  LucideIcons.bot,
-                  size: 28,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
               ),
-            );
-          },
-        ),
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
                 onDestinationSelected: (i) =>
@@ -108,6 +111,11 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     selectedIcon: Icon(Icons.inventory_2_rounded),
                     label: 'My Parcel',
                   ),
+                  //NavigationDestination(
+                  //  icon: Icon(Icons.search_outlined),
+                  //  selectedIcon: Icon(Icons.search_rounded),
+                  //  label: 'Search',
+                  //),
                   NavigationDestination(
                     icon: Icon(Icons.widgets_outlined),
                     selectedIcon: Icon(Icons.widgets_rounded),
@@ -146,6 +154,11 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     selectedIcon: Icon(Icons.inventory_2_rounded),
                     label: Text('My Parcel'),
                   ),
+                  //NavigationRailDestination(
+                  //  icon: Icon(Icons.search_outlined),
+                  //  selectedIcon: Icon(Icons.search_rounded),
+                  //  label: Text('Search'),
+                  //),
                   NavigationRailDestination(
                     icon: Icon(Icons.widgets_outlined),
                     selectedIcon: Icon(Icons.widgets_rounded),
@@ -178,6 +191,11 @@ class _NavigatorServicesState extends State<NavigatorServices>
                     icon: Icon(Icons.inventory_2_outlined),
                     selectedIcon: Icon(Icons.inventory_2_rounded),
                   ),
+                  //NavigationDrawerDestination(
+                  //  label: Text('Search'),
+                  //  icon: Icon(Icons.search_outlined),
+                  //  selectedIcon: Icon(Icons.search_rounded),
+                  //),
                   NavigationDrawerDestination(
                     label: Text('Services'),
                     icon: Icon(Icons.widgets_outlined),
