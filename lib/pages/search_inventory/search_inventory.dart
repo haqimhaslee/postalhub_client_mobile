@@ -25,30 +25,21 @@ class _SearchInventoryState extends State<SearchInventory> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          toolbarHeight: 90,
-          title: Center(
+          title: Text(
+            "Find Parcel",
+          ),
+        ),
+        body: Align(
+            alignment: Alignment.topCenter,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      "Search Parccel",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).colorScheme.onErrorContainer,
-                      ),
-                    ),
-                  ],
-                ),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
                     maxWidth: 600,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 0, left: 0, right: 0, bottom: 0),
+                        top: 10, left: 20, right: 20, bottom: 0),
                     child: TextField(
                       controller: searchInput,
                       decoration: InputDecoration(
@@ -66,19 +57,16 @@ class _SearchInventoryState extends State<SearchInventory> {
                           )),
                     ),
                   ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: 700,
+                      ),
+                      child: _buildSearchResults(_searchTerm)),
                 )
               ],
-            ),
-          ),
-        ),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 700,
-              ),
-              child: _buildSearchResults(_searchTerm)),
-        ));
+            )));
   }
 
   Widget _buildSearchResults(String searchTerm) {

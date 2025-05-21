@@ -23,6 +23,13 @@ class _ProfileMainState extends State<ProfileMain> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Profile'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.more_vert),
+              tooltip: "More",
+              onPressed: () {},
+            ),
+          ],
         ),
         body: Center(
           child: Column(

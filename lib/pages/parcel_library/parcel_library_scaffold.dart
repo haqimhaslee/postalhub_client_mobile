@@ -14,7 +14,7 @@ class _ParcelLibraryScaffoldState extends State<ParcelLibraryScaffold> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Points history'),
+          title: const Text('My Parcel'),
         ),
         body: ParcelLibraryPage());
   }

@@ -12,19 +12,17 @@ class ParcelLibraryPage extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: AppBar(
-          title: TabBar(
-            dividerHeight: 0,
-            splashBorderRadius: BorderRadius.circular(15),
-            isScrollable: true,
-            tabAlignment: TabAlignment.center,
-            tabs: const [
-              Tab(text: 'All'),
-              Tab(text: 'Sorted'),
-              Tab(text: 'On Delivery'),
-              Tab(text: 'Delivered'),
-            ],
-          ),
+        appBar: TabBar(
+          dividerHeight: 0,
+          splashBorderRadius: BorderRadius.circular(15),
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
+          tabs: const [
+            Tab(text: 'All'),
+            Tab(text: 'Sorted'),
+            Tab(text: 'On Delivery'),
+            Tab(text: 'Delivered'),
+          ],
         ),
         body: const ClipRRect(
           child: TabBarView(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:postalhub_tracker/pages/services/customer_services/case_all.dart';
-import 'package:postalhub_tracker/pages/services/customer_services/case_pending.dart';
-import 'package:postalhub_tracker/pages/services/customer_services/case_solved.dart';
+//import 'package:postalhub_tracker/pages/services/customer_services/case_all.dart';
+//import 'package:postalhub_tracker/pages/services/customer_services/case_pending.dart';
+//import 'package:postalhub_tracker/pages/services/customer_services/case_solved.dart';
+import 'package:postalhub_tracker/src/wip_page/not_available_body.dart';
 
 class CustomerServices extends StatelessWidget {
   const CustomerServices({super.key});
@@ -39,9 +40,12 @@ class CustomerServices extends StatelessWidget {
         body: const ClipRRect(
           child: TabBarView(
             children: [
-              CaseAll(),
-              CasePending(),
-              CaseSolved(),
+              NotAvailableBody(),
+              NotAvailableBody(),
+              NotAvailableBody(),
+              //CaseAll(),
+              //CasePending(),
+              //CaseSolved(),
             ],
           ),
         ),

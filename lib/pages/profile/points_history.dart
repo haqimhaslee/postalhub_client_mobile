@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postalhub_tracker/src/wip_page/not_available_body.dart';
 
 class PointsHistory extends StatefulWidget {
   const PointsHistory({super.key});
@@ -15,25 +16,6 @@ class _PointsHistoryState extends State<PointsHistory> {
         appBar: AppBar(
           title: const Text('Points history'),
         ),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/components/not_available.png",
-                scale: 3,
-              ),
-              Text(
-                'Not available yet',
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ));
+        body: NotAvailableBody());
   }
 }
