@@ -31,10 +31,10 @@ void main() async {
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.dark,
+    //systemNavigationBarIconBrightness: Brightness.dark,
   ));
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
   runApp(MyApp(themeManager));
 }
@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
               themeMode: themeMode,
               debugShowCheckedModeBanner: false,
               home: kIsWeb ? NavigatorServices() : const AuthSnapshot(),
+              //home: NavigatorServices(),
             );
           },
         );

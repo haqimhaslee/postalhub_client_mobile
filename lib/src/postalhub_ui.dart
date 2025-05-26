@@ -1,6 +1,11 @@
 // Custom UI Element files
 import 'package:flutter/material.dart';
 
+//Custom UI Element Settings
+int mainRadius = 15;
+int listRadius = 15;
+int cardRadius = 15;
+
 //Color UI
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,

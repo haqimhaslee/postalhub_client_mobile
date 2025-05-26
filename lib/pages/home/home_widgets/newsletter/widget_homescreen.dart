@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:postalhub_tracker/pages/home/home_widgets/announcement_news_page.dart';
 import 'package:intl/intl.dart';
+import 'package:postalhub_tracker/pages/home/home_widgets/newsletter/main_newsletter.dart';
 
 class AnnouncementWidget extends StatefulWidget {
   const AnnouncementWidget({super.key});
@@ -83,7 +83,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AnnouncementDetailPage(
+                      builder: (context) => AnnouncementDetailPageInternal(
                         title: doc['title'],
                         description: doc['description'],
                         imageUrl: doc['img_url'],
@@ -168,13 +168,13 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
   }
 }
 
-class AnnouncementDetailPage extends StatelessWidget {
+class AnnouncementDetailPageInternal extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
   final String date;
 
-  const AnnouncementDetailPage({
+  const AnnouncementDetailPageInternal({
     super.key,
     required this.title,
     required this.description,

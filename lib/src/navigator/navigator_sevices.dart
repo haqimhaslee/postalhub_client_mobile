@@ -6,7 +6,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'package:postalhub_tracker/pages/home/home.dart';
 import 'package:postalhub_tracker/pages/more/more_page.dart';
-import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
+import 'package:postalhub_tracker/pages/parcel_library/parcel_library_platform_identifier.dart';
 //import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/services.dart';
 
@@ -25,7 +25,7 @@ class _NavigatorServicesState extends State<NavigatorServices>
   var _selectedIndex = 0;
   final List<Widget> _windgetOption = <Widget>[
     const HomePage(),
-    const ParcelLibraryPage(),
+    const ParcelLibraryPlatformIdentifier(),
     //const SearchInventory(),
     const ServicesPage(),
     const MorePage(),
@@ -117,14 +117,14 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   //  label: 'Search',
                   //),
                   NavigationDestination(
-                    icon: Icon(Icons.widgets_outlined),
-                    selectedIcon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.interests_outlined),
+                    selectedIcon: Icon(Icons.interests_rounded),
                     label: 'Services',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.person_outline),
-                    selectedIcon: Icon(Icons.person_rounded),
-                    label: 'Profile',
+                    icon: Icon(Icons.more_horiz_rounded),
+                    selectedIcon: Icon(Icons.more_horiz_rounded),
+                    label: 'More',
                   ),
                 ],
               )
@@ -160,14 +160,14 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   //  label: Text('Search'),
                   //),
                   NavigationRailDestination(
-                    icon: Icon(Icons.widgets_outlined),
-                    selectedIcon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.interests_outlined),
+                    selectedIcon: Icon(Icons.interests_rounded),
                     label: Text('Services'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.person_outline),
-                    selectedIcon: Icon(Icons.person_rounded),
-                    label: Text('Profile'),
+                    icon: Icon(Icons.more_horiz_rounded),
+                    selectedIcon: Icon(Icons.more_horiz_rounded),
+                    label: Text('More'),
                   ),
                 ],
               ),
@@ -198,13 +198,13 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   //),
                   NavigationDrawerDestination(
                     label: Text('Services'),
-                    icon: Icon(Icons.widgets_outlined),
-                    selectedIcon: Icon(Icons.widgets_rounded),
+                    icon: Icon(Icons.interests_outlined),
+                    selectedIcon: Icon(Icons.interests_rounded),
                   ),
                   NavigationDrawerDestination(
-                    icon: Icon(Icons.person_outline),
-                    selectedIcon: Icon(Icons.person_rounded),
-                    label: Text('Profile'),
+                    icon: Icon(Icons.more_horiz_rounded),
+                    selectedIcon: Icon(Icons.more_horiz_rounded),
+                    label: Text('More'),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(28, 10, 28, 10),

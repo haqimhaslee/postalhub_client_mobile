@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postalhub_tracker/pages/more/about/about_main.dart';
 //import 'package:postalhub_tracker/pages/more/payments/payment_history/payment_history_main.dart';
@@ -9,8 +10,8 @@ import 'package:postalhub_tracker/pages/more/settings/language/language_main.dar
 //import 'package:postalhub_tracker/pages/more/settings/notification/notification_settings.dart';
 //import 'package:postalhub_tracker/pages/more/settings/security/security_main.dart';
 import 'package:postalhub_tracker/pages/profile/points_history.dart';
-import 'package:postalhub_tracker/pages/profile/profile_main.dart';
-import 'package:postalhub_tracker/pages/profile/profile_widget.dart';
+import 'package:postalhub_tracker/pages/profile/profile_info/main_profile.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/customer_services.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({super.key});
@@ -24,9 +25,6 @@ class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //appBar: AppBar(
-        //  title: const Text('More'),
-        //),
         body: Align(
             alignment: Alignment.topCenter,
             child: ConstrainedBox(
@@ -35,40 +33,34 @@ class _MorePageState extends State<MorePage> {
               ),
               child: ListView(
                 children: [
-                  const Column(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(15, 18, 15, 10),
-                          child: ClipRRect(
-                            child: SizedBox(
-                              width: 600,
-                              child: ProfileOverviewWidget(),
+                  if (!kIsWeb)
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15, bottom: 0, top: 15),
+                            child: Text(
+                              "Account",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                             ),
-                          ))
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, bottom: 0, top: 15),
-                    child: Text(
-                      "Account",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: const Text('Personal Information'),
-                    leading: const Icon(Icons.person_outline_rounded),
-                    trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfileMain()));
-                    },
-                  ),
+                          ),
+                          ListTile(
+                            title: const Text('Personal Information'),
+                            leading: const Icon(Icons.person_outline_rounded),
+                            trailing: const Icon(Icons.chevron_right_rounded),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfileMain()));
+                            },
+                          ),
+                        ]),
                   /*
                   Padding(
                     padding:
@@ -106,34 +98,40 @@ class _MorePageState extends State<MorePage> {
                     },
                   ),
                   */
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, bottom: 0, top: 20),
-                    child: Text(
-                      "Postal Hub",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: const Text('Postal point'),
-                    leading: const Icon(Icons.local_activity_outlined),
-                    trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: const Text('Points history'),
-                    leading: const Icon(Icons.history_outlined),
-                    trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PointsHistory()));
-                    },
-                  ),
+                  if (!kIsWeb)
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15, bottom: 0, top: 20),
+                            child: Text(
+                              "Postal Hub",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: const Text('Postal point'),
+                            leading: const Icon(Icons.local_activity_outlined),
+                            trailing: const Icon(Icons.chevron_right_rounded),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            title: const Text('Points history'),
+                            leading: const Icon(Icons.history_outlined),
+                            trailing: const Icon(Icons.chevron_right_rounded),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PointsHistory()));
+                            },
+                          ),
+                        ]),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 15, bottom: 0, top: 20),
@@ -208,16 +206,15 @@ class _MorePageState extends State<MorePage> {
                     ),
                   ),
                   ListTile(
-                    title: const Text('Get help'),
+                    title: const Text('Help & Support Center'),
                     leading: const Icon(Icons.help_outline_rounded),
                     trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: const Text('Send feedback'),
-                    leading: const Icon(Icons.feedback_outlined),
-                    trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CustomerServices()));
+                    },
                   ),
                   ListTile(
                     title: const Text('About'),

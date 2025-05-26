@@ -43,6 +43,7 @@ dependencies:
   timelines_plus: ^1.0.6
   image_picker: ^1.1.2
   collection: ^1.19.1
+  awesome_ripple_animation: ^2.0.0
   #go_router: ^15.1.1
 
 
@@ -62,6 +63,7 @@ flutter:
   - assets/images/How_to_use_1.png
   - assets/images/How_to_use_2.png
   - assets/images/favicon.png
+  - assets/images/megaphones_purple.png
   - assets/images/carousel/1.png
   - assets/images/carousel/2.png
   - assets/images/carousel/3.png
@@ -79,6 +81,7 @@ flutter:
   - assets/images/components/search_parcel.png
   - assets/images/components/smart_locker_comingsoon.png
   - assets/images/components/smart_locker_comingsoon1.png
+  - assets/images/components/work_in_progress.png
   - assets/gif/not_found.gif
   - assets/gif/search.gif
   - assets/images/logo/google_logo.webp

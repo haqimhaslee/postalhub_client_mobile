@@ -10,7 +10,7 @@ class CustomerServices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         floatingActionButton: FloatingActionButton.extended(
@@ -19,20 +19,17 @@ class CustomerServices extends StatelessWidget {
           icon: const Icon(Icons.add),
         ),
         appBar: AppBar(
-          title: const Text('Customer Service'),
+          title: const Text('Help & Support Center'),
           bottom: TabBar(
             dividerHeight: 0,
             splashBorderRadius: BorderRadius.circular(15),
-            isScrollable: false,
+            isScrollable: true,
             tabs: const [
               Tab(
-                text: 'All',
+                text: 'Knowledge Base',
               ),
               Tab(
-                text: 'Active',
-              ),
-              Tab(
-                text: 'Solved',
+                text: 'Case',
               ),
             ],
           ),
@@ -42,8 +39,6 @@ class CustomerServices extends StatelessWidget {
             children: [
               NotAvailableBody(),
               NotAvailableBody(),
-              NotAvailableBody(),
-              //CaseAll(),
               //CasePending(),
               //CaseSolved(),
             ],

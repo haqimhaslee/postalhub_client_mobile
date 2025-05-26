@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:postalhub_tracker/pages/home/home_widgets/announcement_news_page.dart';
+import 'package:postalhub_tracker/pages/home/home_widgets/newsletter/main_newsletter.dart';
 import 'package:postalhub_tracker/pages/parcel_library/parcel_library_scaffold.dart';
 import 'package:postalhub_tracker/pages/services/locations/locations_main.dart';
 //import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
@@ -560,7 +560,7 @@ class _ServicesPageState extends State<ServicesPage>
                                                   width: 40,
                                                   height: 45,
                                                   child: Icon(
-                                                    Icons.feedback_outlined,
+                                                    Icons.help_outline_rounded,
                                                     size: 35,
                                                     color: Theme.of(context)
                                                         .colorScheme
@@ -569,7 +569,7 @@ class _ServicesPageState extends State<ServicesPage>
                                                 ),
                                               ),
                                               Text(
-                                                "Customer Services",
+                                                "Help & Support Center",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,

@@ -10,8 +10,6 @@ class PointsHistory extends StatefulWidget {
 class _PointsHistoryState extends State<PointsHistory> {
   @override
   Widget build(BuildContext context) {
-    // ... other widget code
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Points history'),
