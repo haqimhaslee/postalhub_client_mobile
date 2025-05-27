@@ -7,6 +7,8 @@ class RewardSystemMain extends StatefulWidget {
   State<RewardSystemMain> createState() => _RewardSystemMainState();
 }
 
+//TODO: Reward listing ONLY (no reward system yet)
+
 class _RewardSystemMainState extends State<RewardSystemMain> {
   @override
   Widget build(BuildContext context) {

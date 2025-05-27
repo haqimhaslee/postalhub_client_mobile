@@ -7,6 +7,8 @@ import 'package:postalhub_tracker/pages/profile/widget/profile_widget_onloading.
 import 'package:postalhub_tracker/pages/services/reward_system/reward_system_main.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
+//TODO : if profileSetup==false, route to profile setup page (new navigations)
+
 class ProfileOverviewWidget extends StatefulWidget {
   const ProfileOverviewWidget({super.key});
 

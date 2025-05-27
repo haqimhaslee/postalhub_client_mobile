@@ -62,78 +62,82 @@ class _CarouselAdsState extends State<CarouselAds> {
       return const Center(child: Text('No images found'));
     }
 
-    return Column(children: [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16, bottom: 10, top: 0),
-            child: Text(
-              "Highlights",
-              style: TextStyle(
-                fontSize: 23,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                ),
+                child: Text(
+                  "Highlights",
+                  style: TextStyle(
+                    fontSize: 23,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 25,
                 color: Theme.of(context).colorScheme.primary,
               ),
-            ),
+            ],
           ),
-          Icon(
-            Icons.chevron_right_rounded,
-            size: 25,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const Spacer(),
-        ],
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-        child: CarouselSlider(
-          options: CarouselOptions(
-            enlargeCenterPage: true,
-            autoPlay: true,
-            aspectRatio: 16 / 7.6,
-            autoPlayCurve: Curves.easeInOut,
-            enableInfiniteScroll: true,
-            autoPlayAnimationDuration: const Duration(milliseconds: 1100),
-            autoPlayInterval: const Duration(seconds: 7),
-            viewportFraction: 0.85,
-          ),
-          items: imageUrls.map((imageUrl) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 0.0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          direction: ShimmerDirection.ltr,
-                          period: const Duration(milliseconds: 1500),
-                          baseColor: Theme.of(context)
-                              .colorScheme
-                              .surfaceContainerLowest,
-                          highlightColor: Theme.of(context)
-                              .colorScheme
-                              .surfaceContainerHighest,
-                          child: const AspectRatio(
-                            aspectRatio: 16 / 9,
-                          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                enlargeCenterPage: true,
+                autoPlay: true,
+                aspectRatio: 16 / 7.6,
+                autoPlayCurve: Curves.easeInOut,
+                enableInfiniteScroll: true,
+                autoPlayAnimationDuration: const Duration(milliseconds: 1100),
+                autoPlayInterval: const Duration(seconds: 7),
+                viewportFraction: 0.85,
+              ),
+              items: imageUrls.map((imageUrl) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 0.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surface,
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      ),
-                    ));
-              },
-            );
-          }).toList(),
-        ),
-      )
-    ]);
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: CachedNetworkImage(
+                            imageUrl: imageUrl,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Shimmer.fromColors(
+                              direction: ShimmerDirection.ltr,
+                              period: const Duration(milliseconds: 1500),
+                              baseColor: Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerLowest,
+                              highlightColor: Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerHighest,
+                              child: const AspectRatio(
+                                aspectRatio: 16 / 9,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
+                        ));
+                  },
+                );
+              }).toList(),
+            ),
+          )
+        ]);
   }
 }

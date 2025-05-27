@@ -14,6 +14,8 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
+//TODO: Re-check appcheck token/auth (release & debug env)
+
 final themeManager = ThemeManager();
 
 void main() async {
@@ -31,7 +33,7 @@ void main() async {
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
-    //systemNavigationBarIconBrightness: Brightness.dark,
+    systemNavigationBarIconBrightness: Brightness.dark,
   ));
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
@@ -102,8 +104,10 @@ class MyApp extends StatelessWidget {
               ),
               themeMode: themeMode,
               debugShowCheckedModeBanner: false,
-              home: kIsWeb ? NavigatorServices() : const AuthSnapshot(),
-              //home: NavigatorServices(),
+              home: kIsWeb
+                  ? NavigatorServices()
+                  : const AuthSnapshot(), //applicable for debug
+              //home: NavigatorServices(), //for full production auth for all platforms
             );
           },
         );

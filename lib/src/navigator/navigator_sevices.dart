@@ -1,9 +1,9 @@
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
-import 'dart:math';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
+//import 'dart:math';
+//import 'package:lucide_icons/lucide_icons.dart';
+//import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'package:postalhub_tracker/pages/home/home.dart';
 import 'package:postalhub_tracker/pages/more/more_page.dart';
 import 'package:postalhub_tracker/pages/parcel_library/parcel_library_platform_identifier.dart';
@@ -52,6 +52,8 @@ class _NavigatorServicesState extends State<NavigatorServices>
         appBar: AppBar(
           title: const Text("Campus Postal Hub"),
         ),
+
+        /*
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: kIsWeb
             ? null
@@ -95,6 +97,8 @@ class _NavigatorServicesState extends State<NavigatorServices>
                   );
                 },
               ),
+
+              */
         bottomNavigationBar: MediaQuery.of(context).size.width <= 590
             ? NavigationBar(
                 onDestinationSelected: (i) =>

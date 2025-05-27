@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postalhub_tracker/pages/home/home_widgets/newsletter/widget_homescreen.dart';
 import 'package:postalhub_tracker/pages/home/home_widgets/carousel/carousel_ads.dart';
-//import 'package:postalhub_tracker/pages/home/home_widgets/quickaction_widget.dart';
+import 'package:postalhub_tracker/pages/home/home_widgets/quickaction_widget.dart';
 import 'package:postalhub_tracker/pages/profile/widget/profile_widget.dart';
 import 'package:postalhub_tracker/pages/home/home_widgets/greetings.dart';
 
@@ -26,36 +26,41 @@ class _HomePageState extends State<HomePage> {
                   child: SizedBox(width: 500, child: Greetings()),
                 )),
             Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                 child: ClipRRect(
                   child: SizedBox(
                     width: 600,
                     child: kIsWeb ? null : ProfileOverviewWidget(),
                   ),
                 )),
+            if (!kIsWeb)
+              Padding(
+                  padding: EdgeInsets.fromLTRB(12, 15, 12, 0),
+                  child: ClipRRect(
+                    child: SizedBox(
+                      width: 450,
+                      child: QuickactionWidget(),
+                    ),
+                  )),
             Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: ClipRRect(
                   child: SizedBox(
                     width: 600,
                     child: CarouselAds(),
                   ),
                 )),
-
-/*
+            if (kIsWeb)
+              Padding(
+                  padding: EdgeInsets.fromLTRB(12, 15, 12, 0),
+                  child: ClipRRect(
+                    child: SizedBox(
+                      width: 450,
+                      child: QuickactionWidget(),
+                    ),
+                  )),
             Padding(
-                padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                child: ClipRRect(
-                  child: SizedBox(
-                    width: 600,
-                    child: QuickactionWidget(),
-                  ),
-                )),
-
-                */
-
-            Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                 child: ClipRRect(
                   child: SizedBox(
                     width: 500,

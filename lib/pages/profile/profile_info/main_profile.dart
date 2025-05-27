@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:postalhub_tracker/pages/profile/profile_info/main_profile_edit.dart';
 import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
 
 class ProfileMain extends StatefulWidget {
@@ -47,7 +48,12 @@ class _ProfileMainState extends State<ProfileMain> {
           IconButton(
             icon: const Icon(Icons.edit_outlined),
             tooltip: "Edit profile",
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileMainEdit()));
+            },
           ),
         ],
       ),

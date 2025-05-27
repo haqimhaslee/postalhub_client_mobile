@@ -41,46 +41,40 @@ class _GreetingsState extends State<Greetings> {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            //border: Border.all(
-            //: const Color.fromARGB(183, 126, 126, 126),
-            //width: 1,
-            //   ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: Row(
-                children: [
-                  RippleAnimation(
-                    repeat: true,
-                    color: Theme.of(context).colorScheme.primary,
-                    minRadius: 14,
-                    ripplesCount: 5,
-                    size: const Size(52, 52),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image:
-                              AssetImage('assets/images/megaphones_purple.png'),
-                          fit: BoxFit.cover,
-                        ),
+    return Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: Row(
+              children: [
+                RippleAnimation(
+                  repeat: true,
+                  color: Theme.of(context).colorScheme.error,
+                  minRadius: 14,
+                  ripplesCount: 3,
+                  size: const Size(52, 52),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage('assets/images/megaphones_purple.png'),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text(
-                      _greeting,
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                  )
-                ],
-              ))),
-    );
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    _greeting,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                )
+              ],
+            )));
   }
 }

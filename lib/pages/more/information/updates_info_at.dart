@@ -109,7 +109,6 @@ class _UpdatesInfoAtState extends State<UpdatesInfoAt> {
                   child: Column(
                     children: [
                       ListTile(
-                        onTap: () {},
                         title: Text(
                           formattedDate,
                         ),
