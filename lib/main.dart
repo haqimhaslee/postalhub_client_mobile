@@ -14,8 +14,6 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
-//TODO: Re-check appcheck token/auth (release & debug env)
-
 final themeManager = ThemeManager();
 
 void main() async {
@@ -33,10 +31,9 @@ void main() async {
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.dark,
   ));
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
   runApp(MyApp(themeManager));
 }

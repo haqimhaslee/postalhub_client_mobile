@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postalhub_tracker/pages/services/customer_services/faqs/main_faqs_page.dart';
 
 class CustomerServices extends StatelessWidget {
   const CustomerServices({super.key});
@@ -27,7 +28,13 @@ class CustomerServices extends StatelessWidget {
                               color:
                                   Theme.of(context).colorScheme.surfaceVariant,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MainFaqsPage()));
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Row(
@@ -137,6 +144,70 @@ class CustomerServices extends StatelessWidget {
                                               SizedBox(height: 4),
                                               Text(
                                                 "Create a case using ticketing system.",
+                                                style: TextStyle(fontSize: 15),
+                                                softWrap: true,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )))),
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Material(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .surfaceVariant,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 55,
+                                          width: 55,
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Icon(
+                                            Icons.support_agent_outlined,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                            size: 30,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 15),
+                                        Expanded(
+                                          // Fixes overflow
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: const [
+                                              Text(
+                                                "Parcel Mate [COMING SOON]",
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                softWrap: true,
+                                              ),
+                                              SizedBox(height: 4),
+                                              Text(
+                                                "Ask any queries to our AI chatbot Parcel Mate. Operate 24/7, anytime, anywhere.",
                                                 style: TextStyle(fontSize: 15),
                                                 softWrap: true,
                                               ),

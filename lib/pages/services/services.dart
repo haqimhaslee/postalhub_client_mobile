@@ -1,12 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:postalhub_tracker/pages/ai_assistant/ai_assistant.dart';
 import 'dart:math';
 import 'package:postalhub_tracker/pages/home/home_widgets/newsletter/main_newsletter.dart';
 import 'package:postalhub_tracker/pages/parcel_library/parcel_library_scaffold.dart';
 import 'package:postalhub_tracker/pages/services/locations/locations_main.dart';
-//import 'package:postalhub_tracker/pages/parcel_library/parcel_library.dart';
 import 'package:postalhub_tracker/pages/search_inventory/search_inventory.dart';
 import 'package:postalhub_tracker/pages/services/customer_services/customer_services.dart';
 import 'package:postalhub_tracker/pages/services/reward_system/reward_system_main.dart';
@@ -478,58 +476,6 @@ class _ServicesPageState extends State<ServicesPage>
                                               ),
                                               Text(
                                                 "Marketplace",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onSurface,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 100,
-                                    height: 100,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: Material(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surfaceVariant,
-                                        child: InkWell(
-                                          //splashColor: Theme.of(context).colorScheme.tertiary,
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const ParcelMate()));
-                                          },
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              ClipRRect(
-                                                child: SizedBox(
-                                                  width: 40,
-                                                  height: 45,
-                                                  child: Icon(
-                                                    Icons.hub_outlined,
-                                                    size: 35,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onSurfaceVariant,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                "Parcel Mate",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontSize: 11,

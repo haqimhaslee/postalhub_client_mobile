@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:postalhub_tracker/pages/profile/profile_info/main_profile_edit.dart';
 import 'package:postalhub_tracker/src/auth_services/auth_services.dart';
+import 'package:intl/intl.dart';
 
 class ProfileMain extends StatefulWidget {
   const ProfileMain({super.key});
@@ -120,48 +121,45 @@ class _ProfileMainState extends State<ProfileMain> {
   Widget profileInfoCard(BuildContext context, Map<String, dynamic> data) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Material(
-          color: Theme.of(context).colorScheme.surfaceVariant,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15, top: 15),
-                child: Text(
-                  "Profile info",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15, top: 15),
+            child: Text(
+              "Profile info",
+              style: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.primary,
               ),
-              ListTile(
-                title: Text(data['username'] ?? ''),
-                subtitle: const Text("Name"),
-                leading: const Icon(Icons.person_outline_rounded),
-              ),
-              ListTile(
-                title: Text(data['email'] ?? ''),
-                subtitle: const Text("Personal email"),
-                leading: const Icon(Icons.email_outlined),
-              ),
-              if (data['phone_no'] != null)
-                ListTile(
-                  title: Text(data['phone_no'] ?? ''),
-                  subtitle: const Text("Phone number"),
-                  leading: const Icon(Icons.phone_outlined),
-                ),
-              if (data['birthday'] != null)
-                ListTile(
-                  title: Text(data['birthday'] ?? ''),
-                  subtitle: const Text("Birthday"),
-                  leading: const Icon(Icons.cake_outlined),
-                ),
-            ],
+            ),
           ),
-        ),
+          ListTile(
+            title: Text(data['username'] ?? ''),
+            subtitle: const Text("Name"),
+            leading: const Icon(Icons.person_outline_rounded),
+          ),
+          ListTile(
+            title: Text(data['email'] ?? ''),
+            subtitle: const Text("Personal email"),
+            leading: const Icon(Icons.email_outlined),
+          ),
+          if (data['phone_no'] != null)
+            ListTile(
+              title: Text(data['phone_no'] ?? ''),
+              subtitle: const Text("Phone number"),
+              leading: const Icon(Icons.phone_outlined),
+            ),
+          if (data['birthday'] != null && data['birthday'] is Timestamp)
+            ListTile(
+              title: Text(
+                DateFormat.yMMMMd()
+                    .format((data['birthday'] as Timestamp).toDate()),
+              ),
+              subtitle: const Text("Birthday"),
+              leading: const Icon(Icons.cake_outlined),
+            ),
+        ],
       ),
     );
   }
@@ -169,64 +167,62 @@ class _ProfileMainState extends State<ProfileMain> {
   Widget campusInfoCard(BuildContext context, Map<String, dynamic> data) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Material(
-          color: Theme.of(context).colorScheme.surfaceVariant,
-          child: data['campusName'] != null
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 15),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Campus/Company details",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.info_outline_rounded,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                          )
-                        ],
+      child: data['campusName'] != null
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 25, right: 25),
+                  child: Divider(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Campus/Company details",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
-                    ),
-                    ListTile(
-                      title: Text(data['campusName'] ?? ''),
-                      subtitle: const Text("Campus/Company name"),
-                      leading: const Icon(Icons.work_outline_rounded),
-                    ),
-                    ListTile(
-                      title: Text(data['campusId'] ?? ''),
-                      subtitle: const Text("Campus/Company ID"),
-                      leading: const Icon(Icons.badge_outlined),
-                    ),
-                    ListTile(
-                      title: Text(data['campusRoomAddress'] ?? ''),
-                      subtitle: const Text("Room/Desk address"),
-                      leading: const Icon(Icons.pin_drop_outlined),
-                    ),
-                    ListTile(
-                      title: Text(data['campusEmail'] ?? ''),
-                      subtitle: const Text("Campus/Company email"),
-                      leading: const Icon(Icons.email_outlined),
-                    ),
-                  ],
-                )
-              : null,
-        ),
-      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.info_outline_rounded,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Text(data['campusName'] ?? ''),
+                  subtitle: const Text("Campus/Company name"),
+                  leading: const Icon(Icons.work_outline_rounded),
+                ),
+                ListTile(
+                  title: Text(data['campusId'] ?? ''),
+                  subtitle: const Text("Campus/Company ID"),
+                  leading: const Icon(Icons.badge_outlined),
+                ),
+                ListTile(
+                  title: Text(data['campusRoomAddress'] ?? ''),
+                  subtitle: const Text("Room/Desk address"),
+                  leading: const Icon(Icons.pin_drop_outlined),
+                ),
+                ListTile(
+                  title: Text(data['campusEmail'] ?? ''),
+                  subtitle: const Text("Campus/Company email"),
+                  leading: const Icon(Icons.email_outlined),
+                ),
+              ],
+            )
+          : null,
     );
   }
 

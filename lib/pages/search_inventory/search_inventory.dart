@@ -290,10 +290,64 @@ class _SearchInventoryState extends State<SearchInventory> {
                                         Text('• Tracking ID 3: $trackingId3'),
                                       if (trackingId4.isNotEmpty)
                                         Text('• Tracking ID 4: $trackingId4'),
-                                      if (remarks.isNotEmpty)
-                                        Text('• Remarks: $remarks'),
                                       if (warehouseCode.isNotEmpty)
                                         Text('• Hub : $warehouseCode'),
+                                      if (remarks.isNotEmpty)
+                                        Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 12),
+                                            child: Card(
+                                              elevation: 4.0,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(8)),
+                                                  side: BorderSide(
+                                                      width: 1,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .tertiaryContainer)),
+                                              child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                              Icons
+                                                                  .info_outline_rounded,
+                                                              size: 20,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .tertiary),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            "Remarks",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .tertiary),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 8),
+                                                      Text(
+                                                        remarks,
+                                                      ),
+                                                    ],
+                                                  )),
+                                            )),
                                     ],
                                   ),
                                 ),

@@ -29,9 +29,7 @@ class _QuickactionWidgetState extends State<QuickactionWidget> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Material(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainerHighest,
+                              color: const Color.fromARGB(0, 0, 0, 0),
                               child: InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -63,9 +61,7 @@ class _QuickactionWidgetState extends State<QuickactionWidget> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Material(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainerHighest,
+                              color: const Color.fromARGB(0, 0, 0, 0),
                               child: InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -97,9 +93,7 @@ class _QuickactionWidgetState extends State<QuickactionWidget> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Material(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainerHighest,
+                              color: const Color.fromARGB(0, 0, 0, 0),
                               child: InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -131,9 +125,7 @@ class _QuickactionWidgetState extends State<QuickactionWidget> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Material(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainerHighest,
+                              color: const Color.fromARGB(0, 0, 0, 0),
                               child: InkWell(
                                   onTap: () {
                                     Navigator.push(
